@@ -1,0 +1,5 @@
+{
+  "decision": "Implement the reviewed top-15 constructions and prioritize hard/full-soft/floor baselines in a bounded interleaved run.",
+  "rationale": "The user authorized repository delivery for one 2080 Ti and eight hours. Selection evidence passed; GPU and native evaluator qualification remain pending. No scientific gate PASS or novelty claim is issued.",
+  "status": "engineering implementation"
+}

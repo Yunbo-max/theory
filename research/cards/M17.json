@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M17",
+  "name": "trajectory_tilt",
+  "formal_object": "Sequence target Q(y)∝P_r(y)^(1−β)P0(y)^β over a fixed finite horizon",
+  "operations": [
+    {
+      "id": "B03",
+      "input": "Sequence target Q(y)∝P_r(y)^(1−β)P0(y)^β over a fixed finite horizon",
+      "condition": "Absolute continuity; finite normalizer; EOS/horizon explicit",
+      "condition_status": "conditional",
+      "output": "Sequence-level self-normalized importance-weighted CE"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M17-S1",
+      "statement": "Relative to full-support P_r, w(y)=(P0(y)/P_r(y))^β",
+      "justification": "Start from the explicitly specified finite-distribution object; Absolute continuity; finite normalizer; EOS/horizon explicit"
+    },
+    {
+      "id": "M17-S2",
+      "statement": "Normalizing gives E_Q f=E_Pr[wf]/E_Pr[w]",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Absolute continuity; finite normalizer; EOS/horizon explicit"
+    },
+    {
+      "id": "M17-S3",
+      "statement": "Empirical self-normalization is biased at finite sample size; truncated proposals require an explicit support correction or restrict the target",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Absolute continuity; finite normalizer; EOS/horizon explicit"
+    }
+  ],
+  "assumptions": [
+    "Absolute continuity",
+    "finite normalizer",
+    "EOS/horizon explicit"
+  ],
+  "method_expression": "Sequence-level self-normalized importance-weighted CE",
+  "distinguishing_prediction": "Control whole-sequence rather than local drift",
+  "falsifier": "Importance weights collapse or prefix method matches it",
+  "closest_alternative": "self-normalized importance sampling",
+  "decisive_comparison": "prefix_damping and ESS diagnostics",
+  "feasibility": "Reserve: variance/support risk under truncation",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

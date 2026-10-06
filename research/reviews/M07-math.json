@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M07",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M07.json",
+    "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Keep top-h μ probabilities exact; estimate the remaining mass ε by n stratified inverse-CDF draws; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "E03: Fixed prefix and head; independent uniforms per stratum; component-level claim only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: On n equal CDF intervals draw independent uniforms U_j=(j+V_j)/n; Averaging indicator masses over intervals has expectation equal to the conditional tail probabilities; Exact head plus ε times this estimator is normalized and unbiased; stratified variance of any fixed linear functional is no larger than iid tail draws by total variance",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Fixed prefix and head; independent uniforms per stratum; component-level claim only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q_head=μ_head; q_tail=ε/n Σ_j e(F_tail^−1(U_j))",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Approximate full-soft targets with less stochastic tail noise than hard labels. Rejection condition: No memory/runtime advantage in this dense implementation or full_soft dominates",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: stratified Monte Carlo and exact-head marginalization. Required comparison: full_soft and hard; log that dense target construction is not a speedup claim",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M07.json",
+          "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M05",
+  "name": "head_mass",
+  "formal_object": "Partition vocabulary into retained decoder support S and its complement",
+  "operations": [
+    {
+      "id": "B06",
+      "input": "Partition vocabulary into retained decoder support S and its complement",
+      "condition": "0≤κ≤1; μ supported on S; if S is full vocabulary q=μ",
+      "condition_status": "conditional",
+      "output": "q_S=M'μ_S; q_out=(1−κ)p_out; M'=p(S)+κ(1−p(S))"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M05-S1",
+      "statement": "Write any distribution as its support mass times its conditional shape",
+      "justification": "Start from the explicitly specified finite-distribution object; 0≤κ≤1; μ supported on S; if S is full vocabulary q=μ"
+    },
+    {
+      "id": "M05-S2",
+      "statement": "Set head mass M'=p(S)+κ(1−p(S)) and head conditional exactly μ",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤κ≤1; μ supported on S; if S is full vocabulary q=μ"
+    },
+    {
+      "id": "M05-S3",
+      "statement": "Assign remaining mass by p outside S; the two masses sum to one and endpoints are well-defined",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤κ≤1; μ supported on S; if S is full vocabulary q=μ"
+    }
+  ],
+  "assumptions": [
+    "0≤κ≤1",
+    "μ supported on S",
+    "if S is full vocabulary q=μ"
+  ],
+  "method_expression": "q_S=M'μ_S; q_out=(1−κ)p_out; M'=p(S)+κ(1−p(S))",
+  "distinguishing_prediction": "Separate head reshaping from how fast tail probability is removed",
+  "falsifier": "A convex mixture of p and μ gives the same measured trade-off",
+  "closest_alternative": "SSD precision/exploration decomposition; partial mass transfer",
+  "decisive_comparison": "full_soft and fixed_alpha; equal token counts",
+  "feasibility": "No extra forward; head shape differs from simple convex mixing",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

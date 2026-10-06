@@ -1,0 +1,56 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M09",
+  "name": "disagreement_gate",
+  "formal_object": "min_a a D + λ KL(Ber(a)||Ber(a0)), D=JS(μ_r,μ_lag)",
+  "operations": [
+    {
+      "id": "D01",
+      "input": "min_a a D + λ KL(Ber(a)||Ber(a0)), D=JS(μ_r,μ_lag)",
+      "condition": "0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness",
+      "condition_status": "conditional",
+      "output": "a=sigmoid(logit(a0)−JS/λ); q=(1−a)p+aμ"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M09-S1",
+      "statement": "Differentiate: D+λ[logit(a)−logit(a0)]=0",
+      "justification": "Start from the explicitly specified finite-distribution object; 0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness"
+    },
+    {
+      "id": "M09-S2",
+      "statement": "Solve a=sigmoid(logit(a0)−D/λ)",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness"
+    },
+    {
+      "id": "M09-S3",
+      "statement": "Strictly positive second derivative λ/[a(1−a)] gives the unique interior minimum; construct q=(1−a)p+aμ",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness"
+    }
+  ],
+  "assumptions": [
+    "0<a0<1",
+    "λ>0",
+    "JS measured before fresh labels, detached",
+    "agreement is not correctness"
+  ],
+  "method_expression": "a=sigmoid(logit(a0)−JS/λ); q=(1−a)p+aμ",
+  "distinguishing_prediction": "Reduce updates specifically at temporally unstable prefixes",
+  "falsifier": "A matched constant gate or lower learning rate performs equally",
+  "closest_alternative": "uncertainty gating and Bernoulli KL regularization",
+  "decisive_comparison": "fixed_alpha, temporal_mean and full_soft",
+  "feasibility": "One lag forward; changes target rather than teacher averaging",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

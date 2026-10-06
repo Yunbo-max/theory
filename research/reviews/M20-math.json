@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M20",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M20.json",
+    "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Martingale error M_R=Σ ε_r with E[ε_r|F_r]=0 and predictable variance charges ν_r; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "E06: Predictable bounds, zero-mean increments and bounded horizon; LLM approximation errors violate these without proof",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Orthogonality of martingale differences gives E||M_R||²=Σ E||ε_r||²; Stop before predictable cumulative ν exceeds B, assuming each conditional variance is bounded by its charge; For bounded stopping horizon, Doob's L2 bound gives P(max||M||≥a)≤4B/a²; deterministic decoder drift is excluded",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Predictable bounds, zero-mean increments and bounded horizon; LLM approximation errors violate these without proof",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Stop recursion when a predeclared cumulative sampling-variance budget is exhausted",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Limit cumulative sampling uncertainty independently of elapsed time. Rejection condition: Proxy charges do not bound observed error or deterministic drift dominates",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: martingale stopping and variance budgets. Required comparison: fixed-round schedule and full_soft",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M20.json",
+          "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

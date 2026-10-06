@@ -1,0 +1,87 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "recursive-ssd-20261006",
+  "scope": "selection",
+  "artifact_ref": {
+    "path": "research/selection.json",
+    "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+  },
+  "reviewer": "same-context assistant review; not independent",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "checks": {
+    "structural_distinctness": {
+      "status": "verified",
+      "rationale": "Compared optimized objects: geometric penalty, bounded ratios, probability floor, composed temperature map, support-mass split, conditional diversity, stratified estimator, temporal barycenter, adaptive local gate, path weighting, joint noise allocation, parameter projection, realized-KL line search, prompt allocation, generation mixture; reserves use metric, sequence tilt, median, transport and stopping. Controls/seeds are excluded from candidate count. Related methods can still have identical special cases.",
+      "evidence_refs": [
+        {
+          "path": "research/selection.json",
+          "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "all_candidates_compared": {
+      "status": "verified",
+      "rationale": "All 20 cards are represented once in the full ranking; none is omitted after an unfavorable cost or novelty assessment.",
+      "evidence_refs": [
+        {
+          "path": "research/selection.json",
+          "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "ranking_basis": {
+      "status": "verified",
+      "rationale": "Prioritize explicit finite-distribution consequences that can be audited on one 11 GiB GPU. Cost, closest known method and falsifier are recorded per candidate. Floors lead because their support consequence survives truncation at target level; candidates 16–20 have stronger standard-method overlap or unsupported/costly implementation assumptions.",
+      "evidence_refs": [
+        {
+          "path": "research/selection.json",
+          "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "top_selection": {
+      "status": "verified",
+      "rationale": "Top 15 are selected for implementation, not scientific endorsement. The timed default queue only prioritizes M03 after hard/full-soft baselines. Statistical/native-evaluation gates remain pending; no promise that 15 GPU comparisons fit eight hours.",
+      "evidence_refs": [
+        {
+          "path": "research/selection.json",
+          "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

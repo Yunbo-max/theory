@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M12",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M12.json",
+    "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_d ||d−d0||²/2 subject to h·d≤c, h=∇θ KL(p0||pθ); fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D01: SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: KKT gives d=d0−λh with λ≥0; Enforce complementarity: λ=max(0,(h·d0−c)/||h||²), handle h=0 separately; Taylor expansion gives retention change η h·d+O(η²); a first-order bound is not a finite-step guarantee",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Project the SGD direction using the anchor-KL gradient; c=0 default",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Reduce first-order retention conflict rather than merely shrinking all gradients. Rejection condition: SGD-matched control is as good or finite-step KL still grows",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: gradient surgery and projected optimization. Required comparison: full_soft_sgd, arithmetic_anchor and realized KL change",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M12.json",
+          "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

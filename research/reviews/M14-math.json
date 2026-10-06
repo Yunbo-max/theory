@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M14",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M14.json",
+    "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min Σ σ_i²/n_i subject to Σn_i=N, n_i>0; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "E06: N≥P; estimated proxy is not true gradient variance; varying lengths still affect wall-clock",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Lagrange stationarity gives n_i proportional to σ_i in the continuous relaxation; Integer largest-remainder allocation with min one preserves total N, but not exact relaxed optimality; Weight each record by N/(P n_i) to preserve an equal-prompt empirical mean; use sqrt(G(first-prefix μ)) only as a proxy for unknown σ_i",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. N≥P; estimated proxy is not true gradient variance; varying lengths still affect wall-clock",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Allocate samples using first-prefix diversity, preserve equal-prompt loss weights",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Use the same sample budget more effectively across prompts. Rejection condition: Uniform prompt allocation wins or proxy poorly predicts sequence uncertainty",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: stratified/Neyman sampling. Required comparison: hard SSD with uniform sample counts, same total N and loss convention",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M14.json",
+          "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

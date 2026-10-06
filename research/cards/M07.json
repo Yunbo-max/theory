@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M07",
+  "name": "tail_stratified",
+  "formal_object": "Keep top-h μ probabilities exact; estimate the remaining mass ε by n stratified inverse-CDF draws",
+  "operations": [
+    {
+      "id": "E03",
+      "input": "Keep top-h μ probabilities exact; estimate the remaining mass ε by n stratified inverse-CDF draws",
+      "condition": "Fixed prefix and head; independent uniforms per stratum; component-level claim only",
+      "condition_status": "conditional",
+      "output": "q_head=μ_head; q_tail=ε/n Σ_j e(F_tail^−1(U_j))"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M07-S1",
+      "statement": "On n equal CDF intervals draw independent uniforms U_j=(j+V_j)/n",
+      "justification": "Start from the explicitly specified finite-distribution object; Fixed prefix and head; independent uniforms per stratum; component-level claim only"
+    },
+    {
+      "id": "M07-S2",
+      "statement": "Averaging indicator masses over intervals has expectation equal to the conditional tail probabilities",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Fixed prefix and head; independent uniforms per stratum; component-level claim only"
+    },
+    {
+      "id": "M07-S3",
+      "statement": "Exact head plus ε times this estimator is normalized and unbiased; stratified variance of any fixed linear functional is no larger than iid tail draws by total variance",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Fixed prefix and head; independent uniforms per stratum; component-level claim only"
+    }
+  ],
+  "assumptions": [
+    "Fixed prefix and head",
+    "independent uniforms per stratum",
+    "component-level claim only"
+  ],
+  "method_expression": "q_head=μ_head; q_tail=ε/n Σ_j e(F_tail^−1(U_j))",
+  "distinguishing_prediction": "Approximate full-soft targets with less stochastic tail noise than hard labels",
+  "falsifier": "No memory/runtime advantage in this dense implementation or full_soft dominates",
+  "closest_alternative": "stratified Monte Carlo and exact-head marginalization",
+  "decisive_comparison": "full_soft and hard; log that dense target construction is not a speedup claim",
+  "feasibility": "No extra forward; experimental dense prototype, sparse-kernel optimization deferred",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

@@ -1,0 +1,9 @@
+usage: cli.py [-h] {prepare,preflight,run,worker,report,collect} ...
+
+Recursive self-policy distillation pilot
+
+positional arguments:
+  {prepare,preflight,run,worker,report,collect}
+
+options:
+  -h, --help            show this help message and exit

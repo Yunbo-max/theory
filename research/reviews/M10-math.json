@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M10",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M10.json",
+    "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Prefix score s_t=Σ_{j<t} max(0,log p_r(y_j|h_j)−log p0(y_j|h_j)); fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "F03: Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Maintain s_{t+1}=s_t+positive log-ratio at t, starting s_0=0; w_t=exp(−min(s_t,C)) is prefix measurable and lies in [exp(−C),1]; The frozen weighted CE objective has gradient Σw_t(p_student−μ_t); it intentionally changes prefix weighting",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: L=mean_t exp(−min(s_t,C)) H(μ_t,p_student,t)",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Damp reinforcement along already amplified generated paths. Rejection condition: A constant loss scale or lower LR matches effect; rare useful paths are suppressed",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: trajectory reweighting and confidence weighting. Required comparison: same-average-weight control, full_soft and lower_lr",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M10.json",
+          "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

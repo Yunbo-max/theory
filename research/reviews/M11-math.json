@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M11",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M11.json",
+    "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "max Σ a_t d_t subject to Σ v_t a_t²≤B, 0≤a_t≤1 on a fixed prefix chunk; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "E06: Prefixes fixed before allocation and fresh labels; d is a drift proxy, not correctness; n=1 implementation",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Set d_t=||μ_t−p_t||² and v_t=G(μ_t)/n for fresh independent target draws; KKT gives a_t=min(1,d_t/(2λv_t)); v=0 directions have no noise charge; The budget is nonincreasing in λ; bisection enforces it and fresh post-allocation draws preserve the stated conditional covariance",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Prefixes fixed before allocation and fresh labels; d is a drift proxy, not correctness; n=1 implementation",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Allocate a jointly, then q_t=(1−a_t)p_t+a_t e(Y_t), Y_t fresh ~ μ_t",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Spend label-noise budget where decoder drift is larger. Rejection condition: Fixed alpha/full_soft matches or exceeds quality under equal cost",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: Neyman-style allocation and quadratic resource constraints. Required comparison: fixed_alpha with fresh labels, full_soft; no reuse of rollout labels here",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M11.json",
+          "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

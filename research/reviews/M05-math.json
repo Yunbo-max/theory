@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M05",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M05.json",
+    "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Partition vocabulary into retained decoder support S and its complement; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "B06: 0≤κ≤1; μ supported on S; if S is full vocabulary q=μ",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Write any distribution as its support mass times its conditional shape; Set head mass M'=p(S)+κ(1−p(S)) and head conditional exactly μ; Assign remaining mass by p outside S; the two masses sum to one and endpoints are well-defined",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. 0≤κ≤1; μ supported on S; if S is full vocabulary q=μ",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q_S=M'μ_S; q_out=(1−κ)p_out; M'=p(S)+κ(1−p(S))",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Separate head reshaping from how fast tail probability is removed. Rejection condition: A convex mixture of p and μ gives the same measured trade-off",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: SSD precision/exploration decomposition; partial mass transfer. Required comparison: full_soft and fixed_alpha; equal token counts",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M05.json",
+          "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

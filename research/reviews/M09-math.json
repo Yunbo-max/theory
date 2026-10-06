@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M09",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M09.json",
+    "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_a a D + λ KL(Ber(a)||Ber(a0)), D=JS(μ_r,μ_lag); fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D01: 0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Differentiate: D+λ[logit(a)−logit(a0)]=0; Solve a=sigmoid(logit(a0)−D/λ); Strictly positive second derivative λ/[a(1−a)] gives the unique interior minimum; construct q=(1−a)p+aμ",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. 0<a0<1; λ>0; JS measured before fresh labels, detached; agreement is not correctness",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: a=sigmoid(logit(a0)−JS/λ); q=(1−a)p+aμ",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Reduce updates specifically at temporally unstable prefixes. Rejection condition: A matched constant gate or lower learning rate performs equally",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: uncertainty gating and Bernoulli KL regularization. Required comparison: fixed_alpha, temporal_mean and full_soft",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M09.json",
+          "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

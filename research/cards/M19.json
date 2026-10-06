@@ -1,0 +1,56 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M19",
+  "name": "embedding_transport",
+  "formal_object": "min_π <C,π>+ε KL(π||p0⊗μ) subject to π1=p0",
+  "operations": [
+    {
+      "id": "D02",
+      "input": "min_π <C,π>+ε KL(π||p0⊗μ) subject to π1=p0",
+      "condition": "ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness",
+      "condition_status": "conditional",
+      "output": "Transport initial token mass using frozen embedding costs; target is column marginal"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M19-S1",
+      "statement": "Introduce one multiplier per row and differentiate on positive support",
+      "justification": "Start from the explicitly specified finite-distribution object; ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness"
+    },
+    {
+      "id": "M19-S2",
+      "statement": "Row-normalization yields π_ij=p0i μj exp(−Cij/ε)/Z_i",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness"
+    },
+    {
+      "id": "M19-S3",
+      "statement": "q_j=Σ_iπ_ij is normalized and minimizes the stated one-marginal transport objective",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness"
+    }
+  ],
+  "assumptions": [
+    "ε>0",
+    "finite C",
+    "μ support explicit",
+    "token similarity need not mean semantic correctness"
+  ],
+  "method_expression": "Transport initial token mass using frozen embedding costs; target is column marginal",
+  "distinguishing_prediction": "Retain semantically nearby alternatives instead of literal initial probabilities",
+  "falsifier": "Cost geometry uninformative or simple anchors dominate",
+  "closest_alternative": "entropy-regularized transport",
+  "decisive_comparison": "geometric_anchor with equal compute; cost ablation",
+  "feasibility": "Reserve: quadratic vocabulary cost; support approximation changes objective",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

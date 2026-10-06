@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M08",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M08.json",
+    "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_q [H(μ_r,q)+H(μ_lag,q)]/2 at the same prefix; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D02: Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Linearity in the target rewrites the objective as H((μ_r+μ_lag)/2,q); Gibbs inequality gives q=(μ_r+μ_lag)/2 at its minimum; Covariance of the mean includes cross-covariance; variance improvement is not guaranteed for biased or correlated teachers",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q=(μ_r+μ_lag)/2",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Damp round-to-round target oscillations. Rejection condition: Staleness harms scores or a smaller learning rate matches it",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: temporal ensembling and mean teachers. Required comparison: full_soft and lower_lr; teacher correlation logged",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M08.json",
+          "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

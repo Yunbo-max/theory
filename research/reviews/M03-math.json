@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M03",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M03.json",
+    "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_q KL(μ||q) subject to q≥c p0 and Σq=1; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D01: 0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: KKT stationarity on free coordinates gives q_v=μ_v/λ; Complementary slackness gives q_v=max(c p0v,k μv); The mass is continuous nondecreasing in k; at k=0 it is c and at k=1 at least one, giving a bisection bracket",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. 0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q_v=max(c p0v,k μv), k chosen to normalize",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Restore excluded tail mass while keeping more decoder-head shape than arithmetic mixing. Rejection condition: No benefit over arithmetic_anchor/full_soft, or fitting error erases the floor",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: probability-floor information projection. Required comparison: full_soft, arithmetic_anchor, same-token lower-LR hard SSD",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M03.json",
+          "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

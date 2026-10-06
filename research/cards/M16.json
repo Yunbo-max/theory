@@ -1,0 +1,54 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M16",
+  "name": "diagonal_metric",
+  "formal_object": "min_d g·d+(1/(2η))dᵀD d for positive diagonal D",
+  "operations": [
+    {
+      "id": "D05",
+      "input": "min_d g·d+(1/(2η))dᵀD d for positive diagonal D",
+      "condition": "Positive damping; quadratic local surrogate only",
+      "condition_status": "conditional",
+      "output": "d=−η g/(sqrt(second_moment)+ε)"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M16-S1",
+      "statement": "Stationarity gives d=−ηD^−1g",
+      "justification": "Start from the explicitly specified finite-distribution object; Positive damping; quadratic local surrogate only"
+    },
+    {
+      "id": "M16-S2",
+      "statement": "Substitution shows the quadratic surrogate decreases by η gᵀD^−1g/2",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Positive damping; quadratic local surrogate only"
+    },
+    {
+      "id": "M16-S3",
+      "statement": "A running squared-gradient diagonal is an empirical metric, not the Fisher unless additional assumptions hold",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Positive damping; quadratic local surrogate only"
+    }
+  ],
+  "assumptions": [
+    "Positive damping",
+    "quadratic local surrogate only"
+  ],
+  "method_expression": "d=−η g/(sqrt(second_moment)+ε)",
+  "distinguishing_prediction": "Preconditioning may target stiff adapter directions",
+  "falsifier": "AdamW matches it, indicating no useful distinction",
+  "closest_alternative": "Adam and diagonal natural-gradient approximations",
+  "decisive_comparison": "AdamW, SGD and true-KL diagnostics",
+  "feasibility": "Reserve: strong standard-optimizer overlap; no code selected",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

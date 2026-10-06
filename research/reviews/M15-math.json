@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M15",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M15.json",
+    "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Generation law ν=(1−ε)μ_r+εμ_0 at every token; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "B04: 0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: ν_v≥ε μ_0v holds pointwise at each prefix; Multiply conditional inequalities along a fixed L-token path to get Pν(path)≥ε^L Pμ0(path); Train on unverified ν samples; preserving proposal support does not establish correctness or student support after fitting",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. 0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Sample the per-token historical/current decoder mixture; hard-label training",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Recover initial-policy paths lost by current-policy truncation. Rejection condition: Extra inference cost dominates or target-only anchoring works as well",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: exploration mixtures and replay policies. Required comparison: hard SSD, arithmetic_anchor; separately report 2-teacher generation cost",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M15.json",
+          "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

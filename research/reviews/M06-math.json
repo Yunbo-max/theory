@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M06",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M06.json",
+    "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "q_S(β)∝μ_S^β for β∈[0,1], require G(q_S)≥ρG(p0|S); fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D03: 0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: At β=0 q is uniform on S and has maximal G, so the constraint is feasible; The derivative of Σq² is 2[Σq² log μ−(Σq²)E_q log μ]≥0 by positive association of q and log μ; Thus G is nonincreasing in β and bisection gives the largest feasible β",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. 0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Choose largest β≤1 satisfying conditional-head diversity, then q=normalize(μ^β on S)",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Avoid overconcentrating the retained head across recursion. Rejection condition: Only entropy changes without better native pass@k, or global tails collapse anyway",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: entropy/diversity constrained smoothing. Required comparison: temperature_budget and full_soft, head diversity diagnostic",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M06.json",
+          "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

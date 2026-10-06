@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M18",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M18.json",
+    "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Coordinatewise median of centered logits from at least three frozen historical teachers; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "C04: Coordinatewise majority condition is hypothetical; teacher errors can be correlated",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: If a strict majority of each coordinate lies within ε of a common centered target, its median also lies there; Softmax log-normalization is 1-Lipschitz in the infinity norm; Therefore each normalized log-probability differs from that target by at most 2ε",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Coordinatewise majority condition is hypothetical; teacher errors can be correlated",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q=softmax(coordinatewise median of centered historical logits)",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Resist one anomalous historical checkpoint. Rejection condition: Correlated errors defeat median or arithmetic mean is better",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: robust temporal ensembling. Required comparison: temporal_mean with equal number of forward passes",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M18.json",
+          "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

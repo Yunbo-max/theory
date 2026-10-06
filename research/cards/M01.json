@@ -1,0 +1,56 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M01",
+  "name": "geometric_anchor",
+  "formal_object": "min_q KL(q||m)+λ KL(q||p0), m=(1−ε)μ+εp0",
+  "operations": [
+    {
+      "id": "D02",
+      "input": "min_q KL(q||m)+λ KL(q||p0), m=(1−ε)μ+εp0",
+      "condition": "p0 positive; ε>0; λ≥0; exact neural fitting is not assumed",
+      "condition_status": "conditional",
+      "output": "q ∝ m^w p0^(1−w), w=1/(1+λ)"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M01-S1",
+      "statement": "Differentiate with a simplex multiplier: (1+λ)log q=log m+λlog p0+constant",
+      "justification": "Start from the explicitly specified finite-distribution object; p0 positive; ε>0; λ≥0; exact neural fitting is not assumed"
+    },
+    {
+      "id": "M01-S2",
+      "statement": "Normalize to obtain q ∝ m^(1/(1+λ)) p0^(λ/(1+λ))",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; p0 positive; ε>0; λ≥0; exact neural fitting is not assumed"
+    },
+    {
+      "id": "M01-S3",
+      "statement": "Strict convexity on positive support makes this the unique distribution-space minimizer",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; p0 positive; ε>0; λ≥0; exact neural fitting is not assumed"
+    }
+  ],
+  "assumptions": [
+    "p0 positive",
+    "ε>0",
+    "λ≥0",
+    "exact neural fitting is not assumed"
+  ],
+  "method_expression": "q ∝ m^w p0^(1−w), w=1/(1+λ)",
+  "distinguishing_prediction": "Initial anchoring should reduce recursive log-ratio drift compared with full-soft targets",
+  "falsifier": "No retention advantage, or arithmetic anchoring dominates at equal measured cost",
+  "closest_alternative": "KL-regularized/geometric distillation",
+  "decisive_comparison": "full_soft, arithmetic_anchor; same prefixes and anchor access",
+  "feasibility": "One extra initial-policy forward; strong known-method overlap",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

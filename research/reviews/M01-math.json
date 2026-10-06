@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M01",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M01.json",
+    "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_q KL(q||m)+λ KL(q||p0), m=(1−ε)μ+εp0; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D02: p0 positive; ε>0; λ≥0; exact neural fitting is not assumed",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Differentiate with a simplex multiplier: (1+λ)log q=log m+λlog p0+constant; Normalize to obtain q ∝ m^(1/(1+λ)) p0^(λ/(1+λ)); Strict convexity on positive support makes this the unique distribution-space minimizer",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. p0 positive; ε>0; λ≥0; exact neural fitting is not assumed",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q ∝ m^w p0^(1−w), w=1/(1+λ)",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Initial anchoring should reduce recursive log-ratio drift compared with full-soft targets. Rejection condition: No retention advantage, or arithmetic anchoring dominates at equal measured cost",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: KL-regularized/geometric distillation. Required comparison: full_soft, arithmetic_anchor; same prefixes and anchor access",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M01.json",
+          "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

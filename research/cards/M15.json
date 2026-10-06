@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M15",
+  "name": "ancestral_exploration",
+  "formal_object": "Generation law ν=(1−ε)μ_r+εμ_0 at every token",
+  "operations": [
+    {
+      "id": "B04",
+      "input": "Generation law ν=(1−ε)μ_r+εμ_0 at every token",
+      "condition": "0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model",
+      "condition_status": "conditional",
+      "output": "Sample the per-token historical/current decoder mixture; hard-label training"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M15-S1",
+      "statement": "ν_v≥ε μ_0v holds pointwise at each prefix",
+      "justification": "Start from the explicitly specified finite-distribution object; 0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model"
+    },
+    {
+      "id": "M15-S2",
+      "statement": "Multiply conditional inequalities along a fixed L-token path to get Pν(path)≥ε^L Pμ0(path)",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model"
+    },
+    {
+      "id": "M15-S3",
+      "statement": "Train on unverified ν samples; preserving proposal support does not establish correctness or student support after fitting",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0<ε≤1; same vocabulary/prefix; both teachers are checkpoints of this model"
+    }
+  ],
+  "assumptions": [
+    "0<ε≤1",
+    "same vocabulary/prefix",
+    "both teachers are checkpoints of this model"
+  ],
+  "method_expression": "Sample the per-token historical/current decoder mixture; hard-label training",
+  "distinguishing_prediction": "Recover initial-policy paths lost by current-policy truncation",
+  "falsifier": "Extra inference cost dominates or target-only anchoring works as well",
+  "closest_alternative": "exploration mixtures and replay policies",
+  "decisive_comparison": "hard SSD, arithmetic_anchor; separately report 2-teacher generation cost",
+  "feasibility": "Extra autoregressive anchor forward/cache; selected but expensive",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

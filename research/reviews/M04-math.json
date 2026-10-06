@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M04",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M04.json",
+    "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Composition of untruncated power maps T_r(p)∝p^(1/T_r); fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "G01: Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Composition multiplies exponents by induction; Choose T_r=exp(w_r log T_total), Σw_r=1, so product T_r=T_total; The ideal endpoint equals one T_total map regardless of round count; truncation and imperfect fitting invalidate endpoint equality",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: T_r=T_total^(1/R) for the declared R rounds; use full-soft targets",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Reduce over-flattening from repeated temperature application. Rejection condition: Same endpoint drift as fixed temperature, or no quality/retention improvement",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: temperature annealing and power-map semigroups. Required comparison: full_soft at fixed T, untruncated diagnostic, matched training steps",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M04.json",
+          "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

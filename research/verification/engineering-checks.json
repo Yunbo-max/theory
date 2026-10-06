@@ -1,0 +1,91 @@
+{
+  "checked_at": "2026-10-06T14:01:43.834464+00:00",
+  "source": {
+    "files": {
+      "configs/2080ti_8h.json": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a",
+      "docker/Dockerfile": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf",
+      "docker/score.py": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9",
+      "pyproject.toml": "d898894c1a071c1a6ad8bdd62298b6c60db412cdf05a4ea6df74a322bdc50b8c",
+      "recursive_ssd/__init__.py": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb",
+      "recursive_ssd/cli.py": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b",
+      "recursive_ssd/data.py": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b",
+      "recursive_ssd/evaluation.py": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e",
+      "recursive_ssd/io.py": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7",
+      "recursive_ssd/methods.py": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767",
+      "recursive_ssd/model.py": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077",
+      "recursive_ssd/runner.py": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74",
+      "recursive_ssd/templates/APPLE_LICENSE": "27eb5d4005ca4ad8862417a009c16b89b76541be99fe862f7d9c164fd2f3a078",
+      "recursive_ssd/templates/self_distillation_prompt_function.j2": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2",
+      "recursive_ssd/train.py": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833",
+      "scripts/run_8h.sh": "dab93ea5889d2544ec121847c3fbb9f8a15935eb5960098848391df9f962bf8d",
+      "scripts/setup.sh": "4188ce827075c96aa947f7d60bef865d3e486d740ed184c0fef56691a4cf8eb0"
+    },
+    "sha256": "baf0f55a439b8131c3bd3b6d446fa9127fba6f13f655c177f482240b372f64ed"
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "research/verification/check-1.log",
+      "sha256": "a1bcbe414909726b3b0bc44551296d147589a211c1f4386a5c99f68e3a822738"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "log": "research/verification/check-2.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "recursive_ssd",
+        "scripts",
+        "tests",
+        "docker/score.py"
+      ],
+      "exit_code": 0,
+      "log": "research/verification/check-3.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "recursive_ssd.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": "research/verification/check-4.log",
+      "sha256": "bec4d044cf41947d4bf15b05a7e4753836ccee8cec0678b686a412b1083ce4fc"
+    },
+    {
+      "command": [
+        "bash",
+        "-n",
+        "scripts/setup.sh",
+        "scripts/run_8h.sh"
+      ],
+      "exit_code": 0,
+      "log": "research/verification/check-5.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "log_path_aliases": [
+    "<PROJECT>",
+    "<VERIFY_ENV>"
+  ],
+  "scope": "engineering only; GPU, native sandbox replay and scientific outcomes pending"
+}

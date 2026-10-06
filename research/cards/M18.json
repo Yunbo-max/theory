@@ -1,0 +1,54 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M18",
+  "name": "temporal_median",
+  "formal_object": "Coordinatewise median of centered logits from at least three frozen historical teachers",
+  "operations": [
+    {
+      "id": "C04",
+      "input": "Coordinatewise median of centered logits from at least three frozen historical teachers",
+      "condition": "Coordinatewise majority condition is hypothetical; teacher errors can be correlated",
+      "condition_status": "conditional",
+      "output": "q=softmax(coordinatewise median of centered historical logits)"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M18-S1",
+      "statement": "If a strict majority of each coordinate lies within ε of a common centered target, its median also lies there",
+      "justification": "Start from the explicitly specified finite-distribution object; Coordinatewise majority condition is hypothetical; teacher errors can be correlated"
+    },
+    {
+      "id": "M18-S2",
+      "statement": "Softmax log-normalization is 1-Lipschitz in the infinity norm",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Coordinatewise majority condition is hypothetical; teacher errors can be correlated"
+    },
+    {
+      "id": "M18-S3",
+      "statement": "Therefore each normalized log-probability differs from that target by at most 2ε",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Coordinatewise majority condition is hypothetical; teacher errors can be correlated"
+    }
+  ],
+  "assumptions": [
+    "Coordinatewise majority condition is hypothetical",
+    "teacher errors can be correlated"
+  ],
+  "method_expression": "q=softmax(coordinatewise median of centered historical logits)",
+  "distinguishing_prediction": "Resist one anomalous historical checkpoint",
+  "falsifier": "Correlated errors defeat median or arithmetic mean is better",
+  "closest_alternative": "robust temporal ensembling",
+  "decisive_comparison": "temporal_mean with equal number of forward passes",
+  "feasibility": "Reserve: at least three reference forwards; weak identification of good majority",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

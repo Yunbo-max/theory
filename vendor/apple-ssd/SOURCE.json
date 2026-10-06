@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/apple-aiml-research/ml-ssd",
+  "commit": "2637d2021f1bc523385b48a1f88ea9aa4812b0a9",
+  "files": {
+    "LICENSE": "27eb5d4005ca4ad8862417a009c16b89b76541be99fe862f7d9c164fd2f3a078",
+    "README.md": "d0813d7c903c9162e1931c83c14d1374f88d769ff18a4c03bf75dc1722c32cc7",
+    "data_generation/generate.py": "65d656b6c16394698748aa1cac9a3c84c7a960c2fdde084fd9f1e84636aa6a6e",
+    "data_generation/config.yaml": "5031a93d3ba2b1da8677b8cd15cc59cf442bd92cee6fb7dad734b1a89f1ee5b4",
+    "data_generation/templates/self_distillation_prompt_function.j2": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2",
+    "data_generation/templates/self_distillation_prompt_stdin.j2": "7861ef502f974ce4f8e2113abc145ab48bb20f0ed2a79d0e5b19c778ac98d436"
+  }
+}

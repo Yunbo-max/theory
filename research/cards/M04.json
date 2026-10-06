@@ -1,0 +1,54 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M04",
+  "name": "temperature_budget",
+  "formal_object": "Composition of untruncated power maps T_r(p)∝p^(1/T_r)",
+  "operations": [
+    {
+      "id": "G01",
+      "input": "Composition of untruncated power maps T_r(p)∝p^(1/T_r)",
+      "condition": "Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis",
+      "condition_status": "conditional",
+      "output": "T_r=T_total^(1/R) for the declared R rounds; use full-soft targets"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M04-S1",
+      "statement": "Composition multiplies exponents by induction",
+      "justification": "Start from the explicitly specified finite-distribution object; Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis"
+    },
+    {
+      "id": "M04-S2",
+      "statement": "Choose T_r=exp(w_r log T_total), Σw_r=1, so product T_r=T_total",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis"
+    },
+    {
+      "id": "M04-S3",
+      "statement": "The ideal endpoint equals one T_total map regardless of round count; truncation and imperfect fitting invalidate endpoint equality",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Power-map theorem excludes top-k/top-p; actual truncated implementation is a hypothesis"
+    }
+  ],
+  "assumptions": [
+    "Power-map theorem excludes top-k/top-p",
+    "actual truncated implementation is a hypothesis"
+  ],
+  "method_expression": "T_r=T_total^(1/R) for the declared R rounds; use full-soft targets",
+  "distinguishing_prediction": "Reduce over-flattening from repeated temperature application",
+  "falsifier": "Same endpoint drift as fixed temperature, or no quality/retention improvement",
+  "closest_alternative": "temperature annealing and power-map semigroups",
+  "decisive_comparison": "full_soft at fixed T, untruncated diagnostic, matched training steps",
+  "feasibility": "No extra forward; a composition-derived schedule, not a claim that annealing is new",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M13",
+  "name": "kl_backtrack",
+  "formal_object": "Actual batch KL constraint on a proposed adapter update Δ",
+  "operations": [
+    {
+      "id": "C03",
+      "input": "Actual batch KL constraint on a proposed adapter update Δ",
+      "condition": "Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded",
+      "condition_status": "conditional",
+      "output": "θ_new=θ_old+γΔ subject to measured prefix-batch KL≤δ"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M13-S1",
+      "statement": "At γ=0 the parameters equal the saved pre-step state and KL(p_before||p_after)=0",
+      "justification": "Start from the explicitly specified finite-distribution object; Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded"
+    },
+    {
+      "id": "M13-S2",
+      "statement": "Test γ=1,1/2,... using the actual frozen pre-step distribution on the same inputs",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded"
+    },
+    {
+      "id": "M13-S3",
+      "statement": "Accept the first γ with KL≤δ; otherwise restore parameters and optimizer state; the accepted tested-batch bound is direct, not a model-wide theorem",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded"
+    }
+  ],
+  "assumptions": [
+    "Finite candidate set includes exact rollback",
+    "evaluation mode and same prefixes",
+    "FP tolerance recorded"
+  ],
+  "method_expression": "θ_new=θ_old+γΔ subject to measured prefix-batch KL≤δ",
+  "distinguishing_prediction": "Prevent unusually large realized updates missed by scalar gradient clipping",
+  "falsifier": "Same cost spent on lower LR performs better, or proposal rejection wastes budget",
+  "closest_alternative": "trust regions and backtracking line search",
+  "decisive_comparison": "full_soft with lower_lr and wall-clock match",
+  "feasibility": "Several extra student forwards; no global guarantee",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

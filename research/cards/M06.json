@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M06",
+  "name": "head_diversity",
+  "formal_object": "q_S(β)∝μ_S^β for β∈[0,1], require G(q_S)≥ρG(p0|S)",
+  "operations": [
+    {
+      "id": "D03",
+      "input": "q_S(β)∝μ_S^β for β∈[0,1], require G(q_S)≥ρG(p0|S)",
+      "condition": "0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support",
+      "condition_status": "conditional",
+      "output": "Choose largest β≤1 satisfying conditional-head diversity, then q=normalize(μ^β on S)"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M06-S1",
+      "statement": "At β=0 q is uniform on S and has maximal G, so the constraint is feasible",
+      "justification": "Start from the explicitly specified finite-distribution object; 0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support"
+    },
+    {
+      "id": "M06-S2",
+      "statement": "The derivative of Σq² is 2[Σq² log μ−(Σq²)E_q log μ]≥0 by positive association of q and log μ",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support"
+    },
+    {
+      "id": "M06-S3",
+      "statement": "Thus G is nonincreasing in β and bisection gives the largest feasible β",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤ρ≤1; condition p0 on nonempty S; no claim about missing outside support"
+    }
+  ],
+  "assumptions": [
+    "0≤ρ≤1",
+    "condition p0 on nonempty S",
+    "no claim about missing outside support"
+  ],
+  "method_expression": "Choose largest β≤1 satisfying conditional-head diversity, then q=normalize(μ^β on S)",
+  "distinguishing_prediction": "Avoid overconcentrating the retained head across recursion",
+  "falsifier": "Only entropy changes without better native pass@k, or global tails collapse anyway",
+  "closest_alternative": "entropy/diversity constrained smoothing",
+  "decisive_comparison": "temperature_budget and full_soft, head diversity diagnostic",
+  "feasibility": "Initial forward plus scalar search; retain support zeros",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

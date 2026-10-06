@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M02",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M02.json",
+    "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "q=p0 exp(clamp(log(m/p0),−B,B))/Z; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "B02: B≥0; m,p0 positive; target-space bound only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Every exponentiated clipped ratio lies in [exp(−B),exp(B)]; A p0-weighted average Z lies in the same interval; Dividing yields exp(−2B)≤q/p0≤exp(2B)",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. B≥0; m,p0 positive; target-space bound only",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: q=normalize(p0*exp(clamp(log(m/p0),−B,B)))",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Bounded target ratios should constrain worst tail suppression. Rejection condition: Realized student ratios remain unbounded or simple anchoring performs as well",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: clipped likelihood ratios and trust regions. Required comparison: M01 and arithmetic_anchor with matched reference forwards",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M02.json",
+          "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

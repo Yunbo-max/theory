@@ -1,0 +1,56 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M12",
+  "name": "gradient_projection",
+  "formal_object": "min_d ||d−d0||²/2 subject to h·d≤c, h=∇θ KL(p0||pθ)",
+  "operations": [
+    {
+      "id": "D01",
+      "input": "min_d ||d−d0||²/2 subject to h·d≤c, h=∇θ KL(p0||pθ)",
+      "condition": "SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only",
+      "condition_status": "conditional",
+      "output": "Project the SGD direction using the anchor-KL gradient; c=0 default"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M12-S1",
+      "statement": "KKT gives d=d0−λh with λ≥0",
+      "justification": "Start from the explicitly specified finite-distribution object; SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only"
+    },
+    {
+      "id": "M12-S2",
+      "statement": "Enforce complementarity: λ=max(0,(h·d0−c)/||h||²), handle h=0 separately",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only"
+    },
+    {
+      "id": "M12-S3",
+      "statement": "Taylor expansion gives retention change η h·d+O(η²); a first-order bound is not a finite-step guarantee",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; SGD without momentum; same parameters and prefix batch for h,d0; differentiable retention; LoRA-space only"
+    }
+  ],
+  "assumptions": [
+    "SGD without momentum",
+    "same parameters and prefix batch for h,d0",
+    "differentiable retention",
+    "LoRA-space only"
+  ],
+  "method_expression": "Project the SGD direction using the anchor-KL gradient; c=0 default",
+  "distinguishing_prediction": "Reduce first-order retention conflict rather than merely shrinking all gradients",
+  "falsifier": "SGD-matched control is as good or finite-step KL still grows",
+  "closest_alternative": "gradient surgery and projected optimization",
+  "decisive_comparison": "full_soft_sgd, arithmetic_anchor and realized KL change",
+  "feasibility": "Extra anchor backward; selected but low scheduling priority",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

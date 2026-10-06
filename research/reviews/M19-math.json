@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M19",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M19.json",
+    "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "min_π <C,π>+ε KL(π||p0⊗μ) subject to π1=p0; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "D02: ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: Introduce one multiplier per row and differentiate on positive support; Row-normalization yields π_ij=p0i μj exp(−Cij/ε)/Z_i; q_j=Σ_iπ_ij is normalized and minimizes the stated one-marginal transport objective",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. ε>0; finite C; μ support explicit; token similarity need not mean semantic correctness",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: Transport initial token mass using frozen embedding costs; target is column marginal",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Retain semantically nearby alternatives instead of literal initial probabilities. Rejection condition: Cost geometry uninformative or simple anchors dominate",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: entropy-regularized transport. Required comparison: geometric_anchor with equal compute; cost ablation",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M19.json",
+          "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

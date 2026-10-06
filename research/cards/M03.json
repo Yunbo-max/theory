@@ -1,0 +1,56 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M03",
+  "name": "floor_projection",
+  "formal_object": "min_q KL(μ||q) subject to q≥c p0 and Σq=1",
+  "operations": [
+    {
+      "id": "D01",
+      "input": "min_q KL(μ||q) subject to q≥c p0 and Σq=1",
+      "condition": "0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate",
+      "condition_status": "conditional",
+      "output": "q_v=max(c p0v,k μv), k chosen to normalize"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M03-S1",
+      "statement": "KKT stationarity on free coordinates gives q_v=μ_v/λ",
+      "justification": "Start from the explicitly specified finite-distribution object; 0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate"
+    },
+    {
+      "id": "M03-S2",
+      "statement": "Complementary slackness gives q_v=max(c p0v,k μv)",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate"
+    },
+    {
+      "id": "M03-S3",
+      "statement": "The mass is continuous nondecreasing in k; at k=0 it is c and at k=1 at least one, giving a bisection bracket",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; 0≤c<1; distributions normalized; zero μ is allowed; neural fit approximate"
+    }
+  ],
+  "assumptions": [
+    "0≤c<1",
+    "distributions normalized",
+    "zero μ is allowed",
+    "neural fit approximate"
+  ],
+  "method_expression": "q_v=max(c p0v,k μv), k chosen to normalize",
+  "distinguishing_prediction": "Restore excluded tail mass while keeping more decoder-head shape than arithmetic mixing",
+  "falsifier": "No benefit over arithmetic_anchor/full_soft, or fitting error erases the floor",
+  "closest_alternative": "probability-floor information projection",
+  "decisive_comparison": "full_soft, arithmetic_anchor, same-token lower-LR hard SSD",
+  "feasibility": "One extra forward; priority candidate; familiar projection, application novelty unresolved",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

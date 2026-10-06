@@ -1,0 +1,54 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M08",
+  "name": "temporal_mean",
+  "formal_object": "min_q [H(μ_r,q)+H(μ_lag,q)]/2 at the same prefix",
+  "operations": [
+    {
+      "id": "D02",
+      "input": "min_q [H(μ_r,q)+H(μ_lag,q)]/2 at the same prefix",
+      "condition": "Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round",
+      "condition_status": "conditional",
+      "output": "q=(μ_r+μ_lag)/2"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M08-S1",
+      "statement": "Linearity in the target rewrites the objective as H((μ_r+μ_lag)/2,q)",
+      "justification": "Start from the explicitly specified finite-distribution object; Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round"
+    },
+    {
+      "id": "M08-S2",
+      "statement": "Gibbs inequality gives q=(μ_r+μ_lag)/2 at its minimum",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round"
+    },
+    {
+      "id": "M08-S3",
+      "statement": "Covariance of the mean includes cross-covariance; variance improvement is not guaranteed for biased or correlated teachers",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Frozen historical policies evaluated at identical current prefixes; lag=teacher in first round"
+    }
+  ],
+  "assumptions": [
+    "Frozen historical policies evaluated at identical current prefixes",
+    "lag=teacher in first round"
+  ],
+  "method_expression": "q=(μ_r+μ_lag)/2",
+  "distinguishing_prediction": "Damp round-to-round target oscillations",
+  "falsifier": "Staleness harms scores or a smaller learning rate matches it",
+  "closest_alternative": "temporal ensembling and mean teachers",
+  "decisive_comparison": "full_soft and lower_lr; teacher correlation logged",
+  "feasibility": "One lag forward; no external teacher",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}

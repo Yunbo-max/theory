@@ -1,0 +1,142 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M13",
+  "scope": "math",
+  "artifact_ref": {
+    "path": "research/cards/M13.json",
+    "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+  },
+  "reviewer": "same-context assistant review; not independent or formal proof",
+  "reviewed_at": "2026-10-06T13:34:14.390557+00:00",
+  "outcome": "verified",
+  "verification_scope": "Conditional algebra only; novelty and empirical validity pending",
+  "checks": {
+    "formal_object": {
+      "status": "verified",
+      "rationale": "Actual batch KL constraint on a proposed adapter update Δ; fixed-prefix versus sequence scope is explicit.",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "operations_and_conditions": {
+      "status": "verified",
+      "rationale": "C03: Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "derivation": {
+      "status": "verified",
+      "rationale": "Reviewed conditional steps: At γ=0 the parameters equal the saved pre-step state and KL(p_before||p_after)=0; Test γ=1,1/2,... using the actual frozen pre-step distribution on the same inputs; Accept the first γ with KL≤δ; otherwise restore parameters and optimizer state; the accepted tested-batch bound is direct, not a model-wide theorem",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "assumptions": {
+      "status": "verified",
+      "rationale": "No accuracy guarantee or exact neural representability inferred. Finite candidate set includes exact rollback; evaluation mode and same prefixes; FP tolerance recorded",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "method_expression": {
+      "status": "verified",
+      "rationale": "Expression implements the stated mathematical construction: θ_new=θ_old+γΔ subject to measured prefix-batch KL≤δ",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "prediction_and_falsifier": {
+      "status": "verified",
+      "rationale": "Prevent unusually large realized updates missed by scalar gradient clipping. Rejection condition: Same cost spent on lower LR performs better, or proposal rejection wastes budget",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    },
+    "closest_alternative": {
+      "status": "verified",
+      "rationale": "Known overlap: trust regions and backtracking line search. Required comparison: full_soft with lower_lr and wall-clock match",
+      "evidence_refs": [
+        {
+          "path": "research/cards/M13.json",
+          "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+        },
+        {
+          "path": "research/SOURCES.md",
+          "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+        },
+        {
+          "path": "research/THEORY.md",
+          "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+        }
+      ]
+    }
+  }
+}

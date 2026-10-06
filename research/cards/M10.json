@@ -1,0 +1,55 @@
+{
+  "kind": "math-card",
+  "version": "1.0.0",
+  "candidate_id": "M10",
+  "name": "prefix_damping",
+  "formal_object": "Prefix score s_t=Σ_{j<t} max(0,log p_r(y_j|h_j)−log p0(y_j|h_j))",
+  "operations": [
+    {
+      "id": "F03",
+      "input": "Prefix score s_t=Σ_{j<t} max(0,log p_r(y_j|h_j)−log p0(y_j|h_j))",
+      "condition": "Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling",
+      "condition_status": "conditional",
+      "output": "L=mean_t exp(−min(s_t,C)) H(μ_t,p_student,t)"
+    }
+  ],
+  "derivation_steps": [
+    {
+      "id": "M10-S1",
+      "statement": "Maintain s_{t+1}=s_t+positive log-ratio at t, starting s_0=0",
+      "justification": "Start from the explicitly specified finite-distribution object; Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling"
+    },
+    {
+      "id": "M10-S2",
+      "statement": "w_t=exp(−min(s_t,C)) is prefix measurable and lies in [exp(−C),1]",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling"
+    },
+    {
+      "id": "M10-S3",
+      "statement": "The frozen weighted CE objective has gradient Σw_t(p_student−μ_t); it intentionally changes prefix weighting",
+      "justification": "Apply the stated constraint/normalization to the preceding algebra; Teacher and anchor frozen; complete observed-prefix log-ratios; not importance sampling"
+    }
+  ],
+  "assumptions": [
+    "Teacher and anchor frozen",
+    "complete observed-prefix log-ratios",
+    "not importance sampling"
+  ],
+  "method_expression": "L=mean_t exp(−min(s_t,C)) H(μ_t,p_student,t)",
+  "distinguishing_prediction": "Damp reinforcement along already amplified generated paths",
+  "falsifier": "A constant loss scale or lower LR matches effect; rare useful paths are suppressed",
+  "closest_alternative": "trajectory reweighting and confidence weighting",
+  "decisive_comparison": "same-average-weight control, full_soft and lower_lr",
+  "feasibility": "One initial forward; path-dependent state is distinct from local gates",
+  "source_refs": [
+    {
+      "path": "research/SOURCES.md",
+      "sha256": "16f9c521e49204e631cc18a3d41e30d01ff6c70ec2ddc8e6ee2f1b53b3c740c4"
+    },
+    {
+      "path": "research/THEORY.md",
+      "sha256": "f1ff07be51e8a5b1c6c7f8c3a624163bafabcdcd025a67e85cfcab7479b5b396"
+    }
+  ],
+  "novelty_status": "UNESTABLISHED; conditional construction, not an originality certificate"
+}
