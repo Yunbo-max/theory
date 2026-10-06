@@ -1,0 +1,235 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "batch_id",
+    "output_root",
+    "pool_dir",
+    "plan_digest",
+    "tasks",
+    "limits",
+    "gpus"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "harness-plan"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "batch_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "output_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pool_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plan_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "task_id",
+          "idea_id",
+          "plan_ref",
+          "depends_on",
+          "priority",
+          "resources"
+        ],
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "idea_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plan_ref": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            }
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "resources": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "cpu_cores",
+              "ram_mib",
+              "gpu_count",
+              "gpu_peak_mib",
+              "allow_gpu_share",
+              "memory_profile_ref",
+              "exclusive_keys"
+            ],
+            "properties": {
+              "cpu_cores": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "ram_mib": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "gpu_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "gpu_peak_mib": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "allow_gpu_share": {
+                "type": "boolean"
+              },
+              "memory_profile_ref": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      }
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "exclusive_keys": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "window_seconds",
+        "total_wall_seconds",
+        "max_parallel_tasks",
+        "cpu_cores",
+        "ram_mib",
+        "max_gpu_task_seconds"
+      ],
+      "properties": {
+        "window_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "total_wall_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_parallel_tasks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cpu_cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ram_mib": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_gpu_task_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "gpus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uuids",
+        "safety_margin_mib",
+        "max_tasks_per_gpu"
+      ],
+      "properties": {
+        "uuids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "safety_margin_mib": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_tasks_per_gpu": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/harness-plan/1.0.0"
+}

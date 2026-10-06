@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/supervisor-event/1.0.0",
+  "title": "supervisor-event",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "revision",
+    "request_id",
+    "request_digest",
+    "event_type",
+    "timestamp",
+    "previous_event_digest",
+    "payload",
+    "state_digest",
+    "receipt",
+    "event_digest"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "supervisor-event"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "event_type": {
+      "enum": [
+        "register",
+        "checkpoint",
+        "reserve",
+        "release",
+        "record-usage",
+        "sync-receipt",
+        "set-destination"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_event_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "state_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "receipt": {
+      "type": "object"
+    },
+    "event_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

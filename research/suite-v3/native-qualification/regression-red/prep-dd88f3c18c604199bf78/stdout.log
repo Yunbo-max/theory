@@ -1,0 +1,39 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_reference_acquisition_extends_prepared_manifest_with_replay_inputs ____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-27/test_reference_acquisition_ext0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8ef993c6b0>
+
+    def test_reference_acquisition_extends_prepared_manifest_with_replay_inputs(tmp_path, monkeypatch):
+        module = adapter("benchmarks")
+        # Acquisition/manifest fixture only; no invented solution is scored.
+        def acquired(url, target, *, download, git_blob):
+            assert git_blob == module.LCB_REFERENCE_BLOB
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if not target.exists():
+                target.write_text("released-output transport fixture\n")
+            return {"url": url, "sha256": digest(target), "bytes": target.stat().st_size,
+                    "git_blob": git_blob}
+        monkeypatch.setattr(module, "_download", acquired)
+        path = tmp_path / "benchmarks-manifest.json"
+        previous = {"files": {"native-index.jsonl": "a" * 64}, "complete_suite": True,
+                    "benchmarks": {"livecodebench": {"source": "unchanged release binding"}}}
+        atomic_json(path, previous)
+        module.acquire_lcb_references(tmp_path, download=False)
+        prepared = read_json(path)
+        reference = "sources/livecodebench-reference-outputs.json"
+        receipt = "sources/livecodebench-reference-outputs.receipt.json"
+>       assert prepared == {**previous, "files": {**previous["files"],
+            reference: digest(tmp_path / reference), receipt: digest(tmp_path / receipt)}}
+E       AssertionError: assert {'benchmarks'...aaaaaaaaaaa'}} == {'benchmarks'...909bf2821da'}}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'files': {'native-index.jsonl': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}} != {'files': {'native-index.jsonl': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'sources/livecode...ces/livecodebench-reference-outputs.receipt.json': 'a3d2149b49e78ba8e7506de646fdcda7eedb8382e235454bee01a909bf2821da'}}
+E         Use -v to get more diff
+
+tests/test_benchmarks.py:249: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_benchmarks.py::test_reference_acquisition_extends_prepared_manifest_with_replay_inputs
+1 failed in 0.06s

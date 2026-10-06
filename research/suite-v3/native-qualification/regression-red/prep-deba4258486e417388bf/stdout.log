@@ -1,0 +1,16 @@
+...........F..........                                                   [100%]
+=================================== FAILURES ===================================
+_ test_lcb_runner_infrastructure_error_cannot_be_accepted_as_a_wrong_solution __
+
+    def test_lcb_runner_infrastructure_error_cannot_be_accepted_as_a_wrong_solution():
+        module = adapter("suite_score")
+        # Official error transport fixture only; no code or test input is executed.
+        native = {"task_ids": ["q"], "metrics": [{"pass@1": 0.0}, {"0": [[-2]]},
+            [[json.dumps({"error": "EOFError()", "error_code": -5, "error_message": "TestRunnerError"})]]]}
+>       with pytest.raises(RuntimeError, match="infrastructure|TestRunnerError"):
+E       Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/test_benchmarks.py:106: Failed
+=========================== short test summary info ============================
+FAILED tests/test_benchmarks.py::test_lcb_runner_infrastructure_error_cannot_be_accepted_as_a_wrong_solution
+1 failed, 21 passed in 0.14s

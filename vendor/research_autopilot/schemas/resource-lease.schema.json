@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/resource-lease/1.0.0",
+  "title": "resource-lease",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "lease_id",
+    "route_id",
+    "resources",
+    "budget",
+    "requested_budget",
+    "spent",
+    "settled",
+    "status",
+    "fencing_token",
+    "created_at",
+    "expires_at",
+    "reason_codes"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "resource-lease"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "lease_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "requested_budget": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "spent": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "settled": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "reserved",
+        "denied",
+        "released"
+      ]
+    },
+    "fencing_token": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expires_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "released_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": false
+}

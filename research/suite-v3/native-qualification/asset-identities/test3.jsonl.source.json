@@ -1,0 +1,7 @@
+{
+  "url": "https://huggingface.co/datasets/livecodebench/code_generation_lite/resolve/0fe84c3912ea0c4d4a78037083943e8f0c4dd505/test3.jsonl",
+  "commit_hash": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+  "sha256": "28ed26cc83363ce3f1fe2d5fad9f8393077beb1907b167a31bd3b32f80801b79",
+  "bytes": 623360766,
+  "source": "official Hugging Face HEAD x-linked-etag SHA-256"
+}

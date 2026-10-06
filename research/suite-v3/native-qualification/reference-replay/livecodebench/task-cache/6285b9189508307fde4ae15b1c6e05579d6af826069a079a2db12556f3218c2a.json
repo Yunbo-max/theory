@@ -1,0 +1,107 @@
+{
+  "identity": {
+    "task": {
+      "question_title": "A. Short Sort",
+      "question_content": "There are three cards with letters $\\texttt{a}$, $\\texttt{b}$, $\\texttt{c}$ placed in a row in some order. You can do the following operation at most once: \n\n \n-  Pick two cards, and swap them.  Is it possible that the row becomes $\\texttt{abc}$ after the operation? Output \"YES\" if it is possible, and \"NO\" otherwise.\n\nInput\n\nThe first line contains a single integer $t$ ($1 \\leq t \\leq 6$) — the number of test cases.\n\nThe only line of each test case contains a single string consisting of each of the three characters $\\texttt{a}$, $\\texttt{b}$, and $\\texttt{c}$ exactly once, representing the cards.\n\nOutput\n\nFor each test case, output \"YES\" if you can make the row $\\texttt{abc}$ with at most one operation, or \"NO\" otherwise.\n\nYou can output the answer in any case (for example, the strings \"yEs\", \"yes\", \"Yes\" and \"YES\" will be recognized as a positive answer).Sample Input 1:\n6\n\nabc\n\nacb\n\nbac\n\nbca\n\ncab\n\ncba\n\n\n\nSample Output 1:\n\nYES\nYES\nYES\nNO\nNO\nYES\n\n\nNote\n\nIn the first test case, we don't need to do any operations, since the row is already $\\texttt{abc}$.\n\nIn the second test case, we can swap $\\texttt{c}$ and $\\texttt{b}$: $\\texttt{acb} \\to \\texttt{abc}$.\n\nIn the third test case, we can swap $\\texttt{b}$ and $\\texttt{a}$: $\\texttt{bac} \\to \\texttt{abc}$.\n\nIn the fourth test case, it is impossible to make $\\texttt{abc}$ using at most one operation.",
+      "platform": "codeforces",
+      "question_id": "1873_A",
+      "contest_id": "1873",
+      "contest_date": "2023-08-21T00:00:00",
+      "starter_code": "",
+      "difficulty": "easy",
+      "metadata": "{}",
+      "_native_ref": {
+        "path": "sources/livecodebench-data/test.jsonl",
+        "offset_bytes": 0,
+        "length_bytes": 2058,
+        "sha256": "f73c98b2f291260489a0cc0d2ced52eefdf9e76b548ec938e0428227c501f2ed"
+      }
+    },
+    "raw_sha256": "117f67ee2cc9a77a45a5832b1d8cf9c094b02cdad7fdad1c1d952998f5203325",
+    "source_sha256": "51d63dd9a09434529f4c6e0ae7f7239108efeed098f7e1d70372f101b64fd9b5",
+    "wrapper_sha256": "bc30ef9a44eae5a7c6b4a39a7fc9d5a32b6de9e9ff52d3de915eabf462ebab3d",
+    "environment_sha256": "71720c37974f519fc25b4d910d7b59bf1587c0752bb2999027a3b4e85b30083e",
+    "expected_samples": 10,
+    "k_values": [
+      1,
+      5
+    ],
+    "parallel": 2,
+    "timeout": 6
+  },
+  "native": {
+    "task_ids": [
+      "1873_A"
+    ],
+    "case_counts": {
+      "1873_A": 5
+    },
+    "counts": {
+      "public": 1,
+      "private": 4
+    },
+    "metrics": [
+      {
+        "pass@1": 0.0,
+        "pass@5": 0.0,
+        "detail": {
+          "pass@1": {
+            "0": 0.0
+          },
+          "pass@5": {
+            "0": 0.0
+          }
+        }
+      },
+      {
+        "0": [
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ]
+        ]
+      },
+      [
+        [
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}"
+        ]
+      ]
+    ]
+  },
+  "result_sha256": "1f8d0a299cfd87775f72bcfa76999a72d34e8eff701eb1dba645518d7f6709cf"
+}

@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/experiment-run-plan/1.0.0",
+  "title": "experiment-run-plan",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "run_id",
+    "purpose",
+    "evidence_mode",
+    "protocol_ref",
+    "protocol_digest",
+    "output_root",
+    "provenance",
+    "limits",
+    "jobs",
+    "plan_digest"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "experiment-run-plan"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "purpose": {
+      "enum": [
+        "engineering",
+        "scientific"
+      ]
+    },
+    "evidence_mode": {
+      "enum": [
+        "developmental",
+        "prospective_confirmatory",
+        "retrospective_audit"
+      ]
+    },
+    "protocol_ref": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_digest": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "git_revision",
+        "model_revision",
+        "data_revision",
+        "environment_digest"
+      ],
+      "properties": {
+        "git_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "required": [
+        "max_attempts",
+        "max_development_trials",
+        "max_confirmation_trials",
+        "max_retries_per_trial",
+        "wall_time_seconds",
+        "attempt_timeout_seconds"
+      ],
+      "properties": {
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_development_trials": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_confirmation_trials": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_retries_per_trial": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "wall_time_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "attempt_timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "jobs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "trial_id",
+          "command",
+          "cwd",
+          "input_refs",
+          "code_refs",
+          "output_paths",
+          "seed",
+          "group",
+          "arm_role"
+        ],
+        "properties": {
+          "trial_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "command": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "cwd": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "code_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "output_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "seed": {
+            "type": "integer"
+          },
+          "group": {
+            "type": "string",
+            "minLength": 1
+          },
+          "arm_role": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plan_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

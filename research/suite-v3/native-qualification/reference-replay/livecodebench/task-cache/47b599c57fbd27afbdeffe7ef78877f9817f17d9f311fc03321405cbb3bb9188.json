@@ -1,0 +1,107 @@
+{
+  "identity": {
+    "task": {
+      "question_title": "sum-in-a-matrix",
+      "question_content": "You are given a 0-indexed 2D integer array nums. Initially, your score is 0. Perform the following operations until the matrix becomes empty:\n\nFrom each row in the matrix, select the largest number and remove it. In the case of a tie, it does not matter which number is chosen.\nIdentify the highest number amongst all those removed in step 1. Add that number to your score.\n\nReturn the final score.\n \nExample 1:\n\nInput: nums = [[7,2,1],[6,4,2],[6,5,3],[3,2,1]]\nOutput: 15\nExplanation: In the first operation, we remove 7, 6, 6, and 3. We then add 7 to our score. Next, we remove 2, 4, 5, and 2. We add 5 to our score. Lastly, we remove 1, 2, 3, and 1. We add 3 to our score. Thus, our final score is 7 + 5 + 3 = 15.\n\nExample 2:\n\nInput: nums = [[1]]\nOutput: 1\nExplanation: We remove 1 and add it to the answer. We return 1.\n \nConstraints:\n\n1 <= nums.length <= 300\n1 <= nums[i].length <= 500\n0 <= nums[i][j] <= 10^3",
+      "platform": "leetcode",
+      "question_id": "2728",
+      "contest_id": "biweekly-contest-104",
+      "contest_date": "2023-05-13T00:00:00",
+      "starter_code": "class Solution:\n    def matrixSum(self, nums: List[List[int]]) -> int:\n        ",
+      "difficulty": "medium",
+      "metadata": "{\"func_name\": \"matrixSum\"}",
+      "_native_ref": {
+        "path": "sources/livecodebench-data/test.jsonl",
+        "offset_bytes": 10455959,
+        "length_bytes": 370062,
+        "sha256": "9a5ea4c4e6bba02e3fe90c2844fcbdea134bff0c1cf876155380cc6d99b868f3"
+      }
+    },
+    "raw_sha256": "77f03bc8f34e541b1afc4d14edace594329ba56301b98fd26b4f7786f3a8d7b0",
+    "source_sha256": "51d63dd9a09434529f4c6e0ae7f7239108efeed098f7e1d70372f101b64fd9b5",
+    "wrapper_sha256": "bc30ef9a44eae5a7c6b4a39a7fc9d5a32b6de9e9ff52d3de915eabf462ebab3d",
+    "environment_sha256": "71720c37974f519fc25b4d910d7b59bf1587c0752bb2999027a3b4e85b30083e",
+    "expected_samples": 10,
+    "k_values": [
+      1,
+      5
+    ],
+    "parallel": 2,
+    "timeout": 6
+  },
+  "native": {
+    "task_ids": [
+      "2728"
+    ],
+    "case_counts": {
+      "2728": 14
+    },
+    "counts": {
+      "public": 2,
+      "private": 12
+    },
+    "metrics": [
+      {
+        "pass@1": 0.0,
+        "pass@5": 0.0,
+        "detail": {
+          "pass@1": {
+            "0": 0.0
+          },
+          "pass@5": {
+            "0": 0.0
+          }
+        }
+      },
+      {
+        "0": [
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ],
+          [
+            -2
+          ]
+        ]
+      },
+      [
+        [
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+          "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}"
+        ]
+      ]
+    ]
+  },
+  "result_sha256": "303b6badfba1a639790899efc59bccb5f5555fc85e7c21e2c7c484bd825362b7"
+}

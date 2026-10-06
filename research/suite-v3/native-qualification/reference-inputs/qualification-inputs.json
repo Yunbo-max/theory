@@ -1,0 +1,84 @@
+{
+  "kind": "native-reference-qualification-inputs",
+  "jobs": [
+    {
+      "benchmark": "humaneval",
+      "tasks_path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-pinned-assets-b160e703d9/job-a1-0c6c1f917e9742999f3749a06c37b4d7/workspace/artifacts/benchmark-reference-inputs-v4/humaneval-tasks.jsonl",
+      "raw_path": null,
+      "expected_samples": 1,
+      "expected_grades": {
+        "HumanEval/0": [
+          true
+        ],
+        "HumanEval/1": [
+          true
+        ]
+      },
+      "tasks_sha256": "c2da9d4ef21410395161a2598d6409e24706998cb77ea7c2cfb15a7fc5c7ad7f",
+      "data_root": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3",
+      "qualify": true
+    },
+    {
+      "benchmark": "mbpp",
+      "tasks_path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-pinned-assets-b160e703d9/job-a1-0c6c1f917e9742999f3749a06c37b4d7/workspace/artifacts/benchmark-reference-inputs-v4/mbpp-tasks.jsonl",
+      "raw_path": null,
+      "expected_samples": 1,
+      "expected_grades": {
+        "Mbpp/2": [
+          true
+        ],
+        "Mbpp/3": [
+          true
+        ]
+      },
+      "tasks_sha256": "8f2bbf6593b4fb52292d4f7fb7a7367be816fbd23433e01df93d9def7ce321fc",
+      "data_root": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3",
+      "qualify": true
+    },
+    {
+      "benchmark": "livecodebench",
+      "tasks_path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-pinned-assets-b160e703d9/job-a1-0c6c1f917e9742999f3749a06c37b4d7/workspace/artifacts/benchmark-reference-inputs-v4/livecodebench-tasks.jsonl",
+      "raw_path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-pinned-assets-b160e703d9/job-a1-0c6c1f917e9742999f3749a06c37b4d7/workspace/artifacts/benchmark-reference-inputs-v4/livecodebench-raw.jsonl",
+      "expected_samples": 10,
+      "expected_grades": {
+        "2728": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          false
+        ],
+        "1873_A": [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          false,
+          false,
+          true,
+          true
+        ]
+      },
+      "tasks_sha256": "fe501e9c04d7092af64dc7636ae49923b3c0ebc6f59c5d6ea4d351e03c0d7629",
+      "raw_sha256": "5fd987c8809f3cf0ae27abc3f55064c5bab7fbf6cdc8d116e906177f006fda59",
+      "data_root": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3",
+      "qualify": true,
+      "reference": {
+        "repository": "LiveCodeBench/submissions",
+        "commit": "6ca212e9c2039373f6e5069d37ffa9db66e23736",
+        "path": "Qwen2.5-Coder-Ins-7B/Scenario.codegeneration_10_0.2_eval_all.json",
+        "git_blob": "0cba6247fc4aae0d1875d49d15812a1429c8a6dc",
+        "sha256": "586707158f8d1648964f54f0290dc42c94806b12684ea03b537202008170c992"
+      }
+    }
+  ],
+  "source_manifest_sha256": "93f5e31706c7c1837dab1e200437d2adbbf93a0616711af6add9f59641c018be",
+  "scope": "sourced scorer replay only; no model experiment or scientific gate advanced"
+}

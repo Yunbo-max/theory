@@ -1,0 +1,40 @@
+{
+  "argv": [
+    "/workspace/scratch/7c897614ec09/verify-env/bin/python",
+    "-I",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/recursive_ssd/lcb_score.py",
+    "--tasks",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/native/attempt-6a22e0d6ed7e/inputs/tasks.jsonl",
+    "--output",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/native/attempt-6a22e0d6ed7e",
+    "--expected-samples",
+    "10",
+    "--parallel",
+    "2",
+    "--k-values",
+    "1,5",
+    "--source",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/native/attempt-6a22e0d6ed7e/inputs/official-source",
+    "--timeout",
+    "6",
+    "--data-root",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3",
+    "--task-cache",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/task-cache",
+    "--raw",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/native/attempt-6a22e0d6ed7e/inputs/raw.jsonl"
+  ],
+  "cwd": "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/native/attempt-6a22e0d6ed7e",
+  "started_epoch": 1791312595.7003317,
+  "ended_epoch": 1791312597.0722306,
+  "status": "completed",
+  "returncode": 0,
+  "timeout_seconds": 450.0,
+  "backend": "native_python",
+  "process_cleanup": {
+    "status": "completed",
+    "orphan_cleanup": false,
+    "signalled": []
+  },
+  "environment_scope": "allowlisted process environment; no GPU; not a security sandbox"
+}

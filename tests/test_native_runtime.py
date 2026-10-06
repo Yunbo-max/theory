@@ -1,4 +1,5 @@
 """Runtime/metadata fixtures only; these are not benchmark accuracy tests."""
+import ctypes
 import json
 import os
 from pathlib import Path
@@ -6,7 +7,6 @@ import subprocess
 import sys
 import time
 
-import psutil
 import pytest
 
 from recursive_ssd import evaluation as ev
@@ -45,13 +45,60 @@ def test_native_child_does_not_inherit_credentials_or_gpu(tmp_path,monkeypatch):
     assert json.loads(output.read_text()) == {'OPENAI_API_KEY':None,'HF_TOKEN':None,'CUDA_VISIBLE_DEVICES':''}
 
 
-def test_native_timeout_stops_descendants(tmp_path):
+@pytest.mark.parametrize('ignore_sigterm',[False,True])
+def test_native_timeout_stops_descendants(tmp_path,ignore_sigterm):
     run=getattr(ev,'run_native_process',None)
     assert callable(run), 'native bounded process runner is required'
-    code='import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,"-c","import time; time.sleep(30)"]); pathlib.Path("child.pid").write_text(str(p.pid)); time.sleep(30)'
+    handler='signal.signal(signal.SIGTERM,signal.SIG_IGN); ' if ignore_sigterm else ''
+    grandchild='import signal,time,pathlib; '+handler+'pathlib.Path("child.ready").touch(); time.sleep(30)'
+    code='\n'.join([
+        'import json,os,pathlib,signal,subprocess,sys,time',
+        handler,
+        f'p=subprocess.Popen([sys.executable,"-I","-c",{grandchild!r}])',
+        'pathlib.Path("pids.json").write_text(json.dumps({"parent":os.getpid(),"child":p.pid,"pgid":os.getpgrp()}))',
+        'while not pathlib.Path("child.ready").exists(): time.sleep(.01)',
+        'time.sleep(30)',
+    ])
+    libc=ctypes.CDLL(None,use_errno=True)
+    before=ctypes.c_int()
+    assert libc.prctl(37,ctypes.byref(before),0,0,0)==0
     with pytest.raises(subprocess.TimeoutExpired):
         run([sys.executable,'-I','-c',code],tmp_path,1)
-    pid=int((tmp_path/'child.pid').read_text())
-    if psutil.pid_exists(pid):
-        assert psutil.Process(pid).status()==psutil.STATUS_ZOMBIE
-    assert json.loads((tmp_path/'execution.json').read_text())['status']=='timeout'
+    pids=json.loads((tmp_path/'pids.json').read_text())
+    # Syscall PIDs can differ from /proc mount PIDs in a nested PID namespace.
+    # kill(0) also sees zombies, so this requires termination *and* reaping.
+    for pid in (pids['parent'],pids['child']):
+        with pytest.raises(ProcessLookupError):
+            os.kill(pid,0)
+    assert pids['pgid']==os.getpgrp(), 'native descendants must inherit the harness worker group'
+    receipt=json.loads((tmp_path/'execution.json').read_text())
+    assert receipt['status']=='timeout'
+    assert receipt['returncode']==(-9 if ignore_sigterm else -15)
+    assert receipt['process_cleanup']['status']=='completed'
+    after=ctypes.c_int()
+    assert libc.prctl(37,ctypes.byref(after),0,0,0)==0
+    assert after.value==before.value, 'restore process-wide subreaper ownership'
+
+
+def test_native_exit_reaps_orphans_without_stopping_existing_children(tmp_path):
+    # An already-running child belongs to the caller, not this evaluator call.
+    sibling=subprocess.Popen([sys.executable,'-I','-c','import time; time.sleep(30)'])
+    try:
+        code='\n'.join([
+            'import pathlib,subprocess,sys,time',
+            'p=subprocess.Popen([sys.executable,"-I","-c","import pathlib,time; pathlib.Path(\'child.ready\').touch(); time.sleep(30)"])',
+            'pathlib.Path("child.pid").write_text(str(p.pid))',
+            'while not pathlib.Path("child.ready").exists(): time.sleep(.01)',
+        ])
+        assert ev.run_native_process([sys.executable,'-I','-c',code],tmp_path,10)==0
+        pid=int((tmp_path/'child.pid').read_text())
+        with pytest.raises(ProcessLookupError):
+            os.kill(pid,0)
+        assert sibling.poll() is None
+        receipt=json.loads((tmp_path/'execution.json').read_text())
+        assert receipt['status']=='completed'
+        assert receipt['returncode']==0
+        assert receipt['process_cleanup']['orphan_cleanup'] is True
+    finally:
+        sibling.terminate()
+        sibling.wait(timeout=5)

@@ -122,6 +122,7 @@ def main():
         if command=="collect":
             p.add_argument("--output",default="returns/2080ti-native-8h.tar.gz")
     args=parser.parse_args()
+    parser.error('The archived pilot CLI cannot start workloads. Use scripts/research.py for the complete native suite and its research-autopilot execution owner.')
     if args.command=="prepare":
         from .data import prepare
         from .runner import validate_config

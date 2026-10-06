@@ -1,0 +1,496 @@
+{
+  "version": "3.0.0",
+  "historical_obligations_ref": {
+    "path": "research/design-v2/implementation-gaps.json",
+    "sha256": "57e13b31cb725ec219f47b47da53188ab0bae9dc4329c5af00f55e6e3a2b2541"
+  },
+  "scope": "complete implementation mapping; evidence qualification is separate",
+  "obligations": [
+    {
+      "id": "NATIVE",
+      "historical_status": "implemented_and_authoring_CPU_reference_qualified; target_host_pending",
+      "acceptance": "Implement and inspect a native Conda path, explicit interpreter/environment fingerprint, process/deadline cleanup; replay unchanged official scorer on sourced native canonical cases and retained native model outputs; retain real host execution/isolation capability. No container dependency.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/evaluation.py",
+        "recursive_ssd/suite_score.py",
+        "recursive_ssd/lcb_score.py"
+      ],
+      "test_paths": [
+        "tests/test_native_runtime.py",
+        "tests/test_benchmarks.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "PARENT",
+      "historical_status": "evidence_pending",
+      "acceptance": "Collect native baseline/natural failure evidence and strongest-simple contrasts, join closest-work audit, then freeze current parent/value/importance artifacts. No retroactive validation of historical prototype.",
+      "implementation_status": "interfaces_implemented_real_evidence_pending",
+      "source_paths": [
+        "recursive_ssd/suite_admission.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_admission.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "COST",
+      "historical_status": "host_pending",
+      "acceptance": "Retain one-device telemetry, representative generation/training/reference-forward/scoring/save costs; budget complete comparisons using measured bounds and remaining authorization.",
+      "implementation_status": "interfaces_implemented_real_evidence_pending",
+      "source_paths": [
+        "recursive_ssd/suite_admission.py",
+        "recursive_ssd/suite_queue.py",
+        "recursive_ssd/suite_train.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_admission.py",
+        "tests/test_suite_queue.py",
+        "tests/test_suite_train.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "SOFT_LR",
+      "historical_status": "not_implemented",
+      "acceptance": "Add full-soft low-LR and controlled LR variants with same optimizer/targets; check semantic objective identity and cost accounting.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "SOFT_MIX",
+      "historical_status": "not_implemented",
+      "acceptance": "Implement deterministic q=(1-a)p+a*mu separately; keep hard-mixture controls available under their real names.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "HEAD_FACTORIAL",
+      "historical_status": "not_implemented",
+      "acceptance": "Four conditions on identical support/prefixes: identity; head reshape at unchanged mass; mass transfer with original within-support shape; both. Native metrics + matched information.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "SMOOTHING_CONTROL",
+      "historical_status": "not_implemented",
+      "acceptance": "Arithmetic and boundary controls use the exact same m=(1-epsilon)mu+epsilon*p0 and reference forwards.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "TAIL_IID",
+      "historical_status": "not_implemented",
+      "acceptance": "Same head/draw counts/expected target and measured total cost; no claimed sparse speedup for dense code.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "TEMPORAL_CONTROLS",
+      "historical_status": "not_implemented",
+      "acceptance": "Current-current duplicate, lag-only and full-soft lower-LR controls; verify R1 degeneracy and R2/R3 differences.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "MEAN_GATE",
+      "historical_status": "not_implemented",
+      "acceptance": "Use each frozen prefix batch's deterministic mean gate and the same soft references; independent RNG/source identities retained.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "MEAN_WEIGHT",
+      "historical_status": "not_implemented",
+      "acceptance": "Uniform weight equal to frozen sequence's mean weight; separately compare lower LR because Adam does not make the two exactly equivalent.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "NOISE_CONTROL",
+      "historical_status": "not_implemented",
+      "acceptance": "Compute common constant a=min(1,sqrt(B/sum G(mu))) after prefixes fixed, then draw independent fresh labels; bind exact budget/draw count.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "SGD_CONTROLS",
+      "historical_status": "not_implemented",
+      "acceptance": "SGD arithmetic anchor and same-norm SGD shrinkage; report projection and finite-step KL without global guarantees.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "CLOCK_CONTROL",
+      "historical_status": "not_implemented",
+      "acceptance": "Separate matched-information/data runs from equal-training-wall-clock runs; freeze checkpoint selection by elapsed cost, never held-out score; keep evaluation budget equal.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_calibration.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_train.py",
+        "tests/test_suite_calibration.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "ALLOCATION_CONTROL",
+      "historical_status": "not_implemented",
+      "acceptance": "Uniform weighted control and uncorrected-weight ablation; preserve total sample count and log all per-prompt counts/proxy forwards.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "EXPLORATION_FACTORIAL",
+      "historical_status": "not_implemented",
+      "acceptance": "Generation mixture on/off × anchor soft target on/off, zero-mixture boundary and cost match. Keep these as controls, not new candidate ideas.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "DECODE_CONDITIONS",
+      "historical_status": "config_and_protocol_pending",
+      "acceptance": "Explicit condition-specific run configs for untruncated and truncated comparisons, and once-only temperature versus distributed schedule. Different conditions cannot share incompatible controls.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "HEAD_TEMPERATURE",
+      "historical_status": "not_implemented",
+      "acceptance": "Developer-only matching of global-temperature control, same support rule and fair selection cost, then freeze before confirmation.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/suite_calibration.py",
+        "recursive_ssd/suite_queue.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_calibration.py",
+        "tests/test_suite_queue.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "TUNING",
+      "historical_status": "design_conditional",
+      "acceptance": "Dev-only bounded tuning with at most three values per named uncertain scalar and equal tuning time for candidate/strong baseline; all tries retained; no blind grid or confirmation feedback.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/suite_design.py",
+        "recursive_ssd/suite_queue.py",
+        "recursive_ssd/suite_calibration.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_design.py",
+        "tests/test_suite_queue.py",
+        "tests/test_suite_calibration.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "ANALYSIS",
+      "historical_status": "not_implemented",
+      "acceptance": "Implement/review frozen crossed task/seed analysis and family correction with live callback; retain official native metric outputs and complete arm inventories. Missing/degenerate evidence stays INCONCLUSIVE.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/analysis.py"
+      ],
+      "test_paths": [
+        "tests/test_analysis.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "GKD",
+      "historical_status": "not_implemented",
+      "acceptance": "Same-information smoothed FKL/RKL/JSD × round/per-update rollout factors with equal generation allowance; verify causal masks/teacher detach/zero-gradient identity and official output scoring.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/methods.py",
+        "recursive_ssd/train.py",
+        "recursive_ssd/suite_train.py",
+        "recursive_ssd/suite_design.py"
+      ],
+      "test_paths": [
+        "tests/test_controls.py",
+        "tests/test_suite_train.py",
+        "tests/test_suite_design.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "BENCHMARKS",
+      "historical_status": "not_implemented",
+      "acceptance": "Native MBPP+ support, explicit confirmation split, exact official prompt/extraction/input conversion; LCB external runner uses frozen data revision and official custom evaluator with task-ID validation.",
+      "implementation_status": "implemented",
+      "source_paths": [
+        "recursive_ssd/benchmarks.py",
+        "recursive_ssd/suite_score.py",
+        "recursive_ssd/lcb_score.py"
+      ],
+      "test_paths": [
+        "tests/test_benchmarks.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    },
+    {
+      "id": "PROTOCOL",
+      "historical_status": "not_frozen",
+      "acceptance": "After required source/host/baseline/control qualification, bind exact refs, per-arm information/budget, released manifests, native scorer, analysis, code-stage discovery batch and current parent, then freeze child protocol and derive design_verified.",
+      "implementation_status": "interfaces_implemented_real_evidence_pending",
+      "source_paths": [
+        "recursive_ssd/suite_admission.py",
+        "recursive_ssd/suite_queue.py"
+      ],
+      "test_paths": [
+        "tests/test_suite_admission.py",
+        "tests/test_suite_queue.py"
+      ],
+      "engineering_evidence": {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      "scientific_status": "pending; no GPU evidence"
+    }
+  ],
+  "engineering_verification_ref": {
+    "path": "research/suite-v3/verification/engineering-checks.json",
+    "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+  },
+  "engineering_tests_passed": 332
+}

@@ -15,7 +15,7 @@ from recursive_ssd.io import atomic_json, digest, read_json, source_manifest
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--output",default="research/native-v1/verification")
+    parser.add_argument("--output",default="research/suite-v3/verification")
     args=parser.parse_args()
     out=ROOT/args.output
     out.mkdir(parents=True,exist_ok=True)
@@ -23,6 +23,8 @@ def main():
         [sys.executable,"-m","pip","check"],
         [sys.executable,"-m","compileall","-q","recursive_ssd","scripts","tests"],
         [sys.executable,"-m","recursive_ssd.cli","--help"],
+        [sys.executable,"scripts/research.py","--help"],
+        [sys.executable,"-m","recursive_ssd.suite","--help"],
         ["bash","-n","scripts/setup.sh","scripts/run_8h.sh","scripts/python_env.sh"]]
     checks=[]
     for i,command in enumerate(commands):

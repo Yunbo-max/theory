@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/supervisor-registry/1.0.0",
+  "title": "supervisor-registry",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "registry_id",
+    "created_at",
+    "configuration",
+    "events",
+    "revision",
+    "head_digest",
+    "state"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "supervisor-registry"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "registry_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "resources",
+        "budget",
+        "destination",
+        "stale_after_seconds"
+      ],
+      "properties": {
+        "resources": {
+          "type": "object"
+        },
+        "budget": {
+          "type": "object"
+        },
+        "destination": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "kind",
+                "uri",
+                "private"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "repository",
+                    "page",
+                    "drive"
+                  ]
+                },
+                "uri": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "private": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "stale_after_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "head_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "projects",
+        "routes",
+        "leases",
+        "usage",
+        "sync_receipts",
+        "fencing_counter"
+      ],
+      "properties": {
+        "projects": {
+          "type": "object"
+        },
+        "routes": {
+          "type": "object"
+        },
+        "leases": {
+          "type": "object"
+        },
+        "usage": {
+          "type": "object"
+        },
+        "sync_receipts": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "fencing_counter": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "destination": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

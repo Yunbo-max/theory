@@ -1,0 +1,912 @@
+{
+  "schema": "recursive-ssd-complete-suite-v3",
+  "stage": "tuning",
+  "candidate_ids": [
+    "M03",
+    "M01"
+  ],
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+  "seeds": [
+    17
+  ],
+  "rounds": 3,
+  "training_lineage": "clean-v2",
+  "trajectories": [
+    {
+      "trajectory_id": "base-f192ccb471699e93",
+      "arm_id": "base",
+      "arm": {
+        "arm_id": "base",
+        "method": "base",
+        "parameters": {},
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M03__floor_0p03-4814d34930012161",
+      "arm_id": "M03__floor_0p03",
+      "arm": {
+        "arm_id": "M03__floor_0p03",
+        "method": "M03",
+        "parameters": {
+          "floor": 0.03
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M03__floor_0p1-ac9ad77919ad6c9b",
+      "arm_id": "M03__floor_0p1",
+      "arm": {
+        "arm_id": "M03__floor_0p1",
+        "method": "M03",
+        "parameters": {
+          "floor": 0.1
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M03__floor_0p3-84fe3d23419abbd2",
+      "arm_id": "M03__floor_0p3",
+      "arm": {
+        "arm_id": "M03__floor_0p3",
+        "method": "M03",
+        "parameters": {
+          "floor": 0.3
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_anchor__floor_0p03-b01217df46347417",
+      "arm_id": "arithmetic_anchor__floor_0p03",
+      "arm": {
+        "arm_id": "arithmetic_anchor__floor_0p03",
+        "method": "arithmetic_anchor",
+        "parameters": {
+          "floor": 0.03
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_anchor__floor_0p1-7dc3c2c4e4f7a983",
+      "arm_id": "arithmetic_anchor__floor_0p1",
+      "arm": {
+        "arm_id": "arithmetic_anchor__floor_0p1",
+        "method": "arithmetic_anchor",
+        "parameters": {
+          "floor": 0.1
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_anchor__floor_0p3-935cc592ffbc0b1a",
+      "arm_id": "arithmetic_anchor__floor_0p3",
+      "arm": {
+        "arm_id": "arithmetic_anchor__floor_0p3",
+        "method": "arithmetic_anchor",
+        "parameters": {
+          "floor": 0.3
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M01__alpha_0p25-5638b5dfa79cb313",
+      "arm_id": "M01__alpha_0p25",
+      "arm": {
+        "arm_id": "M01__alpha_0p25",
+        "method": "M01",
+        "parameters": {
+          "alpha": 0.25
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M01__alpha_0p5-3c9eeaf528a66bd8",
+      "arm_id": "M01__alpha_0p5",
+      "arm": {
+        "arm_id": "M01__alpha_0p5",
+        "method": "M01",
+        "parameters": {
+          "alpha": 0.5
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "M01__alpha_0p75-1c94d78902071f81",
+      "arm_id": "M01__alpha_0p75",
+      "arm": {
+        "arm_id": "M01__alpha_0p75",
+        "method": "M01",
+        "parameters": {
+          "alpha": 0.75
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p25-3f4ed0ee86d2f83a",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p25",
+      "arm": {
+        "arm_id": "arithmetic_same_smoothing__alpha_0p25",
+        "method": "arithmetic_same_smoothing",
+        "parameters": {
+          "alpha": 0.25
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p5-1005cb65c2dd6d33",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p5",
+      "arm": {
+        "arm_id": "arithmetic_same_smoothing__alpha_0p5",
+        "method": "arithmetic_same_smoothing",
+        "parameters": {
+          "alpha": 0.5
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    },
+    {
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p75-0cb6e1a9366dbe4c",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p75",
+      "arm": {
+        "arm_id": "arithmetic_same_smoothing__alpha_0p75",
+        "method": "arithmetic_same_smoothing",
+        "parameters": {
+          "alpha": 0.75
+        },
+        "train": {},
+        "decode": {
+          "temperature": 1.5,
+          "top_k": 20,
+          "top_p": 0.8
+        },
+        "rollout_refresh": "round",
+        "temperature_schedule": "fixed",
+        "generation_exploration": 0.0,
+        "allocation": "uniform",
+        "weight_correction": true,
+        "required_calibration": []
+      },
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "seed": 17,
+      "rounds": 3,
+      "training_lineage": "clean-v2"
+    }
+  ],
+  "evaluation_units": [
+    {
+      "cell_id": "base-9150e722994b31decca5",
+      "trajectory_id": "base-f192ccb471699e93",
+      "arm_id": "base",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 0,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M03__floor_0p03-6e009a412c50214d46a5",
+      "trajectory_id": "M03__floor_0p03-4814d34930012161",
+      "arm_id": "M03__floor_0p03",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M03__floor_0p1-8bace979f06a6bcfdd25",
+      "trajectory_id": "M03__floor_0p1-ac9ad77919ad6c9b",
+      "arm_id": "M03__floor_0p1",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M03__floor_0p3-5fceb48c4109458445c8",
+      "trajectory_id": "M03__floor_0p3-84fe3d23419abbd2",
+      "arm_id": "M03__floor_0p3",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_anchor__floor_0p03-d9deb1dab2c074be3851",
+      "trajectory_id": "arithmetic_anchor__floor_0p03-b01217df46347417",
+      "arm_id": "arithmetic_anchor__floor_0p03",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_anchor__floor_0p1-f096183082073b3da0e0",
+      "trajectory_id": "arithmetic_anchor__floor_0p1-7dc3c2c4e4f7a983",
+      "arm_id": "arithmetic_anchor__floor_0p1",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_anchor__floor_0p3-b7dc5ab0adbba6c9d3ef",
+      "trajectory_id": "arithmetic_anchor__floor_0p3-935cc592ffbc0b1a",
+      "arm_id": "arithmetic_anchor__floor_0p3",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M01__alpha_0p25-5e09e3929375a17104c0",
+      "trajectory_id": "M01__alpha_0p25-5638b5dfa79cb313",
+      "arm_id": "M01__alpha_0p25",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M01__alpha_0p5-0880cda15b1be4b5e9ac",
+      "trajectory_id": "M01__alpha_0p5-3c9eeaf528a66bd8",
+      "arm_id": "M01__alpha_0p5",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "M01__alpha_0p75-a14d6a3223ce232f3e82",
+      "trajectory_id": "M01__alpha_0p75-1c94d78902071f81",
+      "arm_id": "M01__alpha_0p75",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_same_smoothing__alpha_0p25-6d2facc216c5a08736ee",
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p25-3f4ed0ee86d2f83a",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p25",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_same_smoothing__alpha_0p5-33566a2111a8281dc8dc",
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p5-1005cb65c2dd6d33",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p5",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    },
+    {
+      "cell_id": "arithmetic_same_smoothing__alpha_0p75-022275c33250c1f58aa8",
+      "trajectory_id": "arithmetic_same_smoothing__alpha_0p75-0cb6e1a9366dbe4c",
+      "arm_id": "arithmetic_same_smoothing__alpha_0p75",
+      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "benchmark": "humaneval",
+      "split": "dev",
+      "seed": 17,
+      "round": 3,
+      "expected_samples": 10,
+      "sampling": {
+        "samples": 10,
+        "temperature": 0.8,
+        "top_k": 0,
+        "top_p": 0.95,
+        "max_prompt_tokens": 1024,
+        "max_new_tokens": 384,
+        "coverage": "pass@10"
+      }
+    }
+  ],
+  "comparisons": [],
+  "method_bundles": {
+    "M03": {
+      "candidate_id": "M03",
+      "implementation_name": "floor_projection",
+      "question": "保留被截断的概率质量，是否能保留可解题目的覆盖，并优于简单混合？",
+      "baselines": [
+        "hard",
+        "full_soft",
+        "arithmetic_anchor",
+        "lower_lr"
+      ],
+      "decisive_controls": [
+        "floor_zero",
+        "arithmetic_anchor_tuned",
+        "full_soft_lr_half"
+      ],
+      "prediction": "同样的初始模型访问、训练样本和调参预算下，R3 的 pass@10 优于完整软目标及算术混合，同时 pass@1 不劣。",
+      "falsifier": "算术混合或较小步长解释全部收益；或者目标满足下限而拟合后的学生没有改善。",
+      "semantic_review": "目标下限与学生实际下限分别记录；c=0 应退化为 full_soft；不用目标空间定理声称学生有硬保证。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "TUNING",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "arms": [
+        "base",
+        "hard",
+        "full_soft",
+        "fixed_data",
+        "M03",
+        "arithmetic_anchor",
+        "lower_lr",
+        "floor_zero",
+        "arithmetic_anchor_tuned",
+        "full_soft_lr_half",
+        "gkd_fkl_cached",
+        "gkd_fkl_update",
+        "gkd_rkl_cached",
+        "gkd_rkl_update",
+        "gkd_jsd_cached",
+        "gkd_jsd_update"
+      ],
+      "comparisons": [
+        {
+          "candidate_arm": "M03",
+          "control_arm": "base",
+          "control_role": "initial_model"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "hard",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "full_soft",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "fixed_data",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "arithmetic_anchor",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "lower_lr",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "floor_zero",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "arithmetic_anchor_tuned",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "full_soft_lr_half",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_fkl_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_fkl_update",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_rkl_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_rkl_update",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_jsd_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M03",
+          "control_arm": "gkd_jsd_update",
+          "control_role": "baseline"
+        }
+      ]
+    },
+    "M01": {
+      "candidate_id": "M01",
+      "implementation_name": "geometric_anchor",
+      "question": "几何锚定是否比同信息的算术锚定更有价值？",
+      "baselines": [
+        "full_soft",
+        "arithmetic_anchor"
+      ],
+      "decisive_controls": [
+        "arithmetic_same_smoothing",
+        "geometric_weight_one"
+      ],
+      "prediction": "同一平滑目标 m 与初始分布下，几何组合比算术组合改善 pass@10，并保持 pass@1。",
+      "falsifier": "优势只来自 epsilon 平滑/参考前向/更弱更新；算术组合在公平开发调参后不劣。",
+      "semantic_review": "两种组合都用 m=(1-epsilon)mu+epsilon*p0；w=1 应回到 m，不是原始截断 mu。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SMOOTHING_CONTROL",
+        "TUNING",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "arms": [
+        "base",
+        "hard",
+        "full_soft",
+        "fixed_data",
+        "M01",
+        "arithmetic_anchor",
+        "arithmetic_same_smoothing",
+        "geometric_weight_one",
+        "gkd_fkl_cached",
+        "gkd_fkl_update",
+        "gkd_rkl_cached",
+        "gkd_rkl_update",
+        "gkd_jsd_cached",
+        "gkd_jsd_update"
+      ],
+      "comparisons": [
+        {
+          "candidate_arm": "M01",
+          "control_arm": "base",
+          "control_role": "initial_model"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "hard",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "full_soft",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "fixed_data",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "arithmetic_anchor",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "arithmetic_same_smoothing",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "geometric_weight_one",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_fkl_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_fkl_update",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_rkl_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_rkl_update",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_jsd_cached",
+          "control_role": "baseline"
+        },
+        {
+          "candidate_arm": "M01",
+          "control_arm": "gkd_jsd_update",
+          "control_role": "baseline"
+        }
+      ]
+    }
+  },
+  "tuning_groups": {
+    "M03": [
+      "M03__floor_0p03",
+      "M03__floor_0p1",
+      "M03__floor_0p3"
+    ],
+    "arithmetic_anchor": [
+      "arithmetic_anchor__floor_0p03",
+      "arithmetic_anchor__floor_0p1",
+      "arithmetic_anchor__floor_0p3"
+    ],
+    "M01": [
+      "M01__alpha_0p25",
+      "M01__alpha_0p5",
+      "M01__alpha_0p75"
+    ],
+    "arithmetic_same_smoothing": [
+      "arithmetic_same_smoothing__alpha_0p25",
+      "arithmetic_same_smoothing__alpha_0p5",
+      "arithmetic_same_smoothing__alpha_0p75"
+    ]
+  },
+  "analysis": {
+    "family_size": 0,
+    "alpha": 0.05,
+    "bootstrap_seed": 20261006,
+    "bootstrap_repeats": 20000,
+    "aggregation": "crossed task and training seed; paired arms; separate benchmarks",
+    "endpoint_round": 3,
+    "development_only": true
+  },
+  "calibration": {},
+  "tuning_selection": null,
+  "scientific_dispatch_ready": false,
+  "admission": "requires exact native protocol, current method evidence, host qualification and remaining budget",
+  "unresolved_calibration": [],
+  "suite_digest": "dd82fc3eb9aa9b363c7920616dc22facc31c14e4c8a924560688e09749bf68d2"
+}

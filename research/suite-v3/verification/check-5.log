@@ -1,0 +1,13 @@
+usage: research.py [-h]
+                   {check,setup,pipcheck,assets,model,qualify,preflight,design,build,budget,native-assets,protocol,freeze,admit,run,resume,status,report,select,collect}
+                   ...
+
+Single project controller; all executable workloads use the skill harness.
+
+positional arguments:
+  {check,setup,pipcheck,assets,model,qualify,preflight,design,build,budget,native-assets,protocol,freeze,admit,run,resume,status,report,select,collect}
+    check               bounded CPU engineering tests
+    budget              record the original authorization before preparation
+
+options:
+  -h, --help            show this help message and exit

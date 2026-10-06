@@ -1,0 +1,527 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/research-intake/1.0.0",
+  "title": "research-intake",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "project",
+    "entry_inference",
+    "assets",
+    "sources"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "research-intake"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "one_sentence_goal",
+        "operating_mode"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "one_sentence_goal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operating_mode": {
+          "enum": [
+            "audit",
+            "plan",
+            "implement",
+            "run",
+            "full"
+          ]
+        }
+      }
+    },
+    "entry_inference": {
+      "type": "object",
+      "required": [
+        "value",
+        "status",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "I",
+            "M",
+            "R",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "status": {
+          "enum": [
+            "provisional",
+            "confirmed"
+          ]
+        },
+        "basis": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "object"
+    },
+    "goal_alignment": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "core_problem",
+        "minimum_success"
+      ],
+      "properties": {
+        "purpose": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "core_problem": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "minimum_success": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "resource_envelope": {
+      "type": "object",
+      "required": [
+        "accelerators",
+        "human_hours_per_week",
+        "wall_clock_hours",
+        "gpu_hours",
+        "spend_budget",
+        "api_access"
+      ],
+      "properties": {
+        "accelerators": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "model",
+                      "count",
+                      "vram_gb_each"
+                    ],
+                    "properties": {
+                      "model": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "count": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "vram_gb_each": {
+                        "anyOf": [
+                          {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "human_hours_per_week": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "wall_clock_hours": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "gpu_hours": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "spend_budget": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "amount",
+                    "currency"
+                  ],
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "currency": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "api_access": {
+          "type": "object",
+          "required": [
+            "value",
+            "status",
+            "source",
+            "updated_at"
+          ],
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "enum": [
+                "user_stated",
+                "inferred",
+                "unknown",
+                "deferred",
+                "verified",
+                "not_applicable"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

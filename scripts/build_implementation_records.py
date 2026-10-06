@@ -28,7 +28,8 @@ def put(path,obj):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--output-root",default="research/native-v1")
+    parser.add_argument("--output-root",default="research/suite-v3")
+    parser.add_argument("--source-snapshot",help="controller-captured immutable git/source identity for an isolated harness workspace")
     args=parser.parse_args()
     base=ROOT/args.output_root
     verification=base/"verification"
@@ -37,17 +38,39 @@ def main():
         raise SystemExit("Actual software checks did not pass")
     if checks["source"]["sha256"]!=source_manifest(ROOT)["sha256"]:
         raise SystemExit("Source changed after software verification")
-    commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
-    tree=subprocess.check_output(["git","rev-parse","HEAD^{tree}"],cwd=ROOT,text=True).strip()
-    listing=subprocess.check_output(["git","ls-tree","-rz","HEAD"],cwd=ROOT)
-    version=hashlib.sha256(listing).hexdigest()
-    source_files=[*sorted((ROOT/"recursive_ssd").glob("*.py")),ROOT/"pyproject.toml",
-        *sorted((ROOT/"scripts").glob("*.sh")),
-        ROOT/"configs/2080ti_8h.json",ROOT/"recursive_ssd/templates/self_distillation_prompt_function.j2"]
-    for path in source_files:
-        committed=subprocess.check_output(["git","show",f"HEAD:{path.relative_to(ROOT)}"],cwd=ROOT)
-        if committed!=path.read_bytes():
-            raise SystemExit(f"Uncommitted source: {path}")
+    # Bind the same complete source closure that was checked: controllers,
+    # vendored runtime and schemas are result-affecting source too.
+    source_files=[ROOT/name for name in checks["source"]["files"]]
+    if args.source_snapshot:
+        snapshot=read_json(ROOT/args.source_snapshot)
+        commit=snapshot["git_commit"]
+        tree=snapshot["git_tree"]
+        listing=bytes.fromhex(snapshot["tree_listing_hex"])
+        version=hashlib.sha256(listing).hexdigest()
+        if snapshot["git_tree_digest"]!=version or snapshot["source_files"]!=checks["source"]["files"]:
+            raise SystemExit("Controller git snapshot does not match the tested source")
+        # Verify every staged source against the actual Git blob identities in
+        # the retained ls-tree bytes. A copied status label cannot replace them.
+        blobs={}
+        for row in listing.split(b'\0'):
+            if row:
+                metadata,name=row.split(b'\t',1)
+                mode,kind,sha=metadata.split()
+                if kind==b'blob': blobs[name.decode()]=sha.decode()
+        for path in source_files:
+            content=path.read_bytes()
+            sha=hashlib.sha1(b'blob '+str(len(content)).encode()+b'\0'+content).hexdigest()
+            if blobs.get(str(path.relative_to(ROOT)))!=sha:
+                raise SystemExit(f"Source differs from committed Git blob: {path}")
+    else:
+        commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+        tree=subprocess.check_output(["git","rev-parse","HEAD^{tree}"],cwd=ROOT,text=True).strip()
+        listing=subprocess.check_output(["git","ls-tree","-rz","HEAD"],cwd=ROOT)
+        version=hashlib.sha256(listing).hexdigest()
+        for path in source_files:
+            committed=subprocess.check_output(["git","show",f"HEAD:{path.relative_to(ROOT)}"],cwd=ROOT)
+            if committed!=path.read_bytes():
+                raise SystemExit(f"Uncommitted source: {path}")
     refs=[ref(p) for p in source_files]
     identity=put(verification/"source-identity.json",{
         "git_commit":commit,"git_tree":tree,"git_tree_digest":version,
@@ -59,15 +82,15 @@ def main():
     selected=set(selection["selected_ids"])
     locations={
         "M01":"methods.target / geometric_anchor", "M02":"methods.target / ratio_cap",
-        "M03":"methods.floor_projection", "M04":"methods.round_decode and runner.worker",
+        "M03":"methods.floor_projection", "M04":"methods.round_decode and suite_train.train_job",
         "M05":"methods.target / head_mass", "M06":"methods.diversity_floor",
         "M07":"methods.stratified_target", "M08":"methods.target / temporal_mean",
         "M09":"methods.target / disagreement_gate", "M10":"methods.prefix_weights and train.record_loss",
         "M11":"methods.allocate_noise and target / noise_allocation",
         "M12":"methods.project_direction and train.train_round SGD branch",
         "M13":"train.actual_step_kl and train.train_round rollback branch",
-        "M14":"methods.allocate_prompts and runner.generate_records",
-        "M15":"model.Policy.generate exploration branch and runner.generate_records"}
+        "M14":"methods.allocate_prompts and suite_train.train_job.generate_batch",
+        "M15":"model.Policy.generate exploration branch and suite_train.train_job.generate_batch"}
     code_ref=next(r for r in refs if r["path"]=="recursive_ssd/methods.py")
     timestamp=datetime.now(timezone.utc).isoformat()
     for entry in batch["candidates"]:
@@ -76,7 +99,7 @@ def main():
             continue
         card=read_json(ROOT/entry["math_card_ref"]["path"])
         file="recursive_ssd/train.py" if cid in {"M10","M12","M13"} else (
-             "recursive_ssd/runner.py" if cid=="M14" else "recursive_ssd/model.py" if cid=="M15" else "recursive_ssd/methods.py")
+             "recursive_ssd/suite_train.py" if cid in {"M04","M14"} else "recursive_ssd/model.py" if cid=="M15" else "recursive_ssd/methods.py")
         mapped_ref=next(r for r in refs if r["path"]==file)
         check_records=[{"status":"passed","command":c["command"],"tested_code_refs":refs,
             "log_refs":[ref(ROOT/c["log"])]} for c in checks["checks"]]

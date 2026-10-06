@@ -1,0 +1,115 @@
+{
+  "repository": "LiveCodeBench/LiveCodeBench",
+  "commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+  "files": {
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/LICENSE",
+      "sha256": "104099948b78ebc36f2e951b3a7973b956adfa7d39aaec0d1512f97a2686d15d",
+      "bytes": 1070,
+      "git_blob": "d3c6d337d2a28958523092bfced9258904135083"
+    },
+    "pyproject.toml": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/pyproject.toml",
+      "sha256": "907d51622ad2e6b97f277f7f0c67a8e7a8bf27bedeaf0f2a5a1b9ba432a06bd2",
+      "bytes": 456,
+      "git_blob": "e2b5b910298ce7b0fb3f05da173f432e633ae371"
+    },
+    "lcb_runner/benchmarks/__init__.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/benchmarks/__init__.py",
+      "sha256": "0837c4a42b027fe479d12165affe91214b6b180c90245129d0ac0822c74dbfea",
+      "bytes": 398,
+      "git_blob": "a7f5db8a74867a8fc596c3dd8044562075cf2d62"
+    },
+    "lcb_runner/benchmarks/code_generation.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/benchmarks/code_generation.py",
+      "sha256": "0bc93f5a650b55d6a1b54d3db852d80ae64891ece4ff085b2e6b469eb89f8846",
+      "bytes": 4688,
+      "git_blob": "e2e48a73b68c4981dae44356dd4d52df87d9f070"
+    },
+    "lcb_runner/benchmarks/code_execution.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/benchmarks/code_execution.py",
+      "sha256": "b891e798b34b40c32fcfbaedf683c714937f5e10014864e5fd7f3b9c9f6b077f",
+      "bytes": 1937,
+      "git_blob": "f37a03b368fbb1a80b2fecda7f8c0961c70f9ad7"
+    },
+    "lcb_runner/benchmarks/test_output_prediction.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/benchmarks/test_output_prediction.py",
+      "sha256": "2493f00ae1841d0997f5a35632c3d447a189c68641d636bdaa4e91d16bd30d05",
+      "bytes": 2099,
+      "git_blob": "12154ada92c2f539326d33106d711a4cc15d2c86"
+    },
+    "lcb_runner/evaluation/__init__.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/__init__.py",
+      "sha256": "828043d1f71e4120ac51be23f90001fd850bf6ef186a420979d76828ec909057",
+      "bytes": 344,
+      "git_blob": "cad106ea1c384fe24fafdd28594209538a43df31"
+    },
+    "lcb_runner/evaluation/compute_code_generation_metrics.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/compute_code_generation_metrics.py",
+      "sha256": "073f388cc78bf0eb0ad35eaeb8bb509c0a3664963e5305d2be13d6b6eb6f3d21",
+      "bytes": 10369,
+      "git_blob": "b8de33ee0631ef0747c3a0d32aa77130ba8659d8"
+    },
+    "lcb_runner/evaluation/compute_code_execution_metrics.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/compute_code_execution_metrics.py",
+      "sha256": "e63b6d29f12cc5206fd146b616312f305b8903b6459014d7bc6d51dfd6335980",
+      "bytes": 1721,
+      "git_blob": "2737aa392bf0cf96c9c8b952295f9271510dea92"
+    },
+    "lcb_runner/evaluation/compute_test_output_prediction_metrics.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/compute_test_output_prediction_metrics.py",
+      "sha256": "ec415d3207d8fbc04e8280ef091437d3a22e895b362e5557929f003e543a4653",
+      "bytes": 2826,
+      "git_blob": "f9f624cc4b25793d28b941bee275c79fdb576d91"
+    },
+    "lcb_runner/evaluation/pass_k_utils.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/pass_k_utils.py",
+      "sha256": "6af3ee55d40f96fa06fa511bd5e43d94b19604750e82454b4b3c1f45c5199010",
+      "bytes": 2063,
+      "git_blob": "a49382f0857448ef494d77a4c6107db952c9823a"
+    },
+    "lcb_runner/evaluation/testing_util.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/testing_util.py",
+      "sha256": "b7cb6a8a69807bb868150a61742e25d7bb5328bbe01d514471b6ec43c9fa9ed2",
+      "bytes": 18276,
+      "git_blob": "ecc89474b813cb552ae060a53b3a7da534476968"
+    },
+    "lcb_runner/evaluation/utils_execute.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/utils_execute.py",
+      "sha256": "fb86e4c0834ccedd3f057006410909aeb79d9970db54838a9bed79d7039624fa",
+      "bytes": 7370,
+      "git_blob": "85d9a0ef601fd313e30321a6a5ac17c19603eb5b"
+    },
+    "lcb_runner/lm_styles.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/lm_styles.py",
+      "sha256": "57d645b09852d2030d389cf9a14ea818396b7b0510b3e2f3f22e3d3e6792b783",
+      "bytes": 27786,
+      "git_blob": "d10b21176473e22caf55ca042c1eba47e6ceb580"
+    },
+    "lcb_runner/utils/extraction_utils.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/utils/extraction_utils.py",
+      "sha256": "1267d1724c6d4ea6d237b907dd6b53dfc6f1787a04b1616b85c3bc8377446879",
+      "bytes": 2395,
+      "git_blob": "3491583ee6c4162896ec6e180cd8119069602892"
+    },
+    "lcb_runner/prompts/code_generation.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/prompts/code_generation.py",
+      "sha256": "7f360dc01016c277e10c70959f46efe27b37c1d2c4ef72b077f93f348b3fd826",
+      "bytes": 15757,
+      "git_blob": "22ba3f82979598dd1fe828cfb6647df53d4e82d2"
+    },
+    "lcb_runner/runner/custom_evaluator.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/runner/custom_evaluator.py",
+      "sha256": "f486a539f8ee67712022e8f1cc84623e5f674af09eee7ecfcf68b15ae5f7b829",
+      "bytes": 4378,
+      "git_blob": "58990fc364273698db51609df32440996aab10c2"
+    },
+    "lcb_runner/runner/parser.py": {
+      "url": "https://raw.githubusercontent.com/LiveCodeBench/LiveCodeBench/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/runner/parser.py",
+      "sha256": "e9641729a6030164e712b9de465dea03dae95c3fdf036aac87abbbfab9fd7f33",
+      "bytes": 4807,
+      "git_blob": "a047fc0d27e8a28fe3bd346ca0bbec05c8bb799c"
+    }
+  },
+  "import_scope": "official native code-generation API"
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+  File "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/recursive_ssd/suite_score.py", line 312, in score_benchmark
+    raise RuntimeError("native replay differs from released reference grade; retain and investigate")
+RuntimeError: native replay differs from released reference grade; retain and investigate

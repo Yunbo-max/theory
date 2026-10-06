@@ -1,0 +1,191 @@
+{
+  "checked_at": "2026-10-06T19:08:44.840057+00:00",
+  "source": {
+    "files": {
+      "configs/2080ti_8h.json": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a",
+      "pyproject.toml": "68ab28cd228cdcdce57673f1d06e71cbad07ae37bd36fcdf9e9a46edb28e48aa",
+      "recursive_ssd/__init__.py": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb",
+      "recursive_ssd/analysis.py": "5950a1840b7e48e18dc0dfba9b561c61f9c7d03d364ae12eebdd39625d891778",
+      "recursive_ssd/benchmarks.py": "519625a0ea89e436573abc5b7d9d1185ac87902eaecc95e3daf66fedb7029c4a",
+      "recursive_ssd/cli.py": "c83ce79ec4b53990cd333e2ef30022e452bdae3338541e796da442a515f9ba28",
+      "recursive_ssd/data.py": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b",
+      "recursive_ssd/evaluation.py": "f091b66bd17a52220c052961b32e606dd35e62713fe3a786d1c402cda83cadec",
+      "recursive_ssd/harness.py": "7048343579d3bd33e8d34a3eeecb857cfd015d92f71a00162852ca054691cd23",
+      "recursive_ssd/io.py": "ab836674561a81ba79c596f72ab6a1b3182474e5b1fd603b02aff902528f7d1e",
+      "recursive_ssd/lcb_score.py": "f05a1397bf0e04e41df721f0290864888d06a80d65a5976e579322a8e746aab8",
+      "recursive_ssd/methods.py": "058b397c2bb201dcd22cc699f872f367195edd38848593c44034a73dfad5843a",
+      "recursive_ssd/model.py": "22ed3b504e9eb7d112a661d9aaa12c18a33df47a0dc3d8959076c6372d7b432b",
+      "recursive_ssd/native_score.py": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93",
+      "recursive_ssd/runner.py": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1",
+      "recursive_ssd/suite.py": "824b25d061fe9c5ffbb48c41703d8ea9f28508468dd70d58809d94c3d5a4bd96",
+      "recursive_ssd/suite_admission.py": "9898fdf9bca98cb879107effa4e6e2a9c980dfa58f998bb7278ca13ac1ac9196",
+      "recursive_ssd/suite_calibration.py": "bc5899c5c34c2d55e2100dcfa80e6c5813aff555c2967426109024e446ff0f76",
+      "recursive_ssd/suite_design.py": "0368ce2ff186d933292d84a7a5a7e64b595eecab1b1729e077628c8635410811",
+      "recursive_ssd/suite_queue.py": "b0de40e200ad772a6f1213fa0f9829a7085b4a77f4c6684ce048a2084c29f98d",
+      "recursive_ssd/suite_score.py": "b20d2c536c013590297e49a25e1146337db3669045853e61f50727d4e741e2e9",
+      "recursive_ssd/suite_train.py": "f97e992793740ede6116486fbaa25aeae9f055310e7504a5cfdca72b7ba7ba63",
+      "recursive_ssd/templates/APPLE_LICENSE": "27eb5d4005ca4ad8862417a009c16b89b76541be99fe862f7d9c164fd2f3a078",
+      "recursive_ssd/templates/self_distillation_prompt_function.j2": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2",
+      "recursive_ssd/train.py": "bd8fb73b9204c9b341b7289f55a4d66bb7164c806937ad388a170031728b7df1",
+      "scripts/audit_experiment_design.py": "54f2e3223cbcdd2a94008a05379667facc9d53f4567379c738878338cda70e22",
+      "scripts/build_implementation_records.py": "4fe12d666b911425a7790f3df026a27168435f00e4aadb84c5454431ab777a11",
+      "scripts/build_research_records.py": "339f005231670d67649b41b7e016c6a7809b1458d7173b05944a367f8af524db",
+      "scripts/python_env.sh": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246",
+      "scripts/research.py": "e5fc41cbdfaf78f4f3cfb11a0f5626efd7090f299e97dfd4fc62f41cc5070b04",
+      "scripts/run_8h.sh": "a3f141f78a4545a594f996c426b8b288ac2ef919f7bc4be54c22bde7068ad183",
+      "scripts/setup.sh": "de82e2a4b918a5e49b5d9eeee1f1b410feea3be8021172a06197c3154e275662",
+      "scripts/verify_local.py": "e83e4bf68015e148a0916c82597b52214a7d18d0aa7907e121329660aacbcdbd",
+      "vendor/research_autopilot/VENDOR.json": "4e143ec1e45e2517217e7934b53a18fb89f3d089376d43a5cccf4c46f291c809",
+      "vendor/research_autopilot/schemas/approval-event.schema.json": "27add14d09e995f55a5f3d1a1a71fa68e6d4377f5c8638f1fbfd4c05e80669f6",
+      "vendor/research_autopilot/schemas/authority-grant.schema.json": "5c05790b70e153bcee8f08bfbd20519bfe7ec9471369cc2dfcfa23e484be5c7a",
+      "vendor/research_autopilot/schemas/authority-request.schema.json": "25e8556dae6e8093217b02656a03fd4d26643f8853d693715c523c7005e51c5f",
+      "vendor/research_autopilot/schemas/backup-manifest.schema.json": "e97917bdefb19f983caae58b3052255d1e8b696f73ad51ee4577d8e141d089bb",
+      "vendor/research_autopilot/schemas/collision-decision.schema.json": "7aa5eba1de5036e9f346c466e4fe2028f96491f2ead876b719e2edaa24d02a35",
+      "vendor/research_autopilot/schemas/commit-journal.schema.json": "d0e899dac7df38ab0c9ea47ea058916fe47b97eb4bf6e3e2873ad40a683eeede",
+      "vendor/research_autopilot/schemas/evidence-snapshot.schema.json": "1644d0467559321fc1462fa94a7606ec2454e9a719b88062f9a99581f206522f",
+      "vendor/research_autopilot/schemas/evidence-unit.schema.json": "39fdbb95d3ae93fa4f769f9598d258404ae3468ea9c5db27b91cb92a1ef9aa55",
+      "vendor/research_autopilot/schemas/experiment-run-plan.schema.json": "53d980d96f79d598347205d2ed1748b7798661b7a3695e919f8c6b32d7a8d370",
+      "vendor/research_autopilot/schemas/experiment-run-receipt.schema.json": "a8863cb2678550d30212316aa0d320f4c017374e5dcd79619c6d6107db71bef6",
+      "vendor/research_autopilot/schemas/full-validation-decision.schema.json": "444d727d0bcae9786e0b25f2471e144008ae04eeb0c398bef59aa483961fb659",
+      "vendor/research_autopilot/schemas/full-validation-protocol.schema.json": "8e1408809b059b6f7dcb4edd0804a8588d64a5bd6c6d2d49a25d13eae3532fc6",
+      "vendor/research_autopilot/schemas/gate-a-decision.schema.json": "4831e293c158bc14170d37ac44c37b9478efc4185e15a5da9911066e9d8c7e31",
+      "vendor/research_autopilot/schemas/gate-a-protocol.schema.json": "17510d270ad2bd8d840918b68fd84f23c5ede993b4098f888bd89aba744e6621",
+      "vendor/research_autopilot/schemas/gpu-memory-profile.schema.json": "e8f0fa0680625ded8caebe80820c87ca5fcb1aaba165b6e500c8014a1a0b4562",
+      "vendor/research_autopilot/schemas/handoff.schema.json": "d8211c1e4b37c592e826da0beebd980c2d09aa28d0337e0293c991f10e5e3e99",
+      "vendor/research_autopilot/schemas/harness-plan.schema.json": "40c3456c4b1bdd1666fc40a8ec52522f8046becd8d94ba96ab958257bf4e44b9",
+      "vendor/research_autopilot/schemas/idea-atom.schema.json": "51af200f32915c10225b0022777d40ce6a1f7bd04556f1e2ec91c5b8edfe7d27",
+      "vendor/research_autopilot/schemas/importance-decision.schema.json": "64a2f9045d8a1386ec39978a08355ae5e3dd5472b25dfae983f40241da6acc5f",
+      "vendor/research_autopilot/schemas/ledger-anchor.schema.json": "ff4f0598dfb48a9de2f0ce6345246ee1bf6cdd746f6e656876caa9bcf0f6b4ea",
+      "vendor/research_autopilot/schemas/ledger-event.schema.json": "6203e1b79e49b12befbffa73d6ce83bdcda97443278023447a7746d503b22893",
+      "vendor/research_autopilot/schemas/native-eval-contract.schema.json": "f341ab29c50791da073642b6625a6f5039bb63535c52eeef06f0a7e394529c5d",
+      "vendor/research_autopilot/schemas/native-eval-receipt.schema.json": "54b7f58ac1fa521289dd12f37a69b57a2aa60b9ded002a362c267bd70097a3ff",
+      "vendor/research_autopilot/schemas/natural-gate-0.schema.json": "95191b8aa06938e207030c1aa9f196c3fd9be1c464012902133d8d59ebc44cd8",
+      "vendor/research_autopilot/schemas/parent-problem-card.schema.json": "7b9efcb9835afee7f05b665d18bc3f95a568ad3d8fe40097b96c222cb98d8c4c",
+      "vendor/research_autopilot/schemas/redaction-event.schema.json": "b03f0f5959aa67138240a8ab014ce9657c494e0920d0067d237b7e4c1285285d",
+      "vendor/research_autopilot/schemas/research-intake.schema.json": "08db78a230d32368aa06f2f94dc70ea3ac8f1d88e10c875b7da125400985c3e0",
+      "vendor/research_autopilot/schemas/research-state.schema.json": "0ac0b142ded23d96e3d0e5f36c30cb7e790cb71783990405d8f18b38347a6525",
+      "vendor/research_autopilot/schemas/resource-lease.schema.json": "05747942107fd567b53f7be1ebdaef4c1ba27bf5781fcb9753a2a08a6d2ec57c",
+      "vendor/research_autopilot/schemas/route-checkpoint.schema.json": "2e70d99e533960254acdc7dff4d6529f978b3cdd88b73b53cfa3349cc4866843",
+      "vendor/research_autopilot/schemas/run-manifest.schema.json": "246763179751843649c7feb06b0530abc5b23ee107faa811e93a23a885877b25",
+      "vendor/research_autopilot/schemas/search-run.schema.json": "fd7b2e81b8bfd5451997163fc06ab87ad9413391feddf069a0d376b90d84298b",
+      "vendor/research_autopilot/schemas/session-record.schema.json": "aa697c5cbf3ab6c98c5dbff57405c853be183be4fa515368a2396aae3158fea7",
+      "vendor/research_autopilot/schemas/supervisor-event.schema.json": "72bd70311980d2d06787fd03e33f9eb1a8638df414e95bc87cb4fa957c0c2e63",
+      "vendor/research_autopilot/schemas/supervisor-registry.schema.json": "616e8f6cb6c73ea69af9adf17f5f1eb873a2650b2bdec3abbbf1c7a94d0ab3c8",
+      "vendor/research_autopilot/schemas/work-record.schema.json": "19a40e62f2fb49208d579fb3a3edb9a4fcef2f575b3c9876d0cfb914c88aea3d",
+      "vendor/research_autopilot/scripts/_autoresearch.py": "7838317a645d22c97342e76dce3f4915df72a20b9d77b46503f0eb065abf6eba",
+      "vendor/research_autopilot/scripts/_evidence.py": "e509f50f617484ae15c1f8e8c6aae112ec56668b1de699c9a5756edae5d050ea",
+      "vendor/research_autopilot/scripts/_importance.py": "f8a80d9006c06f15915f0f9da1cdcfeb6f4e7fcec11efacfc9450dbee9fd87d9",
+      "vendor/research_autopilot/scripts/_literature.py": "0bc9044bdf96b20c08a9d57e9a26aa34b2464b679ff22aa3e2abc7ca14df1cee",
+      "vendor/research_autopilot/scripts/_native_eval.py": "bbbf79c85c9f7094f4bf4544dd9f34586ac33f9f3aaeda151ddb6234065ce826",
+      "vendor/research_autopilot/scripts/_process_guard.py": "0c38bf499334ab72de229f750ca1191a16e594f9a630a726a9baad6f6fb14a79",
+      "vendor/research_autopilot/scripts/_route_visuals.py": "1e8922b1bad1fcb4a047e57f2e33620e4c7cd11c7681b85090949087b6f6ee6d",
+      "vendor/research_autopilot/scripts/_safety.py": "2f1750ed17e0fb87663c7de43b845bc82eec05928ffef5ee43a4db8bec3b24a8",
+      "vendor/research_autopilot/scripts/_statistical.py": "85f2507d82096ba6139ea528fdc5205dde09c6477b3f78f76eb8a64288b7622c",
+      "vendor/research_autopilot/scripts/_supervisor.py": "aa6a831e56e7dba648575768e777a9635c54000c0732e04ddde4ad61dfb440da",
+      "vendor/research_autopilot/scripts/_writing.py": "b379344cb5e3ea88c28fb287fe01f55cf097be4b022241db632d43f019c9bfed",
+      "vendor/research_autopilot/scripts/evaluate_gate.py": "d5146a239b0e91b81dfef5b77591a0d0dec2fbbe0e7243d1f8fa2e3064bb4427",
+      "vendor/research_autopilot/scripts/freeze_gate.py": "9679e1e2710408a441ca232acdf4a60e4698c896e5e84b080f5bc42fd28d80f7",
+      "vendor/research_autopilot/scripts/init_project.py": "cf4b0dcb092eb913d178e9164abcf64f9e27d76f83ccaaae7837c6b6eaf58dee",
+      "vendor/research_autopilot/scripts/migrate_state.py": "90da181591420ef8ee95587d1e682d85706e891105fda94121303f403924bf7b",
+      "vendor/research_autopilot/scripts/redact_artifact.py": "870cd8b1dcd95709824158b33bcea92a4798b0c1c6456b98346cf873ed3db7e4",
+      "vendor/research_autopilot/scripts/replay_state.py": "2abc64627462699d0834d9ec377015f0ea70e35f8b9b1809f31e68b49a75adf3",
+      "vendor/research_autopilot/scripts/research_nodes.py": "8b997e4d6404b742390a60ab43e52e5953008243625016524b31cc30be381eb9",
+      "vendor/research_autopilot/scripts/run_experiments.py": "e1e2b22c210c22f6028bcb846220eaa33501be4cd22f135c8f97ac9f3405137c",
+      "vendor/research_autopilot/scripts/run_harness.py": "3b8849c6c718427468eca0548c9edf1db804ad6f27ffea55d8735735546d3d42",
+      "vendor/research_autopilot/scripts/session_records.py": "89cb1a8a3dd49d06ba6ff5dca017a40f866cbf54d8fd8b7398f930264b74605c",
+      "vendor/research_autopilot/scripts/supervise_routes.py": "c103bf02fc8cbe4deaa01f7024f6f1fe6ee66ab8578a4da3ce6423021ac71a0e",
+      "vendor/research_autopilot/scripts/transition_state.py": "e4657fe937f9b90da45211cc55216d8a763b4567eb49ee2f3e6ffbd2dc48413c",
+      "vendor/research_autopilot/scripts/validate_artifact.py": "08375b9ffa9e9a65eeada02780f7434027df7db992f76b0487dde81916070be2",
+      "vendor/research_autopilot/scripts/verify_methods.py": "96fac69f9a1f763d886dda2735c25a29e33639956d5882ccc6371c7105d621d8",
+      "vendor/research_autopilot/scripts/writing_assets.py": "0117b2aa45cdd958ebb38daac8573df909c7aa3491cab087b3e7ac7ff03fcbfa"
+    },
+    "sha256": "8f8634c3109a339c499078be465dfbb43a6516a17feacbacc6c21d492db6b8e6"
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-1.log",
+      "sha256": "b54ef4268037171ec774fe2e75b38568a7827dc2f32b4be190c828924ba1425d"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-2.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "recursive_ssd",
+        "scripts",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-3.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "recursive_ssd.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-4.log",
+      "sha256": "a97f82fa42d34f37885b2983d3ddd2f91c8c1f9d8d7845ac32e6f5a715f0b4a4"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/research.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-5.log",
+      "sha256": "0ba3bf21347a9f1fee4eedf0ff3c5b99868c34b61b8977739fdbda646bd9cdc5"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "recursive_ssd.suite",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-6.log",
+      "sha256": "322f7a7844711212ae381fb630ffaefc8b6c3dcee2e58e4daea00dbc9c53764b"
+    },
+    {
+      "command": [
+        "bash",
+        "-n",
+        "scripts/setup.sh",
+        "scripts/run_8h.sh",
+        "scripts/python_env.sh"
+      ],
+      "exit_code": 0,
+      "log": "research/suite-v3/verification/check-7.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "log_path_aliases": [
+    "<PROJECT>",
+    "<VERIFY_ENV>"
+  ],
+  "scope": "engineering only; GPU and scientific method outcomes pending"
+}

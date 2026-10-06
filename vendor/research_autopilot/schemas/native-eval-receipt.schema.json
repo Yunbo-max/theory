@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/native-eval-receipt/1.0.0",
+  "title": "native-eval-receipt",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "receipt_id",
+    "run_id",
+    "protocol_id",
+    "protocol_digest",
+    "contract_digest",
+    "arm_role",
+    "arm_name",
+    "implementation_revision",
+    "implementation_refs",
+    "benchmark_id",
+    "benchmark_revision",
+    "split",
+    "seed",
+    "group",
+    "sample_manifest_ref",
+    "labels_or_tests_ref",
+    "denominator",
+    "predictions_ref",
+    "sampling",
+    "budget",
+    "resources",
+    "scorer_identity",
+    "scorer_revision",
+    "scorer_code_refs",
+    "scorer_command",
+    "native_metrics",
+    "raw_output_refs",
+    "native_output_ref",
+    "recorded_at"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "native-eval-receipt"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "contract_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "arm_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arm_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "implementation_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "implementation_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "benchmark_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample_manifest_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "labels_or_tests_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "denominator": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "predictions_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sampling": {
+      "type": "object",
+      "required": [
+        "policy",
+        "parameters"
+      ],
+      "properties": {
+        "policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "resources": {
+      "type": "object"
+    },
+    "scorer_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scorer_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scorer_code_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scorer_command": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "native_metrics": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "raw_output_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "native_output_ref": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recorded_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

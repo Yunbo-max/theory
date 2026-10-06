@@ -39,7 +39,11 @@ def test_all_methods_backward_and_base_teacher_frozen(method):
     frozen={n:x.detach().clone() for n,x in p.model.named_parameters() if ".student." not in n}
     loss=record_loss(p,RECORDS[0],method,Decode(1.5,5,.8),{},chunk=2)
     loss.backward()
-    assert any(x.grad is not None and x.grad.abs().sum()>0 for n,x in p.model.named_parameters() if ".student." in n)
+    gradients=[x.grad for n,x in p.model.named_parameters() if ".student." in n and x.grad is not None]
+    if method == "head_identity":
+        assert gradients and all(g.abs().max()<1e-7 for g in gradients)
+    else:
+        assert any(g.abs().sum()>0 for g in gradients)
     for n,x in p.model.named_parameters():
         if n in frozen:
             assert x.grad is None

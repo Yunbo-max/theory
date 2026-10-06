@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/route-checkpoint/1.0.0",
+  "title": "route-checkpoint",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "route_id",
+    "kind",
+    "observed_at",
+    "summary",
+    "status",
+    "blockers",
+    "changed_results",
+    "overlay",
+    "lease_tokens"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "route-checkpoint"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "route_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_route_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "kind": {
+      "enum": [
+        "verified",
+        "manual"
+      ]
+    },
+    "verification": {
+      "enum": [
+        "verified_project_ledger",
+        "unverified_manual_report"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "active",
+        "waiting",
+        "blocked",
+        "paused",
+        "completed"
+      ]
+    },
+    "blockers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "changed_results": {
+      "type": "boolean"
+    },
+    "overlay": {
+      "type": "object",
+      "required": [
+        "path",
+        "current_node",
+        "next_node",
+        "last_evidence"
+      ],
+      "properties": {
+        "path": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "current_node": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next_node": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_evidence": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "lease_tokens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "lease_id",
+          "fencing_token"
+        ],
+        "properties": {
+          "lease_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fencing_token": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reported_state": {
+      "type": "object"
+    },
+    "resolve_upstream_validation": {
+      "type": "boolean"
+    },
+    "validation_resolution": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

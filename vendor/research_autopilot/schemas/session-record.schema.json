@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/session-record/1.0.0",
+  "title": "session-record",
+  "type": "object",
+  "required": ["schema_id", "schema_version", "record_id", "recorded_at", "project_path", "source", "event_name", "session_id", "payload", "transcript_captures"],
+  "properties": {
+    "schema_id": {"const": "session-record"},
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "minLength": 1},
+    "recorded_at": {"type": "string", "minLength": 1},
+    "project_path": {"type": "string", "minLength": 1},
+    "source": {"enum": ["codex_hook", "worker_decision_note"]},
+    "event_name": {"type": "string", "minLength": 1},
+    "session_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+    "payload": {"type": "object"},
+    "transcript_captures": {"type": "array", "items": {"type": "object"}},
+    "recovered_event_tail": {
+      "type": "object", "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "index": 0,
+    "question_id": "1873_A",
+    "sample_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "native_ref": {
+      "path": "sources/livecodebench-data/test.jsonl",
+      "offset_bytes": 0,
+      "length_bytes": 2058,
+      "sha256": "f73c98b2f291260489a0cc0d2ced52eefdf9e76b548ec938e0428227c501f2ed"
+    },
+    "public_case_count": 1,
+    "private_case_count": 4
+  },
+  {
+    "index": 1,
+    "question_id": "2728",
+    "sample_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "native_ref": {
+      "path": "sources/livecodebench-data/test.jsonl",
+      "offset_bytes": 10455959,
+      "length_bytes": 370062,
+      "sha256": "9a5ea4c4e6bba02e3fe90c2844fcbdea134bff0c1cf876155380cc6d99b868f3"
+    },
+    "public_case_count": 2,
+    "private_case_count": 12
+  }
+]

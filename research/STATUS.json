@@ -1,44 +1,78 @@
 {
   "project": "recursive-ssd",
   "as_of": "2026-10-06",
+  "runtime_version": "suite-v3",
   "mathematical_candidates": 20,
   "selected_implementations": 15,
-  "engineering_tests_passed": 76,
-  "review_scope": "same-context conditional mathematics, design audit and CPU engineering; not independent review, novelty certification or GPU evidence",
-  "primary_candidate": "M03 floor_projection",
-  "first_window": {
-    "hardware": "one RTX 2080 Ti, approximately 11 GiB",
-    "maximum_hours": 8,
-    "start": "user launches locally at 16:00 or supplies an explicit timezone-aware --start-at",
-    "remote_gpu_launched": false,
-    "arms": [
-      "hard",
-      "full_soft",
-      "M03",
-      "arithmetic_anchor",
-      "fixed_data",
-      "lower_lr"
-    ],
-    "planned_rounds": 3,
-    "completed_gpu_rounds": 0,
-    "completion_guarantee": "bounded wall-clock only; unfinished comparisons remain incomplete"
+  "implemented_comparison_bundles": 15,
+  "engineering_tests_passed": 332,
+  "engineering_checks_passed": 7,
+  "engineering_verification_ref": {
+    "path": "research/suite-v3/verification/engineering-checks.json",
+    "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
   },
-  "remaining_selected_backlog": [
-    "M04",
-    "M05",
-    "M01",
-    "M07",
-    "M02",
-    "M06",
-    "M08",
-    "M09",
-    "M10",
-    "M11",
-    "M12",
-    "M13",
-    "M14",
-    "M15"
-  ],
+  "review_scope": "Bounded component and integration agent source reviews plus actual CPU engineering; no independent scientific review, novelty certification or target-GPU evidence",
+  "primary_candidate": "M03 floor_projection",
+  "benchmarks": {
+    "humaneval": {
+      "release": "v0.1.10",
+      "full": 164,
+      "development": 32,
+      "confirmation": 132,
+      "samples_per_task": 10
+    },
+    "mbpp": {
+      "release": "v0.2.0",
+      "full": 378,
+      "samples_per_task": 10
+    },
+    "livecodebench": {
+      "release": "release_v5",
+      "full": 880,
+      "samples_per_task": 10
+    }
+  },
+  "development_inventory": {
+    "candidate_ids": 15,
+    "trajectories": 64,
+    "evaluation_cells": 190,
+    "comparisons": 203
+  },
+  "tuning_inventory": {
+    "trials": 12,
+    "base_evaluations": 1,
+    "values_per_family": 3,
+    "development_seed": 17
+  },
+  "confirmation": {
+    "maximum_finalists": 2,
+    "seeds": [
+      23,
+      47,
+      71,
+      101,
+      131
+    ],
+    "endpoint_round": 3,
+    "benchmarks": [
+      "humaneval",
+      "mbpp",
+      "livecodebench"
+    ],
+    "selected_finalists": null
+  },
+  "first_window": {
+    "hardware": "one user-run RTX 2080 Ti, approximately 11 GiB",
+    "maximum_hours": 8,
+    "original_intended_start": "2026-10-06T16:00:00+01:00",
+    "actual_gpu_start_observed": false,
+    "consumed_target_gpu_seconds": null,
+    "remote_gpu_launched": false,
+    "completed_gpu_rounds": 0,
+    "budget_semantics": "one original cumulative ledger shared across preparation, tuning, development, confirmation and boundary queues; no restart/extension",
+    "completion_guarantee": "none for full scientific inventory; complete bundles need measured capacity, unfinished cells remain pending"
+  },
+  "remaining_selected_code_backlog": [],
   "reserves_without_implementation": [
     "M16",
     "M17",
@@ -46,22 +80,24 @@
     "M19",
     "M20"
   ],
-  "native_qualification": "Authoring CPU: official HumanEval/57 and /72 canonical and raw/sanitizer paths passed. Target GPU host replay pending.",
-  "gpu_memory_and_throughput": "PENDING local preflight",
-  "scientific_verdict": "INCONCLUSIVE; no GPU observations yet",
-  "gate_a_g01_e04": "PENDING; code verification does not satisfy scientific gates",
-  "next_evidence": "Target-host preflight and bounded baseline/resource measurements; implement missing matched controls and freeze v2 protocol before formal method dispatch. The default remains the legacy 32-task development queue.",
-  "historical_source_commit": "9ae7ad033f2344a66b60208289e14268ba4057f1",
-  "runtime_version": "native-v1",
-  "current_source_identity": "research/native-v1/verification/source-identity.json",
+  "native_qualification": {
+    "authoring_cpu_humaneval": "Official canonical HumanEval/0 and /1 passed all base+plus tests",
+    "authoring_cpu_mbpp": "Official canonical Mbpp/2 and /3 passed all base+plus tests",
+    "authoring_cpu_livecodebench": "NOT QUALIFIED: unchanged official scorer Manager IPC blocked by host PermissionError EPERM; actual failure retained; infrastructure-error rejection repair tested",
+    "target_host": "PENDING for all scorers and actual model baselines"
+  },
+  "gpu_memory_and_throughput": "PENDING real target-host measurements",
+  "scientific_verdict": "INCONCLUSIVE; no GPU observations",
+  "gate_a_g01_e04": "PENDING canonical scientific prerequisites, native host qualification, current freeze and result review",
+  "next_evidence": "Target-host native reference replay, baseline/natural failure qualification, actual per-node cost/VRAM, canonical Parent/Gate0/IPCG, reviewed frozen complete design; then finite whole-bundle dispatch",
+  "historical_source_commit": "bfe8a4058590853ecf1c7108703fcf1021e85c05",
+  "source_commit": null,
+  "current_source_identity": "research/suite-v3/verification/source-identity.json (created after source commit)",
+  "current_method_verification_ref": null,
+  "code_verified": 0,
+  "code_binding_status": "332 current engineering tests passed; source-commit implementation binding is the next delivery step",
   "design_drafts": 15,
   "design_verified": 0,
-  "design_ref": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
-  "source_commit": "bfe8a4058590853ecf1c7108703fcf1021e85c05",
-  "current_method_verification_ref": {
-    "path": "research/native-v1/implementation-check.json",
-    "sha256": "014a39d37dab409c17a279913b5db88d749635a03c09ba9c573053ba5123e064"
-  },
-  "code_verified": 15,
+  "design_ref": "research/suite-v3/G01_COVERAGE.md",
   "gpu_results_verified": 0
 }

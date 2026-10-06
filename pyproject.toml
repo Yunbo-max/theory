@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "recursive-ssd"
 version = "0.1.0"
-description = "Bounded, label-free recursive self-policy distillation pilot"
+description = "Bounded recursive self-policy distillation with complete native benchmark comparisons"
 requires-python = ">=3.11,<3.13"
 dependencies = [
   "torch==2.6.0", "transformers==4.51.3", "peft==0.15.2",
@@ -15,7 +15,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest==8.3.5"]
-evaluation = ["evalplus==0.3.1", "tree-sitter==0.23.2", "tree-sitter-python==0.23.6", "psutil==7.2.2"]
+evaluation = ["evalplus==0.3.1", "tree-sitter==0.23.2", "tree-sitter-python==0.23.6", "psutil==7.2.2", "tqdm==4.70.1"]
 
 [project.scripts]
 recursive-ssd = "recursive_ssd.cli:main"

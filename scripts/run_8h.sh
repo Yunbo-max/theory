@@ -5,4 +5,4 @@ export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
 export TOKENIZERS_PARALLELISM=false
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 source scripts/python_env.sh
-"$RECURSIVE_SSD_PYTHON" -m recursive_ssd.cli run --hours 8 "$@"
+"$RECURSIVE_SSD_PYTHON" scripts/research.py run "$@"

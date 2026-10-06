@@ -1,0 +1,109 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "workload_digest",
+    "device_uuids",
+    "peak_mib",
+    "reservation_mib",
+    "qualified_max_concurrency",
+    "measured_at",
+    "measurement_refs",
+    "throughput_evidence_refs",
+    "co_location_workload_digests"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "gpu-memory-profile"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "workload_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "device_uuids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "peak_mib": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reservation_mib": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "qualified_max_concurrency": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "measured_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measurement_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "throughput_evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "co_location_workload_digests": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/gpu-memory-profile/1.0.0"
+}

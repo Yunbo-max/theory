@@ -1,0 +1,44 @@
+{
+  "schema_id": "harness-plan",
+  "schema_version": "1.0.0",
+  "batch_id": "prep-ab76a11e0e2248e4992c",
+  "tasks": [
+    {
+      "task_id": "job",
+      "idea_id": "native-preparation",
+      "plan_ref": {
+        "path": "runs/controller/official-three-scorer-qualification/native-plan.json",
+        "sha256": "cd3c38547c24389ff3e432ac44bbd52c0ce7d88eebb81f2dccbdcce14660c10e"
+      },
+      "depends_on": [],
+      "priority": 1,
+      "resources": {
+        "cpu_cores": 2,
+        "ram_mib": 4096,
+        "gpu_count": 0,
+        "allow_gpu_share": false,
+        "exclusive_keys": [
+          "recursive-ssd-single-host"
+        ],
+        "gpu_peak_mib": null,
+        "memory_profile_ref": null
+      }
+    }
+  ],
+  "limits": {
+    "window_seconds": 580,
+    "total_wall_seconds": 580,
+    "max_parallel_tasks": 1,
+    "cpu_cores": 2,
+    "ram_mib": 4096,
+    "max_gpu_task_seconds": 0
+  },
+  "pool_dir": "/root/.local/state/research-autopilot",
+  "output_root": "runs/harness",
+  "gpus": {
+    "uuids": [],
+    "safety_margin_mib": 1024,
+    "max_tasks_per_gpu": 1
+  },
+  "plan_digest": "a399eddb3cbf86b473b33f0a1c3734d5800d4a68f21f3edaf8e6520efc702ed3"
+}

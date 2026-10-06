@@ -1,0 +1,63 @@
+{
+  "result": {
+    "format": "research-harness-state-v1",
+    "batch_id": "prep-ab76a11e0e2248e4992c",
+    "plan_digest": "a399eddb3cbf86b473b33f0a1c3734d5800d4a68f21f3edaf8e6520efc702ed3",
+    "root": "/workspace/scratch/7c897614ec09/theory",
+    "started_at": "2026-10-06T18:48:58.255582Z",
+    "started_epoch": 1791312538.2555594,
+    "hard_deadline_epoch": 1791313118.2555594,
+    "reported_windows": 0,
+    "status": "failed",
+    "started_monotonic": 22869.787821327,
+    "hard_deadline_monotonic": 23449.787821327,
+    "boot_id": "aa879b73-962e-4b17-afdc-04f958887135",
+    "tasks": {
+      "job": {
+        "status": "failed",
+        "queued_at": "2026-10-06T18:48:58.255714Z",
+        "reason_code": "failed",
+        "devices": [],
+        "started_at": "2026-10-06T18:49:01.201867Z",
+        "started_epoch": 1791312541.2018867,
+        "started_monotonic": 22872.73414909,
+        "process": {
+          "boot_id": "aa879b73-962e-4b17-afdc-04f958887135",
+          "pid": 22264,
+          "start_ticks": "2287273"
+        },
+        "completed_at": "2026-10-06T18:49:57.182187Z",
+        "completed_monotonic": 22928.716978072,
+        "execution_context_ref": {
+          "path": "runs/harness/prep-ab76a11e0e2248e4992c/tasks/job/execution-context.json",
+          "sha256": "da891ce189d8a13faacebe675de8b089bdc90bd06c9d078cdd15ead552a3cb38"
+        },
+        "gate_advanced": false,
+        "output_refs": [],
+        "receipt_ref": {
+          "path": "runs/attempts/prep-ab76a11e0e2248e4992c/receipt.json",
+          "sha256": "f8166be3643d362e916ca81f54c4b6d29aec4f5dc7576c2ea5aff5bc348f74b4"
+        },
+        "completed_epoch": 1791312597.182187
+      }
+    },
+    "gate_advanced": false,
+    "gpu_snapshot": [],
+    "observed_at": "2026-10-06T18:49:57.258483Z",
+    "report_kind": "checkpoint",
+    "scientific_result_verified": false,
+    "human_review_required_for_new_direction": true,
+    "elapsed_wall_seconds": 59.00292902900037,
+    "remaining_wall_seconds": 520.9970698899997,
+    "resource_accounting": {
+      "gpu_device_occupied_seconds": 0,
+      "gpu_task_reserved_seconds_upper_bound": 0,
+      "billing_verified": false,
+      "llm_calls_by_scheduler": 0
+    }
+  },
+  "task_ref": {
+    "path": "runs/harness/prep-ab76a11e0e2248e4992c/tasks/job/result.json",
+    "sha256": "30427fd395dc7a36113b94e2749fbca4f4b0eedce79c8a7af19874f18d9a11b3"
+  }
+}

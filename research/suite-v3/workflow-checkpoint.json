@@ -1,0 +1,85 @@
+{
+  "workflow_checkpoint": {
+    "policy_version": "1.1.0",
+    "policy_source": "User requires research-autopilot complete experiment design and implementation; no Docker",
+    "skill_source_revision": "b138bed01563c36b8ade8fc15bbac834bfe3e00b15f27a552aa380d41e766c87",
+    "loaded_module_refs": [
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/SKILL.md",
+        "sha256": "b138bed01563c36b8ade8fc15bbac834bfe3e00b15f27a552aa380d41e766c87"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/workflow-harness.md",
+        "sha256": "3593adfccbe3922e01e9b63faf3793d436f8d9b066ca154316027c2a0ca3eafc"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/method-verification.md",
+        "sha256": "f70ec9eb8e0a156f2675f1a7762ccdca3550809aa31edccd0632873d352dc864"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/full-validation-and-review.md",
+        "sha256": "f705d04a7b836ec8eaa6121d8da708c76b903c5342a834a0a2d6a9e1835afe14"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/rolling-research-batches.md",
+        "sha256": "a43997f1309dcfdf1cafa77742e4051520e0686b7b19e6473fd698d74411c9a1"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/gpu-host-runtime.md",
+        "sha256": "4cfbb2b473e3af9c2d333237e82c41245df0648e8c66ce686f6c57cc59224bbc"
+      },
+      {
+        "source": "/root/.codex/skills/remote-skills/skill-6abe2370f2f8819180de6c6e8d45e3b8/references/repository-round-trips.md",
+        "sha256": "e746a13d78143253b5ded27041c8174deb9483d9aa135ee6dd3efdd48d022e70"
+      }
+    ],
+    "execution_role": "local_executor",
+    "role_source": "Continued authorized workspace code implementation/repair, actual CPU checks and GitHub delivery; the user will run the separate one-GPU host. No target-GPU execution assignment or access here.",
+    "work_phase": "verified engineering delivery",
+    "project_id": "recursive-ssd",
+    "observed_at": "2026-10-06T19:05:44.255639+00:00",
+    "canonical_ledger_ref": null,
+    "current_goal_ref": "research/suite-v3/G01_COVERAGE.md",
+    "user_message_effect": "Requires full existing experiment design and all benchmark queue implementation; preserves prior scope and native execution constraint",
+    "policy_change": null,
+    "current_node": "M audit/repair -> E02 implementation qualification; G01 host admission pending",
+    "requested_action": "Finish implementation, verify engineering and native interfaces, deliver to Yunbo-max/theory",
+    "required_deliverables": [
+      "full benchmark/claim/control coverage",
+      "actual native adapters and complete comparison queue",
+      "retained engineering evidence",
+      "GitHub source and readback"
+    ],
+    "earliest_unclosed_prerequisite": "Target-host native LCB qualification, baseline/natural failure evidence, current Parent/Gate0/IPCG and measured cost/VRAM before scientific design admission",
+    "prerequisite_evidence_refs": [
+      "research/selection-check.json",
+      "research/native-v1/implementation-check.json",
+      "research/suite-v3/native-qualification/retention-manifest.json"
+    ],
+    "readiness": "CPU engineering verified; native target-host scientific dispatch still blocked",
+    "missing_requirements": [
+      "target GPU access and measurements",
+      "LCB required IPC on native evaluation host",
+      "qualified current model baselines",
+      "canonical scientific gates/freeze/current design review",
+      "GPU outcomes/E04"
+    ],
+    "next_legal_action": "Commit current source, bind implementation records to exact source, push and read back GitHub delivery",
+    "remaining_budget_ref": null,
+    "budget_observation": "Original user-run one-GPU eight-hour window retained; actual host start/consumption unobserved; no extension authorized",
+    "execution_harness_plan_ref": {
+      "path": "research/suite-v3/verification/harness-plan.json",
+      "sha256": "77b5542f786358c5d5a9111d41f50c07a900604754f8c0b58c2ea06a79ecd772"
+    },
+    "produced_deliverable_refs": [
+      {
+        "path": "research/suite-v3/verification/engineering-checks.json",
+        "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
+      },
+      {
+        "path": "research/suite-v3/G01_COVERAGE.md",
+        "sha256": "b46bbc539959cf54da1fe8594ffa4d4a804799dbff4a2c08ded08ea750a1b328"
+      }
+    ]
+  }
+}

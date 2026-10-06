@@ -1,0 +1,10 @@
+{
+  "url": "https://raw.githubusercontent.com/LiveCodeBench/submissions/6ca212e9c2039373f6e5069d37ffa9db66e23736/Qwen2.5-Coder-Ins-7B/Scenario.codegeneration_10_0.2_eval_all.json",
+  "sha256": "586707158f8d1648964f54f0290dc42c94806b12684ea03b537202008170c992",
+  "bytes": 10858879,
+  "git_blob": "0cba6247fc4aae0d1875d49d15812a1429c8a6dc",
+  "repository": "LiveCodeBench/submissions",
+  "commit": "6ca212e9c2039373f6e5069d37ffa9db66e23736",
+  "source_path": "Qwen2.5-Coder-Ins-7B/Scenario.codegeneration_10_0.2_eval_all.json",
+  "local_path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3/sources/livecodebench-reference-outputs.json"
+}

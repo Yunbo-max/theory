@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoresearch/experiment-run-receipt/1.0.0",
+  "title": "experiment-run-receipt",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "run_id",
+    "plan_digest",
+    "purpose",
+    "evidence_mode",
+    "status",
+    "attempts",
+    "started_at",
+    "completed_at",
+    "resources",
+    "provenance",
+    "gate_advanced"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "experiment-run-receipt"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plan_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "purpose": {
+      "enum": [
+        "engineering",
+        "scientific"
+      ]
+    },
+    "evidence_mode": {
+      "enum": [
+        "developmental",
+        "prospective_confirmatory",
+        "retrospective_audit"
+      ]
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed",
+        "budget_exhausted",
+        "interrupted"
+      ]
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "completed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resources": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "git_revision",
+        "model_revision",
+        "data_revision",
+        "environment_digest"
+      ],
+      "properties": {
+        "git_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "gate_advanced": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

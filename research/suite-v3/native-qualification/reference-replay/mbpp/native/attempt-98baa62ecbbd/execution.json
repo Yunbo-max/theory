@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/workspace/scratch/7c897614ec09/verify-env/bin/python",
+    "-I",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/recursive_ssd/suite_score.py",
+    "--tasks",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/mbpp/native/attempt-98baa62ecbbd/inputs/tasks.jsonl",
+    "--output",
+    "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/mbpp/native/attempt-98baa62ecbbd",
+    "--expected-samples",
+    "1",
+    "--parallel",
+    "2",
+    "--k-values",
+    "1",
+    "--benchmark",
+    "mbpp",
+    "--qualify"
+  ],
+  "cwd": "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/mbpp/native/attempt-98baa62ecbbd",
+  "started_epoch": 1791312570.809705,
+  "ended_epoch": 1791312592.0421762,
+  "status": "completed",
+  "returncode": 0,
+  "timeout_seconds": 450.0,
+  "backend": "native_python",
+  "process_cleanup": {
+    "status": "completed",
+    "orphan_cleanup": false,
+    "signalled": []
+  },
+  "environment_scope": "allowlisted process environment; no GPU; not a security sandbox"
+}

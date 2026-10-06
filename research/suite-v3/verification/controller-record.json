@@ -1,0 +1,8 @@
+{
+  "run_id": "suite-v3-final-verification-73aefe2e5c",
+  "scope": "actual CPU engineering workload under pinned skill H and R; no GPU or scientific PASS",
+  "receipt": {
+    "path": "runs/attempts/suite-v3-final-verification-73aefe2e5c/receipt.json",
+    "sha256": "8317381c193efc2f3a837802d30b71577f656bcc0cc51764b9d33eb21ac61190"
+  }
+}

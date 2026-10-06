@@ -1,0 +1,17 @@
+usage: suite.py [-h] --job JOB --data DATA --output OUTPUT --seconds SECONDS
+                {execute}
+
+Inner native workloads. Launch using scripts/research.py, owned by the skill
+harness. This module writes observations and provenance, never a research gate
+verdict. Its pure helpers are also exercised with explicitly labelled
+engineering fixtures.
+
+positional arguments:
+  {execute}
+
+options:
+  -h, --help         show this help message and exit
+  --job JOB
+  --data DATA
+  --output OUTPUT
+  --seconds SECONDS

@@ -1,0 +1,155 @@
+{
+  "task_ids": [
+    "1873_A",
+    "2728"
+  ],
+  "case_counts": {
+    "1873_A": 5,
+    "2728": 14
+  },
+  "metrics": [
+    {
+      "pass@1": 0.0,
+      "pass@5": 0.0,
+      "detail": {
+        "pass@1": {
+          "0": 0.0,
+          "1": 0.0
+        },
+        "pass@5": {
+          "0": 0.0,
+          "1": 0.0
+        }
+      }
+    },
+    {
+      "0": [
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ]
+      ],
+      "1": [
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ],
+        [
+          -2
+        ]
+      ]
+    },
+    [
+      [
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}"
+      ],
+      [
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}",
+        "{\"error\": \"EOFError()\", \"error_code\": -5, \"error_message\": \"TestRunnerError\"}"
+      ]
+    ]
+  ],
+  "source": {
+    "commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+    "files": {
+      "LICENSE": "104099948b78ebc36f2e951b3a7973b956adfa7d39aaec0d1512f97a2686d15d",
+      "pyproject.toml": "907d51622ad2e6b97f277f7f0c67a8e7a8bf27bedeaf0f2a5a1b9ba432a06bd2",
+      "lcb_runner/benchmarks/__init__.py": "0837c4a42b027fe479d12165affe91214b6b180c90245129d0ac0822c74dbfea",
+      "lcb_runner/benchmarks/code_generation.py": "0bc93f5a650b55d6a1b54d3db852d80ae64891ece4ff085b2e6b469eb89f8846",
+      "lcb_runner/benchmarks/code_execution.py": "b891e798b34b40c32fcfbaedf683c714937f5e10014864e5fd7f3b9c9f6b077f",
+      "lcb_runner/benchmarks/test_output_prediction.py": "2493f00ae1841d0997f5a35632c3d447a189c68641d636bdaa4e91d16bd30d05",
+      "lcb_runner/evaluation/__init__.py": "828043d1f71e4120ac51be23f90001fd850bf6ef186a420979d76828ec909057",
+      "lcb_runner/evaluation/compute_code_generation_metrics.py": "073f388cc78bf0eb0ad35eaeb8bb509c0a3664963e5305d2be13d6b6eb6f3d21",
+      "lcb_runner/evaluation/compute_code_execution_metrics.py": "e63b6d29f12cc5206fd146b616312f305b8903b6459014d7bc6d51dfd6335980",
+      "lcb_runner/evaluation/compute_test_output_prediction_metrics.py": "ec415d3207d8fbc04e8280ef091437d3a22e895b362e5557929f003e543a4653",
+      "lcb_runner/evaluation/pass_k_utils.py": "6af3ee55d40f96fa06fa511bd5e43d94b19604750e82454b4b3c1f45c5199010",
+      "lcb_runner/evaluation/testing_util.py": "b7cb6a8a69807bb868150a61742e25d7bb5328bbe01d514471b6ec43c9fa9ed2",
+      "lcb_runner/evaluation/utils_execute.py": "fb86e4c0834ccedd3f057006410909aeb79d9970db54838a9bed79d7039624fa",
+      "lcb_runner/lm_styles.py": "57d645b09852d2030d389cf9a14ea818396b7b0510b3e2f3f22e3d3e6792b783",
+      "lcb_runner/utils/extraction_utils.py": "1267d1724c6d4ea6d237b907dd6b53dfc6f1787a04b1616b85c3bc8377446879",
+      "lcb_runner/prompts/code_generation.py": "7f360dc01016c277e10c70959f46efe27b37c1d2c4ef72b077f93f348b3fd826",
+      "lcb_runner/runner/custom_evaluator.py": "f486a539f8ee67712022e8f1cc84623e5f674af09eee7ecfcf68b15ae5f7b829",
+      "lcb_runner/runner/parser.py": "e9641729a6030164e712b9de465dea03dae95c3fdf036aac87abbbfab9fd7f33"
+    },
+    "sha256": "51d63dd9a09434529f4c6e0ae7f7239108efeed098f7e1d70372f101b64fd9b5"
+  },
+  "task_receipts": {
+    "1873_A": {
+      "path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/task-cache/6285b9189508307fde4ae15b1c6e05579d6af826069a079a2db12556f3218c2a.json",
+      "sha256": "165bdf2a5d649435760e26303e9fa661c68a07a0c4ca1576f728d54d452f6040"
+    },
+    "2728": {
+      "path": "/workspace/scratch/7c897614ec09/theory/runs/attempts/prep-ab76a11e0e2248e4992c/job-a1-e5810abf49c544499cf7e8e7c2341e95/workspace/results/livecodebench/task-cache/47b599c57fbd27afbdeffe7ef78877f9817f17d9f311fc03321405cbb3bb9188.json",
+      "sha256": "49ec676de990b62bbc56a8bc006338e0133468237d27c47df43965c2144b0fad"
+    }
+  },
+  "data_root": "/workspace/scratch/7c897614ec09/theory/runs/attempts/official-suite-assets-26683b573f/job-a1-7552defc727b49e79eb38b41c52eee4f/workspace/artifacts/benchmarks-v3",
+  "execution_scope": "one native task at a time; all samples/tests retained",
+  "private_transport": "restricted pickle JSON-string decoding; native test values unchanged"
+}

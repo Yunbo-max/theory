@@ -29,9 +29,10 @@ class Policy:
         self.select("student",train=True)
 
     @classmethod
-    def load(cls, rank=16):
-        tokenizer=AutoTokenizer.from_pretrained(MODEL,revision=MODEL_REV,trust_remote_code=False,local_files_only=True)
-        base=AutoModelForCausalLM.from_pretrained(MODEL,revision=MODEL_REV,torch_dtype=torch.float16,
+    def load(cls, rank=16, model=MODEL, revision=MODEL_REV, model_path=None):
+        source=str(model_path) if model_path is not None else model
+        tokenizer=AutoTokenizer.from_pretrained(source,revision=revision,trust_remote_code=False,local_files_only=True)
+        base=AutoModelForCausalLM.from_pretrained(source,revision=revision,torch_dtype=torch.float16,
             attn_implementation="sdpa",trust_remote_code=False,local_files_only=True)
         return cls(base,tokenizer,rank=rank)
 
