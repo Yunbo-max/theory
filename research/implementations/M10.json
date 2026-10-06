@@ -1,0 +1,454 @@
+{
+  "kind": "implementation-card",
+  "version": "1.0.0",
+  "candidate_id": "M10",
+  "math_card_ref": {
+    "path": "research/cards/M10.json",
+    "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+  },
+  "selection_ref": {
+    "path": "research/selection.json",
+    "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+  },
+  "code_refs": [
+    {
+      "path": "recursive_ssd/__init__.py",
+      "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+    },
+    {
+      "path": "recursive_ssd/cli.py",
+      "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+    },
+    {
+      "path": "recursive_ssd/data.py",
+      "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+    },
+    {
+      "path": "recursive_ssd/evaluation.py",
+      "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+    },
+    {
+      "path": "recursive_ssd/io.py",
+      "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+    },
+    {
+      "path": "recursive_ssd/methods.py",
+      "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+    },
+    {
+      "path": "recursive_ssd/model.py",
+      "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+    },
+    {
+      "path": "recursive_ssd/runner.py",
+      "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+    },
+    {
+      "path": "recursive_ssd/train.py",
+      "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+    },
+    {
+      "path": "docker/score.py",
+      "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+    },
+    {
+      "path": "docker/Dockerfile",
+      "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+    },
+    {
+      "path": "configs/2080ti_8h.json",
+      "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+    },
+    {
+      "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+      "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+    }
+  ],
+  "code_version": "73ab8bd58d7c197a6c412ea0d219baa46300bba1e6fe03dd55139306a5bfd5c9",
+  "method_version": "44111bb312b47edfba4ae9a0a5a8fdad6b714d82fd2cac73f84f63cc0b9c2940",
+  "source_identity_ref": {
+    "path": "research/verification/source-identity.json",
+    "sha256": "e05ad88744dd640b852a62e0304e247241824e2c4a816107851addfb884342a1"
+  },
+  "mapping": [
+    {
+      "derivation_step": "M10-S1",
+      "code_ref": {
+        "path": "recursive_ssd/train.py",
+        "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+      },
+      "location": "methods.prefix_weights and train.record_loss",
+      "rationale": "Maintain s_{t+1}=s_t+positive log-ratio at t, starting s_0=0. The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    },
+    {
+      "derivation_step": "M10-S2",
+      "code_ref": {
+        "path": "recursive_ssd/train.py",
+        "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+      },
+      "location": "methods.prefix_weights and train.record_loss",
+      "rationale": "w_t=exp(−min(s_t,C)) is prefix measurable and lies in [exp(−C),1]. The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    },
+    {
+      "derivation_step": "M10-S3",
+      "code_ref": {
+        "path": "recursive_ssd/train.py",
+        "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+      },
+      "location": "methods.prefix_weights and train.record_loss",
+      "rationale": "The frozen weighted CE objective has gradient Σw_t(p_student−μ_t); it intentionally changes prefix weighting. The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    }
+  ],
+  "software_checks": [
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "docker/score.py",
+          "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+        },
+        {
+          "path": "docker/Dockerfile",
+          "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/verification/check-1.log",
+          "sha256": "a1bcbe414909726b3b0bc44551296d147589a211c1f4386a5c99f68e3a822738"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "docker/score.py",
+          "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+        },
+        {
+          "path": "docker/Dockerfile",
+          "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/verification/check-2.log",
+          "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "recursive_ssd",
+        "scripts",
+        "tests",
+        "docker/score.py"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "docker/score.py",
+          "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+        },
+        {
+          "path": "docker/Dockerfile",
+          "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/verification/check-3.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "recursive_ssd.cli",
+        "--help"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "docker/score.py",
+          "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+        },
+        {
+          "path": "docker/Dockerfile",
+          "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/verification/check-4.log",
+          "sha256": "bec4d044cf41947d4bf15b05a7e4753836ccee8cec0678b686a412b1083ce4fc"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "bash",
+        "-n",
+        "scripts/setup.sh",
+        "scripts/run_8h.sh"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "5d1e891512e0d5691faae5182b20be960a6215744cf2c484bec2540716600b4b"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "e5849c73cae47beae9993b72e3ab9e9f4ba4a744fc01647b6aa35292b410609e"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "6dfa7d756781825d806abb66f67478451af2c757394fef3e46ca257c52a233c7"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "21b39f68148f5fcecdccba69f250e624bb7dff129982a77a068434c75a109a74"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "docker/score.py",
+          "sha256": "7147b2675dd98912bdbd5e754aa5f8ad69cdcaec787c9c5c7a7518c8259a21a9"
+        },
+        {
+          "path": "docker/Dockerfile",
+          "sha256": "8a12ea23b505670ac70a7ffa0c9d5f56a3544dab3675a80d76a7113726f062bf"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/verification/check-5.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "limits": "CPU engine checks only; mathematical special cases are tested where tractable. No full model GPU run, independent review or empirical method verdict."
+}

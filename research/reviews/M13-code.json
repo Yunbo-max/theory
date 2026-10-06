@@ -1,0 +1,69 @@
+{
+  "kind": "method-review",
+  "version": "1.0.0",
+  "subject_id": "M13",
+  "scope": "code",
+  "artifact_ref": {
+    "path": "research/implementations/M13.json",
+    "sha256": "075ce40f600b48d9a8a5fd900ddfcf8a38d946907dbafbae54826c1622a5bd91"
+  },
+  "reviewer": "same-context assistant review; not independent",
+  "reviewed_at": "2026-10-06T14:06:22.455960+00:00",
+  "outcome": "verified",
+  "checks": {
+    "math_to_code": {
+      "status": "verified",
+      "rationale": "Reviewed train.actual_step_kl and train.train_round rollback branch against θ_new=θ_old+γΔ subject to measured prefix-batch KL≤δ. Frozen references, completion masks and conditional scope are retained; see mapped statements for limitations.",
+      "evidence_refs": [
+        {
+          "path": "research/implementations/M13.json",
+          "sha256": "075ce40f600b48d9a8a5fd900ddfcf8a38d946907dbafbae54826c1622a5bd91"
+        },
+        {
+          "path": "research/verification/source-identity.json",
+          "sha256": "e05ad88744dd640b852a62e0304e247241824e2c4a816107851addfb884342a1"
+        },
+        {
+          "path": "research/verification/engineering-checks.json",
+          "sha256": "95d012ed65e137a945a6f1dc96a01a3df15688dc2561089ae6f63bab237df4e9"
+        }
+      ]
+    },
+    "software_checks": {
+      "status": "verified",
+      "rationale": "Actual pytest suite, dependency check, compilation, CLI and shell checks passed. Tests include target constraints, all-candidate backward passes, tiny-model recursion, optimizer/resume paths and inventory checks. This is an engineering scope, not native benchmark evidence.",
+      "evidence_refs": [
+        {
+          "path": "research/implementations/M13.json",
+          "sha256": "075ce40f600b48d9a8a5fd900ddfcf8a38d946907dbafbae54826c1622a5bd91"
+        },
+        {
+          "path": "research/verification/source-identity.json",
+          "sha256": "e05ad88744dd640b852a62e0304e247241824e2c4a816107851addfb884342a1"
+        },
+        {
+          "path": "research/verification/engineering-checks.json",
+          "sha256": "95d012ed65e137a945a6f1dc96a01a3df15688dc2561089ae6f63bab237df4e9"
+        }
+      ]
+    },
+    "actual_code_identity": {
+      "status": "verified",
+      "rationale": "Source files match committed bytes at 9ae7ad033f2344a66b60208289e14268ba4057f1. Full source tree listing and SHA256 plus code-file hashes bind the review; later files added here are evidence-only.",
+      "evidence_refs": [
+        {
+          "path": "research/implementations/M13.json",
+          "sha256": "075ce40f600b48d9a8a5fd900ddfcf8a38d946907dbafbae54826c1622a5bd91"
+        },
+        {
+          "path": "research/verification/source-identity.json",
+          "sha256": "e05ad88744dd640b852a62e0304e247241824e2c4a816107851addfb884342a1"
+        },
+        {
+          "path": "research/verification/engineering-checks.json",
+          "sha256": "95d012ed65e137a945a6f1dc96a01a3df15688dc2561089ae6f63bab237df4e9"
+        }
+      ]
+    }
+  }
+}
