@@ -1,0 +1,27 @@
+{
+  "kind": "runtime-profile",
+  "backend": "native-python",
+  "authoring": {
+    "python_environment_ref": "research/native-v1/verification/environment.json",
+    "gpu_available": false,
+    "engineering_tests_passed": 76,
+    "official_reference_tasks": [
+      "HumanEval/57",
+      "HumanEval/72"
+    ],
+    "canonical_path": "passed",
+    "raw_sanitizer_path": "passed",
+    "cache_reuse_and_changed_input_rejection": "passed"
+  },
+  "target_host": {
+    "hardware": "one RTX 2080 Ti, approximately 11 GiB (user stated)",
+    "interpreter": null,
+    "driver": null,
+    "free_vram": null,
+    "throughput": null,
+    "preflight_status": "pending user-host measurement"
+  },
+  "runtime_calls_container": false,
+  "time_authority": "original eight-hour allocation; actual user-host start and remaining time unobserved",
+  "scientific_verdict": "INCONCLUSIVE; zero GPU comparisons observed"
+}

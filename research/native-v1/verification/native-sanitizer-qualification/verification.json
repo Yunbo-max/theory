@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "official reference inputs through raw/sanitizer/native scorer and cache provenance; no model accuracy claim",
+  "task_ids": [
+    "HumanEval/57",
+    "HumanEval/72"
+  ],
+  "task_count": 2,
+  "reference_plus_pass": 2,
+  "cache_reuse_verified": true,
+  "changed_input_rejected": true
+}

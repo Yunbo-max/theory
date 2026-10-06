@@ -1,0 +1,212 @@
+{
+  "kind": "conditional-research-resource-plan",
+  "version": "2.0.0",
+  "authorization": {
+    "gpu_count": 1,
+    "gpu_model_user_stated": "RTX 2080 Ti",
+    "vram_gib_approx_user_stated": 11,
+    "total_execution_hours": 8,
+    "additional_compute_authorized": false,
+    "observed_consumed_hours": null,
+    "original_intended_start": "2026-10-06T16:00:00+01:00",
+    "end_if_started_as_intended": "2026-10-07T00:00:00+01:00",
+    "actual_start": null,
+    "time_zone": "Europe/London",
+    "no_remote_job_launched": true
+  },
+  "bounds": {
+    "reserve_minutes": 15,
+    "qualification_calibration_max_minutes": 60,
+    "simultaneous_gpu_jobs": 1,
+    "gpu_sharing": false,
+    "external_api_spend": 0
+  },
+  "timing_basis": {
+    "measured_gpu_throughput": null,
+    "measured_training_seconds_per_arm": null,
+    "measured_peak_vram": null,
+    "expected_complete_methods": null,
+    "reason": "No host connection or returned GPU logs. Limits are not runtime predictions."
+  },
+  "cost_model": {
+    "per_arm_round": "load_or_switch + generate(prefill, actual_tokens) + reference_forwards + training + official_scoring + diagnostics + checkpoint_save",
+    "comparison_bundle": "sum distinct compatible arm-round costs + shared base evaluation + all failed/tuning costs + statistical replay/E04/export",
+    "admission": "Start a whole eligible comparison bundle only if its conservative measured estimate plus 15-minute closeout fits the original remaining hard budget. Otherwise retain the bundle pending; do not drop controls.",
+    "memory": "Use target-host measured free/total VRAM, actual dtype/rank/sequence shape and required headroom. Do not infer fit from tiny CPU tests.",
+    "cost_matched": "Equal-data/updates and equal-training-wall-clock are separate panels; the latter needs its own frozen implementation and cannot be inferred from the former."
+  },
+  "tasks": [
+    {
+      "id": "Q0",
+      "kind": "host_inventory",
+      "gpu": 0,
+      "depends_on": [],
+      "state": "awaiting_target_host",
+      "outputs": [
+        "actual_conda_interpreter",
+        "resolved_packages",
+        "device_inventory",
+        "existing_job_and_remaining_budget"
+      ]
+    },
+    {
+      "id": "Q1",
+      "kind": "native_scorer_qualification",
+      "gpu": 0,
+      "depends_on": [
+        "Q0",
+        "E01-native"
+      ],
+      "state": "native_wrapper_implemented_authoring_CPU_qualified_target_host_pending",
+      "outputs": [
+        "official_native_reference_case_replay",
+        "scorer_revision",
+        "denominator_and_extraction_receipts"
+      ]
+    },
+    {
+      "id": "Q2",
+      "kind": "bounded_resource_calibration",
+      "gpu": 1,
+      "depends_on": [
+        "Q0",
+        "Q1"
+      ],
+      "state": "conditional",
+      "outputs": [
+        "actual_generation_training_scoring_cost",
+        "peak_vram",
+        "truncation",
+        "cpu_scoring_capacity"
+      ]
+    },
+    {
+      "id": "D0",
+      "kind": "baseline_natural_measurement",
+      "gpu": 1,
+      "depends_on": [
+        "Q1",
+        "Q2",
+        "E02-soft-lr"
+      ],
+      "state": "conditional",
+      "arms": [
+        "base",
+        "hard",
+        "full_soft",
+        "fixed_data",
+        "lower_lr",
+        "full_soft_lr_half"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "seed": 17,
+      "outputs": [
+        "natural_failure_and_success_inventory",
+        "qualified_baseline_package",
+        "parent_value_review"
+      ]
+    },
+    {
+      "id": "D1",
+      "kind": "M03_complete_comparison",
+      "gpu": 1,
+      "depends_on": [
+        "D0",
+        "G01-freeze",
+        "E02-gkd",
+        "G02-fair-selection"
+      ],
+      "state": "not_dispatchable",
+      "method_ids": [
+        "M03"
+      ],
+      "rule": "Retain all per-method controls and mandatory qualified published comparisons; admission requires candidate design_verified and scientific prerequisites."
+    },
+    {
+      "id": "D2",
+      "kind": "selected_method_backlog",
+      "gpu": 1,
+      "depends_on": [
+        "D0",
+        "G01-freeze"
+      ],
+      "state": "not_dispatchable",
+      "method_ids": [
+        "M04",
+        "M05",
+        "M01",
+        "M07",
+        "M02",
+        "M06",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "rule": "Use ranked complete bundles; methods need not be run serially by candidate when compatible controls are shared, but only one GPU workload at once."
+    },
+    {
+      "id": "C0",
+      "kind": "prospective_confirmation",
+      "gpu": 1,
+      "depends_on": [
+        "complete_development",
+        "candidate_selection",
+        "new_freeze",
+        "remaining_total_authorization"
+      ],
+      "state": "future_conditional",
+      "max_candidates": 2,
+      "seeds": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "checkpoint_round": 3,
+      "benchmark": "HumanEval+ held-out 132",
+      "rule": "No automatic new eight-hour grant; no reuse of inspected confirmation to tune."
+    },
+    {
+      "id": "V0",
+      "kind": "external_replication",
+      "gpu": 1,
+      "depends_on": [
+        "frozen_finalist",
+        "BENCHMARKS",
+        "remaining_total_authorization"
+      ],
+      "state": "future_conditional",
+      "benchmarks": [
+        "MBPP+ v0.2.0 full 378",
+        "LiveCodeBench lite release_v5 nominal 880"
+      ],
+      "rule": "Scope claims to separately qualified groups. New protocol/data/code cannot resume an old run identity."
+    },
+    {
+      "id": "V1",
+      "kind": "scale_boundary",
+      "gpu": 1,
+      "depends_on": [
+        "frozen_finalist",
+        "second_model_qualification",
+        "remaining_total_authorization"
+      ],
+      "state": "future_conditional",
+      "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+      "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+      "rule": "One additional scale in the same family, not proof of cross-family generalization. No weights downloaded or fit measured."
+    }
+  ],
+  "carryover": "Stable attempt/protocol identities; unchanged complete comparisons only within the original cumulative authorization; all incomplete/failed outputs preserved.",
+  "stop": "Hard original deadline, invalid source/score identity, exhausted attempt/resource ceiling, or no qualified task. These produce pending/inconclusive, not automatic scientific KILL."
+}

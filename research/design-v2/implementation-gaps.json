@@ -1,0 +1,168 @@
+{
+  "kind": "experiment-implementation-obligations",
+  "version": "2.0.0",
+  "scope": "design audit plus native runtime implementation; remaining comparison controls are not claimed implemented",
+  "blockers": [
+    {
+      "id": "NATIVE",
+      "task": "E01-native",
+      "why": "Current setup, preflight, scorer and runner use a container wrapper. Official EvalPlus already supports native Python.",
+      "acceptance": "Implement and inspect a native Conda path, explicit interpreter/environment fingerprint, process/deadline cleanup; replay unchanged official scorer on sourced native canonical cases and retained native model outputs; retain real host execution/isolation capability. No container dependency.",
+      "status": "implemented_and_authoring_CPU_reference_qualified; target_host_pending"
+    },
+    {
+      "id": "PARENT",
+      "task": "B01-G03-H03",
+      "why": "No GPU baseline observations or current qualified Parent/Natural Gate 0/IPCG closure.",
+      "acceptance": "Collect native baseline/natural failure evidence and strongest-simple contrasts, join closest-work audit, then freeze current parent/value/importance artifacts. No retroactive validation of historical prototype.",
+      "status": "evidence_pending"
+    },
+    {
+      "id": "COST",
+      "task": "P04-G01",
+      "why": "No measured target-host time, current VRAM/allocation or consumed eight-hour budget.",
+      "acceptance": "Retain one-device telemetry, representative generation/training/reference-forward/scoring/save costs; budget complete comparisons using measured bounds and remaining authorization.",
+      "status": "host_pending"
+    },
+    {
+      "id": "SOFT_LR",
+      "task": "E02-soft-lr",
+      "why": "lower_lr uses hard labels.",
+      "acceptance": "Add full-soft low-LR and controlled LR variants with same optimizer/targets; check semantic objective identity and cost accounting.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "SOFT_MIX",
+      "task": "E02-soft-mixture",
+      "why": "fixed_alpha/fresh_alpha contain one-hot labels.",
+      "acceptance": "Implement deterministic q=(1-a)p+a*mu separately; keep hard-mixture controls available under their real names.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "HEAD_FACTORIAL",
+      "task": "E02-head-factorial",
+      "why": "Mass transfer and conditional head reshaping are not separated.",
+      "acceptance": "Four conditions on identical support/prefixes: identity; head reshape at unchanged mass; mass transfer with original within-support shape; both. Native metrics + matched information.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "SMOOTHING_CONTROL",
+      "task": "E02-smoothing",
+      "why": "Geometric/ratio methods include epsilon smoothing absent from original arithmetic control.",
+      "acceptance": "Arithmetic and boundary controls use the exact same m=(1-epsilon)mu+epsilon*p0 and reference forwards.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "TAIL_IID",
+      "task": "E02-tail",
+      "why": "No exact-head+iid-tail comparator for stratification.",
+      "acceptance": "Same head/draw counts/expected target and measured total cost; no claimed sparse speedup for dense code.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "TEMPORAL_CONTROLS",
+      "task": "E02-temporal",
+      "why": "Lag benefit is confounded with weaker updates and extra forwards.",
+      "acceptance": "Current-current duplicate, lag-only and full-soft lower-LR controls; verify R1 degeneracy and R2/R3 differences.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "MEAN_GATE",
+      "task": "E02-gate",
+      "why": "Position-specific gating needs a matched constant gate.",
+      "acceptance": "Use each frozen prefix batch's deterministic mean gate and the same soft references; independent RNG/source identities retained.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "MEAN_WEIGHT",
+      "task": "E02-prefix-weight",
+      "why": "Prefix weighting needs a same-average loss scale control.",
+      "acceptance": "Uniform weight equal to frozen sequence's mean weight; separately compare lower LR because Adam does not make the two exactly equivalent.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "NOISE_CONTROL",
+      "task": "E02-noise-budget",
+      "why": "Fixed alpha=0.5 does not match an adaptive quadratic noise budget.",
+      "acceptance": "Compute common constant a=min(1,sqrt(B/sum G(mu))) after prefixes fixed, then draw independent fresh labels; bind exact budget/draw count.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "SGD_CONTROLS",
+      "task": "E02-sgd",
+      "why": "Only full_soft_sgd exists; AdamW differences would confound M12.",
+      "acceptance": "SGD arithmetic anchor and same-norm SGD shrinkage; report projection and finite-step KL without global guarantees.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "CLOCK_CONTROL",
+      "task": "E03-cost-match",
+      "why": "Same steps/samples are not equal cost when extra forwards or rejections are used.",
+      "acceptance": "Separate matched-information/data runs from equal-training-wall-clock runs; freeze checkpoint selection by elapsed cost, never held-out score; keep evaluation budget equal.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "ALLOCATION_CONTROL",
+      "task": "E02-allocation",
+      "why": "Prompt allocation changes multiplicity and may change implicit objective.",
+      "acceptance": "Uniform weighted control and uncorrected-weight ablation; preserve total sample count and log all per-prompt counts/proxy forwards.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "EXPLORATION_FACTORIAL",
+      "task": "E02-exploration",
+      "why": "Generation mixture versus target anchoring lacks complete interaction controls.",
+      "acceptance": "Generation mixture on/off × anchor soft target on/off, zero-mixture boundary and cost match. Keep these as controls, not new candidate ideas.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "DECODE_CONDITIONS",
+      "task": "G01-temperature",
+      "why": "Fixed truncation cannot test the untruncated temperature-composition identity.",
+      "acceptance": "Explicit condition-specific run configs for untruncated and truncated comparisons, and once-only temperature versus distributed schedule. Different conditions cannot share incompatible controls.",
+      "status": "config_and_protocol_pending"
+    },
+    {
+      "id": "HEAD_TEMPERATURE",
+      "task": "G01-head-temperature",
+      "why": "Head smoothing may reduce to a simpler temperature setting.",
+      "acceptance": "Developer-only matching of global-temperature control, same support rule and fair selection cost, then freeze before confirmation.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "TUNING",
+      "task": "G02-fair-selection",
+      "why": "Defaults do not establish competitive strongest baselines.",
+      "acceptance": "Dev-only bounded tuning with at most three values per named uncertain scalar and equal tuning time for candidate/strong baseline; all tries retained; no blind grid or confirmation feedback.",
+      "status": "design_conditional"
+    },
+    {
+      "id": "ANALYSIS",
+      "task": "V06-analysis",
+      "why": "Current report has one-seed task bootstrap only.",
+      "acceptance": "Implement/review frozen crossed task/seed analysis and family correction with live callback; retain official native metric outputs and complete arm inventories. Missing/degenerate evidence stays INCONCLUSIVE.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "GKD",
+      "task": "E02-gkd",
+      "why": "Closest-method reading has not been converted to runnable matched losses/rollouts.",
+      "acceptance": "Same-information smoothed FKL/RKL/JSD × round/per-update rollout factors with equal generation allowance; verify causal masks/teacher detach/zero-gradient identity and official output scoring.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "BENCHMARKS",
+      "task": "B01-S02-multi-benchmark",
+      "why": "Current data/runner is HumanEval-dev only.",
+      "acceptance": "Native MBPP+ support, explicit confirmation split, exact official prompt/extraction/input conversion; LCB external runner uses frozen data revision and official custom evaluator with task-ID validation.",
+      "status": "not_implemented"
+    },
+    {
+      "id": "PROTOCOL",
+      "task": "G01-freeze",
+      "why": "Narrative v2 design is not a frozen native protocol.",
+      "acceptance": "After required source/host/baseline/control qualification, bind exact refs, per-arm information/budget, released manifests, native scorer, analysis, code-stage discovery batch and current parent, then freeze child protocol and derive design_verified.",
+      "status": "not_frozen"
+    }
+  ]
+}

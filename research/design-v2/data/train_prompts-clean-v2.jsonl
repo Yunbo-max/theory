@@ -1,0 +1,32 @@
+{"task_id": "708", "text": "Write a python function to convert a string to a list."}
+{"task_id": "768", "text": "Write a python function to check for odd parity of a given number."}
+{"task_id": "908", "text": "Write a function to find the fixed point in the given array."}
+{"task_id": "701", "text": "Write a function to find the equilibrium index of the given array."}
+{"task_id": "689", "text": "## write a function to find the minimum number of jumps to reach the end of the array for the given array of integers where each element represents the max number of steps that can be made forward from that element. > indented block > indented block"}
+{"task_id": "933", "text": "Write a function to convert camel case string to snake case string by using regex."}
+{"task_id": "862", "text": "Write a function to find the occurrences of n most common words in a given text."}
+{"task_id": "961", "text": "Write a function to convert a roman numeral to an integer."}
+{"task_id": "662", "text": "Write a function to sort a list in a dictionary."}
+{"task_id": "710", "text": "Write a function to access the initial and last data of the given tuple record."}
+{"task_id": "816", "text": "Write a function to clear the values of the given tuples."}
+{"task_id": "698", "text": "Write a function to sort dictionary items by tuple product of keys for the given dictionary with tuple keys."}
+{"task_id": "746", "text": "Write a function to find area of a sector."}
+{"task_id": "695", "text": "Write a function to check if each element of the second tuple is greater than its corresponding index in the first tuple."}
+{"task_id": "949", "text": "Write a function to sort the given tuple list basis the total digits in tuple."}
+{"task_id": "972", "text": "Write a function to concatenate the given two tuples to a nested tuple."}
+{"task_id": "828", "text": "Write a function to count alphabets,digits and special charactes in a given string."}
+{"task_id": "802", "text": "Write a python function to count the number of rotations required to generate a sorted array."}
+{"task_id": "888", "text": "Write a function to substract the elements of the given nested tuples."}
+{"task_id": "642", "text": "Write a function to remove similar rows from the given tuple matrix."}
+{"task_id": "832", "text": "Write a function to extract the maximum numeric value from a string by using regex."}
+{"task_id": "973", "text": "Write a python function to left rotate the string."}
+{"task_id": "874", "text": "Write a python function to check if the string is a concatenation of another string."}
+{"task_id": "851", "text": "Write a python function to find sum of inverse of divisors."}
+{"task_id": "709", "text": "Write a function to count unique keys for each value present in the tuple."}
+{"task_id": "654", "text": "Write a function to find the perimeter of a rectangle."}
+{"task_id": "943", "text": "Write a function to combine two given sorted lists using heapq module."}
+{"task_id": "839", "text": "Write a function to sort the tuples alphabetically by the first item of each tuple."}
+{"task_id": "939", "text": "Write a function to sort a list of dictionaries using lambda function."}
+{"task_id": "634", "text": "Write a python function to find the sum of fourth power of first n even natural numbers."}
+{"task_id": "820", "text": "Write a function to check whether the given month number contains 28 days or not."}
+{"task_id": "853", "text": "Write a python function to find sum of odd factors of a number."}

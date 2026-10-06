@@ -1,3 +1,5 @@
+> 历史设计记录：原容器执行约束已由用户的原生运行要求取代。当前运行说明见 [NATIVE_RUNTIME.md](NATIVE_RUNTIME.md)，完整条件实验设计见 [G01](../research/design-v2/G01_EXPERIMENT_DESIGN.md)。下文保留原始方案语境，不是当前容器启动指令。
+
 # Frozen pilot protocol
 
 Configuration: `configs/2080ti_8h.json`. The launcher stores its exact bytes' semantics, a code/config/template content manifest, model/data identities, evaluator image ID and start/end timestamps in `run.json`. Changing any scientific setting requires a new run identity. The default queue is fixed in advance and does not inspect correctness to determine updates, weights, sampling, stopping or method order.

@@ -1,5 +1,7 @@
 # Engineering validation and outstanding checks
 
+Historical validation is retained below. Current native-v1 evidence is in `research/native-v1/verification/`; Docker instructions in the historical paragraph no longer apply. See [NATIVE_RUNTIME.md](NATIVE_RUNTIME.md).
+
 The checked test suite exercises:
 
 - Temperature/top-k/top-p order, normalized detached targets for all 15 selected candidates and controls.
@@ -15,3 +17,7 @@ Logs in `research/verification/` record the actual final test command/output, en
 **Not available in the authoring environment:** CUDA/RTX 2080 Ti, a Docker daemon, native sandbox execution, actual FP16 GPU training, and an eight-hour throughput measurement. `scripts/setup.sh` performs the on-machine GPU canary before the timed run. The worker qualifies the official scorer on actual canonical tasks in Docker before evaluating generated code. Until those run successfully, hardware and native-evaluation readiness remain pending.
 
 Full-scale/native confirmation, independent review, multiple seeds, all candidate-specific matched controls and a novelty review remain future evidence requirements. No code here should be described as empirically improving the model before those observations exist.
+
+## Native-v1 更新
+
+原生 runtime 回归与完整 CPU 检查保存在 `research/native-v1/verification/`，旧 `research/verification/` 是历史快照。官方 HumanEval/57 和 HumanEval/72 的参考答案在 native Python EvalPlus 路径通过；这只验证已运行的评分路径。目标 2080 Ti 的驱动、显存、耗时和实际模型结果仍未知。

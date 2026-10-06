@@ -1,28 +1,32 @@
 # Recursive SSD：单张 2080 Ti 的 8 小时研究实验
 
+**2026-10-06 更新：已改用 Conda/Python 原生 EvalPlus，安装、预检、评分与清理均不调用 Docker。** 官方两题参考答案已在 CPU 原生入口通过。完整的 [G01 实验设计](research/design-v2/G01_EXPERIMENT_DESIGN.md) 和 [15 项方法对照矩阵](research/design-v2/METHOD_MATRIX.md) 已补齐为条件方案；默认配置仍是 32 题开发队列，尚未变成多 benchmark、完整对照的自动执行队列。
+
 这是基于 [Apple SSD](https://github.com/apple-aiml-research/ml-ssd) 的**递归自策略训练实验代码**。每轮用自己的上一轮模型生成未经验证的回答，再从上一轮权重继续训练。训练不使用正确答案、测试通过信号、外部教师或奖励模型。
 
 **当前状态：工程实现与 CPU 检查；尚无真实 2080 Ti 跑分。不能据此断言“没人做过”或“能够递归提升”。** 迭代自蒸馏已有相关研究。本项目研究具体约束能否优于简单递归和软目标基线。
 
-## 先安装，再在下午 4 点启动
+## 原生环境与既有开发试跑
 
-环境：Linux、Python 3.11 或 3.12、可用的 NVIDIA 驱动和 Docker。默认只使用 `CUDA_VISIBLE_DEVICES=0`，FP16，不使用 BF16、vLLM、FlashAttention 或 bitsandbytes。请在计时前完成下载与安装。需要约 15–25 GB 可用磁盘，实际取决于环境缓存和输出。
+环境：Linux、Python 3.11 或 3.12、可用的 NVIDIA 驱动、项目 Conda 环境。默认只使用 `CUDA_VISIBLE_DEVICES=0`，FP16，不使用 BF16、vLLM、FlashAttention 或 bitsandbytes。请在计时前完成下载与安装。需要约 15–25 GB 可用磁盘，实际取决于环境缓存和输出。
 
 ```bash
 git clone https://github.com/Yunbo-max/theory.git
 cd theory
+conda create -n recursive-ssd python=3.11 -y
+conda activate recursive-ssd
 bash scripts/setup.sh
 ```
 
-如果系统只有 Python 3.12：
+已有兼容 Conda 环境可直接激活复用；也可显式指定 Python 3.11/3.12 解释器：
 
 ```bash
-PYTHON=python3.12 bash scripts/setup.sh
+PYTHON=/absolute/path/to/conda/env/bin/python bash scripts/setup.sh
 ```
 
-安装脚本依次安装 CUDA 11.8 对应的 PyTorch、运行 CPU 测试、构建隔离评测镜像、下载固定版本模型/数据、执行 GPU 显存预检。预检失败时先看报错；它不会自动替换模型或悄悄缩减实验。主配置是 `configs/2080ti_8h.json`。
+安装脚本依次安装 CUDA 11.8 对应的 PyTorch、运行 CPU 测试、下载固定版本模型/数据、调用官方原生 EvalPlus 做参考答案检查，再执行 GPU 显存预检。预检失败时先看报错；它不会自动替换模型或悄悄缩减实验。主配置是 `configs/2080ti_8h.json`。
 
-**下午 4 点在你的机器执行：**
+**在原授权窗口内由你本地启动：**
 
 ```bash
 bash scripts/run_8h.sh
@@ -37,7 +41,7 @@ bash scripts/run_8h.sh --start-at '2026-10-06T16:00:00+01:00'
 这是本地命令，仓库本身没有替你启动或预约 GPU。终端可用 `tmux` 保持会话。实时查看：
 
 ```bash
-tail -f runs/2080ti-8h/worker.log
+tail -f runs/2080ti-native-8h/worker.log
 ```
 
 ## 默认实验做什么
@@ -84,25 +88,25 @@ $$q_v=\max(c p_{0v}, k\mu_v),$$
 
 `recursive_ssd/methods.py` 提供 M01–M15；M12 的梯度投影、M13 的实际 KL 回溯在 `train.py`，M14 的题目采样分配、M15 的历史策略混合生成在 `runner.py` / `model.py`。
 
-复制配置并把相应 ID 加入 `arms`，仍保留 `hard` 与 `full_soft`。例如 `M04` 为总温度预算、`M08` 为历史 teacher 平均。M12 应同时加入 `full_soft_sgd`，M09/M11 应加入 `fixed_alpha` / `fresh_alpha` 等卡片指定的控制。配置不包含自动根据测试结果挑选方法的逻辑。
+复制配置并把相应 ID 加入 `arms`，仍保留 `hard` 与 `full_soft`。例如 `M04` 为总温度预算、`M08` 为历史 teacher 平均。M12 应同时加入 `full_soft_sgd`，M09 需要确定性软混合控制（旧 `fixed_alpha` 使用 one-hot，不能代替）；M11 需要同噪声预算的 fresh-label 控制。完整控制清单见新版设计，部分尚待实现。配置不包含自动根据测试结果挑选方法的逻辑。
 
 修改配置后重新预检，并使用新的运行目录；**不要修改正在运行的配置、代码或数据**。相同运行目录重启会继续原截止时间，不能凭重启多获得 8 小时。
 
 ## 中断、结果和回传
 
-同一代码和配置下重新运行原命令，可以复用已生成记录和最近完整优化步；每步保存 optimizer、scaler、随机数状态和父模型哈希。源代码、数据或评测镜像变化会拒绝混合续训。最终 adapter 是本地产物，保留在各轮 `adapter.pt` 中。
+同一代码和配置下重新运行原命令，可以复用已生成记录和最近完整优化步；每步保存 optimizer、scaler、随机数状态和父模型哈希。源代码、数据或原生 Python/评分依赖身份变化会拒绝混合续训。最终 adapter 是本地产物，保留在各轮 `adapter.pt` 中。
 
 ```bash
-.venv/bin/python -m recursive_ssd.cli report
-.venv/bin/python -m recursive_ssd.cli collect
+python -m recursive_ssd.cli report
+python -m recursive_ssd.cli collect
 ```
 
 结果：
 
-- `runs/2080ti-8h/REPORT.md`：完成情况和 HumanEval+ pass@1。
-- `runs/2080ti-8h/report.json`：成对任务 bootstrap 区间、分布诊断、优化有效性。
+- `runs/2080ti-native-8h/REPORT.md`：完成情况和 HumanEval+ pass@1。
+- `runs/2080ti-native-8h/report.json`：成对任务 bootstrap 区间、分布诊断、优化有效性。
 - 每个 round 内：未经筛选的生成记录、teacher 父哈希、训练日志、原生评测结果。
-- `returns/2080ti-8h.tar.gz`：可回传的结果包，包含失败/未完成记录，排除模型权重。
+- `returns/2080ti-native-8h.tar.gz`：可回传的结果包，包含失败/未完成记录，排除模型权重。
 
 把结果包发回即可继续分析。它不会自动向 GitHub 上传你的本地文件。
 
@@ -115,3 +119,5 @@ $$q_v=\max(c p_{0v}, k\mu_v),$$
 CPU 测试中的小型随机模型和有限概率向量只是工程夹具。没有伪造 GPU 结果，也没有把它们当作新 benchmark。32 题、1 个 seed 的结果一律先标为 `INCONCLUSIVE`；更强结论需要完整对照、确认集、额外 seeds 和成本匹配。
 
 相关论文及模型/数据固定版本见 [research/SOURCES.md](research/SOURCES.md)，实验协议见 [docs/PROTOCOL.md](docs/PROTOCOL.md)，工程验证范围见 [docs/VALIDATION.md](docs/VALIDATION.md)。
+
+原生运行细节、独立评分命令和迁移说明见 [docs/NATIVE_RUNTIME.md](docs/NATIVE_RUNTIME.md)。正式 design_verified 仍为 0，等待完整基线/控制、目标 GPU 成本与协议冻结；官方参考答案检查不等于模型跑分或 GPU 资格。

@@ -1,0 +1,984 @@
+{
+  "kind": "candidate-design-draft-batch",
+  "status": "not_a_native_frozen_protocol",
+  "selected_ids": [
+    "M03",
+    "M04",
+    "M05",
+    "M01",
+    "M07",
+    "M02",
+    "M06",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15"
+  ],
+  "methods": [
+    {
+      "candidate_id": "M03",
+      "implementation_name": "floor_projection",
+      "question": "保留被截断的概率质量，是否能保留可解题目的覆盖，并优于简单混合？",
+      "baselines": [
+        "hard",
+        "full_soft",
+        "arithmetic_anchor",
+        "lower_lr"
+      ],
+      "decisive_controls": [
+        "floor_zero",
+        "arithmetic_anchor_tuned",
+        "full_soft_lr_half"
+      ],
+      "prediction": "同样的初始模型访问、训练样本和调参预算下，R3 的 pass@10 优于完整软目标及算术混合，同时 pass@1 不劣。",
+      "falsifier": "算术混合或较小步长解释全部收益；或者目标满足下限而拟合后的学生没有改善。",
+      "semantic_review": "目标下限与学生实际下限分别记录；c=0 应退化为 full_soft；不用目标空间定理声称学生有硬保证。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "TUNING",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M03.json",
+        "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M03.json",
+        "sha256": "fb3907b3df1d5f3a8ba702bb3dc36083ad11f8b2de66e1b61a3c694f14b85d3c"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M04",
+      "implementation_name": "temperature_budget",
+      "question": "累积温度变换是否足以解释递归漂移？",
+      "baselines": [
+        "full_soft",
+        "hard"
+      ],
+      "decisive_controls": [
+        "temperature_fixed_untruncated",
+        "temperature_budget_untruncated",
+        "temperature_once_then_one"
+      ],
+      "prediction": "无截断对照中，按 R 次方根分配温度减小累计目标漂移；截断主实验另检验 native pass@1/pass@10。",
+      "falsifier": "只改温度就解释主候选收益，或根式日程在真实拟合中无收益；无截断恒等式不适用于截断实验。",
+      "semantic_review": "必须分开有/无截断两个条件；相同 R、更新数；轮次本身不算独立样本。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "DECODE_CONDITIONS",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M04.json",
+        "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M04.json",
+        "sha256": "549c4e89442604f6f7afa751804fb1399dacde1774d297a67803a331ba50610d"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M05",
+      "implementation_name": "head_mass",
+      "question": "保留尾部质量和重塑头部形状，是否各有独立作用？",
+      "baselines": [
+        "full_soft",
+        "hard"
+      ],
+      "decisive_controls": [
+        "soft_current_mix",
+        "head_shape_only",
+        "mass_transfer_only"
+      ],
+      "prediction": "在相同质量转移强度下，完整方法优于分别只改头部形状/质量的对照，或揭示是哪一项起效。",
+      "falsifier": "确定性软混合给出相同或更优原生指标；所谓头部结构作用消失。",
+      "semantic_review": "固定 alpha 当前实现混合 one-hot，不能代替确定性 q=(1-a)p+a*mu；四格对照中 identity 组是已知零信号参考。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_MIX",
+        "HEAD_FACTORIAL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M05.json",
+        "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M05.json",
+        "sha256": "64555141f655b8df188e8b8b335d1ed2fe55ca57495933fe05b210fbb8415e23"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M01",
+      "implementation_name": "geometric_anchor",
+      "question": "几何锚定是否比同信息的算术锚定更有价值？",
+      "baselines": [
+        "full_soft",
+        "arithmetic_anchor"
+      ],
+      "decisive_controls": [
+        "arithmetic_same_smoothing",
+        "geometric_weight_one"
+      ],
+      "prediction": "同一平滑目标 m 与初始分布下，几何组合比算术组合改善 pass@10，并保持 pass@1。",
+      "falsifier": "优势只来自 epsilon 平滑/参考前向/更弱更新；算术组合在公平开发调参后不劣。",
+      "semantic_review": "两种组合都用 m=(1-epsilon)mu+epsilon*p0；w=1 应回到 m，不是原始截断 mu。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SMOOTHING_CONTROL",
+        "TUNING",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M01.json",
+        "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M01.json",
+        "sha256": "003dedcf0b750f33cab1961fcd3b38cadd309f8840e4437de11429607c194b9e"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M07",
+      "implementation_name": "tail_stratified",
+      "question": "精确头部加分层尾部，能否在任务质量相近时节省蒸馏成本？",
+      "baselines": [
+        "full_soft",
+        "hard"
+      ],
+      "decisive_controls": [
+        "head_exact_tail_iid",
+        "fresh_hard"
+      ],
+      "prediction": "相同 head=4、draws=4 下，分层版本减小条件尾部估计噪声；只有实测成本下降才能支持效率。",
+      "falsifier": "只有局部方差差异，原生质量/成本没有优势；当前 dense 构造比 full_soft 更慢即不能声称高效。",
+      "semantic_review": "对照保持期望目标、头部和尾部样本数相同；已有 dense 实现不推定省显存/加速。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "TAIL_IID",
+        "ANALYSIS"
+      ],
+      "decision_family": "efficiency",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M07.json",
+        "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M07.json",
+        "sha256": "19e66fc25cf2a082252593d956aecf47796ab13d55e5c6774e86a685de55e119"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M02",
+      "implementation_name": "ratio_cap",
+      "question": "控制相对初始策略的比率，是否优于普通锚定？",
+      "baselines": [
+        "M01",
+        "arithmetic_anchor",
+        "full_soft"
+      ],
+      "decisive_controls": [
+        "ratio_bound_unlimited",
+        "arithmetic_same_smoothing"
+      ],
+      "prediction": "减少极端尾部抑制时，原生覆盖改善且 pass@1 保持；与相同平滑的简单锚定比较。",
+      "falsifier": "真实学生仍严重偏移或相同成本的简单锚定不劣；只能证明目标上界。",
+      "semantic_review": "归一化后目标比率是 exp(±2B) 界；B→∞ 对应 m，不能错叫 mu。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SMOOTHING_CONTROL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M02.json",
+        "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M02.json",
+        "sha256": "53ca8642145a1d78135b6741919b2867fa49a3b0948dad90d2adba847b88d1ee"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M06",
+      "implementation_name": "head_diversity",
+      "question": "头部内部的多样性约束能否改善可解题覆盖？",
+      "baselines": [
+        "full_soft",
+        "M04"
+      ],
+      "decisive_controls": [
+        "head_retention_zero",
+        "temperature_matched_head"
+      ],
+      "prediction": "在同一截断支持内，改善 native pass@10 且不损害 pass@1。",
+      "falsifier": "只有熵/Gini 增大，native pass@10 无改善，或尾部丢失仍主导。",
+      "semantic_review": "不声称恢复支持外 token；全局温度对照需在开发数据匹配头部多样性后冻结。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "HEAD_TEMPERATURE",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M06.json",
+        "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M06.json",
+        "sha256": "72945486ccd1e116e0e6bc6312e8017b6687cbb8d874ef798f899d4ab689a6cc"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M08",
+      "implementation_name": "temporal_mean",
+      "question": "历史教师能否减少有害轮间波动，而不只是减小更新？",
+      "baselines": [
+        "full_soft"
+      ],
+      "decisive_controls": [
+        "full_soft_lr_half",
+        "temporal_current_twice",
+        "lag_only"
+      ],
+      "prediction": "R2/R3 优于当前教师、滞后教师及较小学习率；原生指标改善而非只看目标相关性。",
+      "falsifier": "较小学习率解释全部收益，或陈旧教师损害正确率。",
+      "semantic_review": "第一轮 lag 与 current 相同是身份检查；不能用 R1 声称时间集成有效；成本计入额外前向。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "TEMPORAL_CONTROLS",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M08.json",
+        "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M08.json",
+        "sha256": "6c8ef54599aad9bce6517e1fa979614c3ce78b723e461d0a9700507338dc1965"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M09",
+      "implementation_name": "disagreement_gate",
+      "question": "时间分歧是否提供了有用的位置级更新分配信息？",
+      "baselines": [
+        "full_soft",
+        "M08"
+      ],
+      "decisive_controls": [
+        "soft_current_mix",
+        "constant_mean_gate",
+        "full_soft_lr_half"
+      ],
+      "prediction": "与每个冻结批次平均 a 相同的常量门相比，位置自适应门改善原生任务指标。",
+      "falsifier": "匹配平均更新强度的常量门不劣；分歧没有额外选择价值。",
+      "semantic_review": "常量门用确定性软目标；旧 fixed_alpha 引入硬标签噪声，不是合格替代。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_MIX",
+        "MEAN_GATE",
+        "SOFT_LR",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M09.json",
+        "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M09.json",
+        "sha256": "df7b0519608ed2584fefc9a34e23d721378de202505ed389f6243f2bdf363a5b"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M10",
+      "implementation_name": "prefix_damping",
+      "question": "抑制已经被放大的路径，是否优于统一减小 loss？",
+      "baselines": [
+        "full_soft"
+      ],
+      "decisive_controls": [
+        "constant_mean_weight",
+        "full_soft_lr_half",
+        "prefix_weight_one"
+      ],
+      "prediction": "在相同平均 loss 权重下，前缀相关权重改善 pass@10 且保留 pass@1。",
+      "falsifier": "同均值常量权重或较小学习率获得相同结果；路径依赖没有必要。",
+      "semantic_review": "保留 exclusive prefix 定义；Adam 下统一 loss 缩放不严格等于学习率缩放，两个对照都要做。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "MEAN_WEIGHT",
+        "SOFT_LR",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M10.json",
+        "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M10.json",
+        "sha256": "d69bed8e42c0e2cc257d4b9a6e800a23b031a6989fc36f21a219ae374915ca32"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M11",
+      "implementation_name": "noise_allocation",
+      "question": "固定局部噪声预算内，位置分配能否优于统一缩放？",
+      "baselines": [
+        "full_soft",
+        "fresh_alpha"
+      ],
+      "decisive_controls": [
+        "fresh_alpha_budget_matched",
+        "fresh_hard"
+      ],
+      "prediction": "前缀与系数固定后独立重采样标签；在相同 Σ a_t² G(mu_t) 下分配策略优于统一 a。",
+      "falsifier": "相同预算的常量 a 或完整软目标更好；提高收益仅来自更大平均更新。",
+      "semantic_review": "统一 a=min(1,sqrt(B/sum_vt))，v_t=G(mu_t)；不能复用生成该前缀的标签去验证无偏噪声结论。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "NOISE_CONTROL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M11.json",
+        "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M11.json",
+        "sha256": "c820e8d5e8ca5b9952b43ac90896c081f844a76ceb08ea415fd968c83261c010"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M12",
+      "implementation_name": "gradient_projection",
+      "question": "方向修正是否比等幅缩步更能保留任务能力？",
+      "baselines": [
+        "full_soft_sgd"
+      ],
+      "decisive_controls": [
+        "arithmetic_anchor_sgd",
+        "sgd_norm_matched",
+        "projection_disabled"
+      ],
+      "prediction": "同一 SGD 优化器下，投影在原生正确率/覆盖上胜过同范数缩步和简单锚定。",
+      "falsifier": "SGD 对照不劣，或一阶约束在有限步中没有任务收益。",
+      "semantic_review": "不能与 AdamW 组直接归因于投影；记录投影触发率、有限步 KL 及两次反向成本。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SGD_CONTROLS",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M12.json",
+        "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M12.json",
+        "sha256": "561b013cdac813ccac5cea391b8df38064dfb132df74bf262ef89b05050c5570"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M13",
+      "implementation_name": "kl_backtrack",
+      "question": "实际步长回溯是否值得它增加的前向与拒绝成本？",
+      "baselines": [
+        "full_soft"
+      ],
+      "decisive_controls": [
+        "full_soft_lr_half",
+        "full_soft_lr_matched",
+        "backtrack_disabled"
+      ],
+      "prediction": "既在等数据/更新比较，又在等训练墙钟比较中体现原生质量优势或质量保持的成本优势。",
+      "falsifier": "更小学习率在同总时间内不劣；回溯拒绝耗尽预算；只保证检查批次上的 KL。",
+      "semantic_review": "冻结回溯次数与缩放候选；所有拒绝步、optimizer 回滚与代价都保留。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "CLOCK_CONTROL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M13.json",
+        "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M13.json",
+        "sha256": "075ce40f600b48d9a8a5fd900ddfcf8a38d946907dbafbae54826c1622a5bd91"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M14",
+      "implementation_name": "prompt_allocation",
+      "question": "用自身首位置分布分配生成预算，是否比均匀采样更有效？",
+      "baselines": [
+        "hard"
+      ],
+      "decisive_controls": [
+        "uniform_counts_weighted",
+        "allocation_without_weight_correction"
+      ],
+      "prediction": "同样 64 个训练样本和相同等题目训练目标下，非均匀分配改善原生正确率/覆盖。",
+      "falsifier": "均匀分配不劣，或改善来自改变了题目权重而非方差分配。",
+      "semantic_review": "同时保留加权/不加权消融；样本数相同不等于 token/时间相同，代理前向也记账。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "ALLOCATION_CONTROL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M14.json",
+        "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M14.json",
+        "sha256": "0e099a9bc0b7e2e7851098a58e48e939cbf9464769f5e436a73010d6c73d6bad"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    },
+    {
+      "candidate_id": "M15",
+      "implementation_name": "ancestral_exploration",
+      "question": "历史策略参与生成，是否比仅在目标中保留初始分布更有效？",
+      "baselines": [
+        "hard",
+        "arithmetic_anchor"
+      ],
+      "decisive_controls": [
+        "ancestral_mix_zero",
+        "ancestral_soft_anchor",
+        "hard_equal_clock"
+      ],
+      "prediction": "生成混合×目标锚定的 2×2 比较区分路径覆盖与目标保留，并按原生指标检查交互。",
+      "falsifier": "仅目标锚定或给 hard 相同总时间已解释收益；额外生成前向不划算。",
+      "semantic_review": "混合是逐 token 分布混合，不能当作整条轨迹重放；记录两策略前向成本。",
+      "blocker_ids": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "EXPLORATION_FACTORIAL",
+        "CLOCK_CONTROL",
+        "ANALYSIS"
+      ],
+      "decision_family": "retention",
+      "kind": "candidate-experiment-design-draft",
+      "status": "conditional_not_frozen",
+      "math_card_ref": {
+        "path": "research/cards/M15.json",
+        "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+      },
+      "selection_ref": {
+        "path": "research/selection.json",
+        "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+      },
+      "historical_implementation_ref": {
+        "path": "research/implementations/M15.json",
+        "sha256": "743d0b3e90c6bb3933ad3a1e725887eb334b02ae3e5ad8e1069ac647555a6042"
+      },
+      "current_runtime_binding": "new native-v1 source/evidence must be bound before formal protocol freeze",
+      "common_design_ref": {
+        "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+        "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+      },
+      "benchmark_contracts_ref": {
+        "path": "research/design-v2/benchmarks.json",
+        "sha256": "11c5fecc5d2fb4ba36777d272f779e48885d5c620f20852e292e6f073ef33159"
+      },
+      "complete_rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seed": 17,
+      "confirmation_seeds_proposed": [
+        23,
+        47,
+        71,
+        101,
+        131
+      ],
+      "primary_checkpoint": 3,
+      "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
+      "native_result_count": 0
+    }
+  ]
+}

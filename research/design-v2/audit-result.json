@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "design coverage, source-reference identity and exact task-ID data separation only",
+  "design_drafts": 15,
+  "human_eval_development": 32,
+  "human_eval_confirmation": 132,
+  "mbpp_plus_tasks_observed": 378,
+  "old_train_prompt_overlap": 14,
+  "new_train_prompt_overlap": 0,
+  "formal_design_verified": 0,
+  "gpu_results_verified": 0
+}

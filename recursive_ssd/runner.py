@@ -12,7 +12,7 @@ import time
 import traceback
 import torch
 from .data import MODEL_REV, verify_data
-from .evaluation import docker_info, official_score, paired_interval
+from .evaluation import evaluator_info, official_score, paired_interval
 from .io import (Deadline, DeadlineReached, atomic_json, digest, event, jsonl,
                  object_hash, read_json, read_jsonl, source_manifest, stable_seed)
 from .methods import Decode, allocate_prompts, decoder, gini, kl, name, round_decode
@@ -181,7 +181,7 @@ def preflight(config, artifacts, output):
     validate_config(config)
     verify_data(artifacts,config)
     info=hardware()
-    image=docker_info()
+    evaluator=evaluator_info()
     output=Path(output)
     output.mkdir(parents=True,exist_ok=True)
     torch.manual_seed(config["seed"])
@@ -200,10 +200,11 @@ def preflight(config, artifacts, output):
     peak=torch.cuda.max_memory_allocated()
     if peak>info["vram_bytes"]*.93:
         raise RuntimeError("insufficient VRAM headroom; reduce sequence length/rank in a new frozen configuration")
-    report={"hardware":info,"eval_image_id":image,"peak_allocated_bytes":peak,
+    report={"hardware":info,"evaluator":evaluator,"peak_allocated_bytes":peak,
         "peak_reserved_bytes":torch.cuda.max_memory_reserved(),
         "probe":"engineering resource canary on a real MBPP prompt; no accuracy measurement",
-        "config_sha256":object_hash(config),"status":"passed"}
+        "config_sha256":object_hash(config),
+        "source_sha256":source_manifest(Path(__file__).resolve().parents[1])["sha256"],"status":"passed"}
     atomic_json(output/"preflight.json",report)
     return report
 
@@ -218,8 +219,8 @@ def worker(run, artifacts):
         raise ValueError("source changed since run was frozen; do not mix implementations on resume")
     verify_data(artifacts,config)
     hardware()
-    if docker_info()!=state["eval_image_id"]:
-        raise ValueError("evaluator image identity changed")
+    if evaluator_info()!=state.get("evaluator"):
+        raise ValueError("native evaluator identity changed; legacy runs need a separate versioned run")
     # Stop signals leave the last atomic optimizer-step checkpoint intact.
     def stop(_signal,_frame):
         raise DeadlineReached("supervisor requested bounded stop")
@@ -227,7 +228,7 @@ def worker(run, artifacts):
     torch.manual_seed(config["seed"])
     torch.cuda.manual_seed_all(config["seed"])
     policy=Policy.load(config["lora_rank"])
-    # Qualify exact scorer on a small set of actual official tasks, inside Docker.
+    # Qualify the exact official native scorer on released canonical solutions.
     qualification=run/"qualification"
     qualification.mkdir(exist_ok=True)
     qproblems=qualification/"problems.jsonl"

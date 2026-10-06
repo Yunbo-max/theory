@@ -1,3 +1,5 @@
+> 历史设计记录：原容器执行约束已由用户的原生运行要求取代。当前运行说明见 [NATIVE_RUNTIME.md](NATIVE_RUNTIME.md)，完整条件实验设计见 [G01](../research/design-v2/G01_EXPERIMENT_DESIGN.md)。下文保留原始方案语境，不是当前容器启动指令。
+
 # Recursive SSD: bounded, label-free pilot
 
 User-authorized delivery: implement recursive SSD and mathematically motivated alternatives in `Yunbo-max/theory`; prepare a single RTX 2080 Ti (11 GiB) run limited to eight hours. The user launches the GPU run. No remote GPU has been connected or scheduled.

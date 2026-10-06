@@ -1,0 +1,32 @@
+{
+  "kind": "workflow-audit",
+  "skill": "research-autopilot",
+  "source_hashes": {
+    "SKILL.md": "984f2f101c2070ab9148cd7cecee7339acf73fa8279562cf06efabebbbf5f8fd",
+    "references/full-validation-and-review.md": "87c34489471d8904174d62f79a554848e63b7712f0b861f9ef08a8ad3611125a",
+    "references/method-verification.md": "fc0dfbcbab5595a6f7da4f4237278d0ec7484e5da805716520951a24b911e4c8",
+    "references/rolling-research-batches.md": "4fef965c484755f311115545aef845a8997d445f988cb52c87ed6cc389d06d51",
+    "references/gpu-host-runtime.md": "1f780d15ec7e3f00b5ded725aa5d69ab9f1fb3b2f95a9ce9f84b422b5396b878",
+    "references/research-quality-bar.md": "cb4e4522337f6815f3c53f5e0c193783ada6a492e652c6531e90b30cb580c409",
+    "references/native-evaluation.md": "6262d90670f1ca667669f4b208a44df6aab748956b2360527e94f80b500c9a80",
+    "references/statistics-and-claims.md": "12322da38b2ae3fd6cc4b10171eba245d7ce26affcc76f17590537087443a3c7",
+    "references/development-and-execution.md": "f0400f7897ee21695e13e8664a8cbd661aaf67d0565b04dcecd3177610f8b1bd"
+  },
+  "reviewer": "same-context assistant; no independent subagents",
+  "entry": "M audit/repair; reuse prior pool and selection",
+  "design_drafts": 15,
+  "formal_design_verified": 0,
+  "gpu_runs_observed": 0,
+  "mathematical_pool": 20,
+  "selected": 15,
+  "scientific_outcomes_verified": 0,
+  "findings": [
+    "Per-method experiment controls absent from original default queue",
+    "lower_lr is hard, not soft, and fixed_alpha uses hard labels",
+    "14/32 old training prompts overlap official MBPP+",
+    "Target-host timing/VRAM and complete native baseline evidence missing",
+    "Original implementation certificates are historical; native source revision needs child code bindings"
+  ],
+  "remote_gpu_connected": false,
+  "authorization": "GitHub delivery authorized in conversation; one user-run GPU and original eight-hour cap; no new paid compute"
+}

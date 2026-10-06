@@ -1,0 +1,124 @@
+{
+  "kind": "benchmark-readiness-audit",
+  "as_of": "2026-10-06T17:13:38.835442+00:00",
+  "benchmarks": [
+    {
+      "id": "HE",
+      "name": "HumanEval+",
+      "revision": "v0.1.10",
+      "full_count_observed": 164,
+      "development_count": 32,
+      "confirmation_count": 132,
+      "manifest_ref": {
+        "path": "research/design-v2/data/humaneval-manifest.json",
+        "sha256": "64ee6c321144096048cd5d7df6ada30fc289178389fee529bb67713e521f9c5b"
+      },
+      "scorer": "EvalPlus 0.3.1",
+      "scorer_commit": "e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2",
+      "source": "https://github.com/evalplus/humanevalplus_release/releases/download/v0.1.10/HumanEvalPlus.jsonl.gz",
+      "primary": "pass@1",
+      "coverage": "pass@10",
+      "sampling_v2": {
+        "n": 10,
+        "temperature": 0.8,
+        "top_p": 0.95,
+        "top_k": 0
+      },
+      "scope": "native function-code correctness and task coverage, not semantic solution diversity",
+      "integration": "existing dev-only runner; v2 confirmation/analysis pending"
+    },
+    {
+      "id": "MB",
+      "name": "MBPP+",
+      "revision": "v0.2.0",
+      "full_count_observed": 378,
+      "manifest_ref": {
+        "path": "research/design-v2/data/mbpp-plus-audit.json",
+        "sha256": "ebddc62e44f850f2590e53ef220b200ea918b895ec0c2d1187dfcd0979e7fd66"
+      },
+      "scorer": "EvalPlus 0.3.1",
+      "scorer_commit": "e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2",
+      "source": "https://github.com/evalplus/mbppplus_release/releases/download/v0.2.0/MbppPlus.jsonl.gz",
+      "primary": "pass@1",
+      "coverage": "pass@10",
+      "sampling_v2": {
+        "n": 10,
+        "temperature": 0.8,
+        "top_p": 0.95,
+        "top_k": 0
+      },
+      "scope": "external tasks only for the clean-training lineage; old adapters have prompt exposure",
+      "integration": "native upstream supports MBPP; project adapter not yet implemented"
+    },
+    {
+      "id": "LCB",
+      "name": "LiveCodeBench code_generation_lite",
+      "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+      "release": "release_v5",
+      "published_count": 880,
+      "full_count_observed": null,
+      "observed_native_row_ref": {
+        "path": "research/design-v2/data/lcb-native-row-audit.json",
+        "sha256": "d4e1878d66a7561792de7a763e4f64dd99c3fb857c02d1ce337f4631168c29ab"
+      },
+      "dataset": "livecodebench/code_generation_lite",
+      "scorer_commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+      "inspected_files": [
+        "README.md",
+        "lcb_runner/benchmarks/code_generation.py",
+        "lcb_runner/runner/custom_evaluator.py",
+        "lcb_runner/evaluation/compute_code_generation_metrics.py"
+      ],
+      "loader_definition_sha256": "973e37989fed0f069c8246776e918d0d96600d64a3730cd6242dd76bccf2f7bb",
+      "release_files": [
+        "test.jsonl",
+        "test2.jsonl",
+        "test3.jsonl",
+        "test4.jsonl",
+        "test5.jsonl"
+      ],
+      "primary": "pass@1",
+      "coverage": "pass@5",
+      "sampling_v2": {
+        "n": 10,
+        "temperature": 0.2,
+        "top_p": "pin from inspected parser before freeze",
+        "max_tokens": "calibrate native contest-code length before freeze"
+      },
+      "scope": "external contest programming boundary; release date does not prove uncontaminated pretraining",
+      "integration": "official native custom evaluator read; full task inventory, model prompt/length/parser and dependency qualification pending"
+    }
+  ],
+  "models": [
+    {
+      "id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "role": "primary",
+      "gpu_qualified": false
+    },
+    {
+      "id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+      "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+      "role": "conditional within-family scale boundary",
+      "weights_downloaded": false,
+      "gpu_qualified": false
+    }
+  ],
+  "training": {
+    "source_dataset": "google-research-datasets/mbpp",
+    "source_revision": "4bb6404fdc6cacfda99d4ac4205087b89d32030c",
+    "new_prompt_ref": {
+      "path": "research/design-v2/data/train_prompts-clean-v2.jsonl",
+      "sha256": "a9f7642d10f57d03abc77b55e46e8158f5cb2e1b9fd5335baf4d4ecc41e6092f"
+    },
+    "audit_ref": {
+      "path": "research/design-v2/data/clean-training-manifest.json",
+      "sha256": "d4c72618c4ba7bf4f607b0be6c277ffe7ea120dc4ac296652be0273a7ea36612"
+    },
+    "old_training_mbpp_plus_overlap": 14,
+    "new_exact_id_overlap": 0,
+    "near_duplicate_and_pretraining_audit": "pending",
+    "must_restart_from_base": true
+  },
+  "read_scope": "actual official data/schema/code inspection; no model benchmark results or original-paper reproduction claimed"
+}

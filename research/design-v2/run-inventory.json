@@ -1,0 +1,503 @@
+{
+  "kind": "finite_comparison_backlog",
+  "executable": false,
+  "method_bundles": [
+    {
+      "candidate_id": "M03",
+      "required_arms": [
+        "base",
+        "M03",
+        "hard",
+        "full_soft",
+        "arithmetic_anchor",
+        "lower_lr",
+        "floor_zero",
+        "arithmetic_anchor_tuned",
+        "full_soft_lr_half"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "TUNING",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M04",
+      "required_arms": [
+        "base",
+        "M04",
+        "full_soft",
+        "hard",
+        "temperature_fixed_untruncated",
+        "temperature_budget_untruncated",
+        "temperature_once_then_one"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "DECODE_CONDITIONS",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M05",
+      "required_arms": [
+        "base",
+        "M05",
+        "full_soft",
+        "hard",
+        "soft_current_mix",
+        "head_shape_only",
+        "mass_transfer_only"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_MIX",
+        "HEAD_FACTORIAL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M01",
+      "required_arms": [
+        "base",
+        "M01",
+        "full_soft",
+        "arithmetic_anchor",
+        "arithmetic_same_smoothing",
+        "geometric_weight_one"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SMOOTHING_CONTROL",
+        "TUNING",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M07",
+      "required_arms": [
+        "base",
+        "M07",
+        "full_soft",
+        "hard",
+        "head_exact_tail_iid",
+        "fresh_hard"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "TAIL_IID",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M02",
+      "required_arms": [
+        "base",
+        "M02",
+        "M01",
+        "arithmetic_anchor",
+        "full_soft",
+        "ratio_bound_unlimited",
+        "arithmetic_same_smoothing"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SMOOTHING_CONTROL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M06",
+      "required_arms": [
+        "base",
+        "M06",
+        "full_soft",
+        "M04",
+        "head_retention_zero",
+        "temperature_matched_head"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "HEAD_TEMPERATURE",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M08",
+      "required_arms": [
+        "base",
+        "M08",
+        "full_soft",
+        "full_soft_lr_half",
+        "temporal_current_twice",
+        "lag_only"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "TEMPORAL_CONTROLS",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M09",
+      "required_arms": [
+        "base",
+        "M09",
+        "full_soft",
+        "M08",
+        "soft_current_mix",
+        "constant_mean_gate",
+        "full_soft_lr_half"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_MIX",
+        "MEAN_GATE",
+        "SOFT_LR",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M10",
+      "required_arms": [
+        "base",
+        "M10",
+        "full_soft",
+        "constant_mean_weight",
+        "full_soft_lr_half",
+        "prefix_weight_one"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "MEAN_WEIGHT",
+        "SOFT_LR",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M11",
+      "required_arms": [
+        "base",
+        "M11",
+        "full_soft",
+        "fresh_alpha",
+        "fresh_alpha_budget_matched",
+        "fresh_hard"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "NOISE_CONTROL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M12",
+      "required_arms": [
+        "base",
+        "M12",
+        "full_soft_sgd",
+        "arithmetic_anchor_sgd",
+        "sgd_norm_matched",
+        "projection_disabled"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SGD_CONTROLS",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M13",
+      "required_arms": [
+        "base",
+        "M13",
+        "full_soft",
+        "full_soft_lr_half",
+        "full_soft_lr_matched",
+        "backtrack_disabled"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "SOFT_LR",
+        "CLOCK_CONTROL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M14",
+      "required_arms": [
+        "base",
+        "M14",
+        "hard",
+        "uniform_counts_weighted",
+        "allocation_without_weight_correction"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "ALLOCATION_CONTROL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    },
+    {
+      "candidate_id": "M15",
+      "required_arms": [
+        "base",
+        "M15",
+        "hard",
+        "arithmetic_anchor",
+        "ancestral_mix_zero",
+        "ancestral_soft_anchor",
+        "hard_equal_clock"
+      ],
+      "rounds": [
+        1,
+        2,
+        3
+      ],
+      "development_seeds": [
+        17
+      ],
+      "eval_tasks": 32,
+      "samples_per_task_v2": 10,
+      "estimated_seconds": null,
+      "state": "conditional",
+      "dependencies": [
+        "NATIVE",
+        "PARENT",
+        "COST",
+        "EXPLORATION_FACTORIAL",
+        "CLOCK_CONTROL",
+        "ANALYSIS",
+        "PROTOCOL"
+      ]
+    }
+  ],
+  "published_comparison_bundle": {
+    "family": "GKD-inspired own-policy",
+    "losses": [
+      "FKL",
+      "RKL",
+      "JSD_0.5"
+    ],
+    "rollout_schedules": [
+      "round_cache",
+      "per_update_student"
+    ],
+    "additional_information": false,
+    "implementation_status": "pending"
+  },
+  "shared_control_rule": "Reuse only exact data/model/code/config/seed/condition/round/resource-compatible checkpoints; no cross-condition or cross-runtime mixing.",
+  "completion_count_promised": null
+}

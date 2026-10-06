@@ -1,0 +1,30 @@
+{
+  "source": "https://huggingface.co/datasets/livecodebench/code_generation_lite/resolve/0fe84c3912ea0c4d4a78037083943e8f0c4dd505/test5.jsonl",
+  "dataset_revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+  "file": "test5.jsonl",
+  "source_row_sha256": "2354619bf7d370f2f238c67b9fde0b21165ca1f1efe661dc28a40e58f9b167da",
+  "question_id": "abc374_c",
+  "question_title": "Separated Lunch",
+  "contest_date": "2024-10-05T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "medium",
+  "field_names": [
+    "question_title",
+    "question_content",
+    "platform",
+    "question_id",
+    "contest_id",
+    "contest_date",
+    "starter_code",
+    "difficulty",
+    "public_test_cases",
+    "private_test_cases",
+    "metadata"
+  ],
+  "prompt_chars": 1818,
+  "public_tests_representation": "str",
+  "private_tests_representation": "str",
+  "private_tests_deserialized": false,
+  "scorer_executed": false,
+  "scope": "one actual native row inspected for schema; no benchmark output or score inspected; full inventory remains unverified"
+}

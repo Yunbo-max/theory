@@ -1,0 +1,9 @@
+Computing expected output...
+Expected outputs computed in 0.01s
+Reading samples...
+0it [00:00, ?it/s]2it [00:00, 148.69it/s]
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 32.47it/s]
+humaneval (base tests)
+pass@1:	1.000
+humaneval+ (base + extra tests)
+pass@1:	1.000

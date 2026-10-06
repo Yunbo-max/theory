@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/workspace/scratch/7c897614ec09/verify-env/bin/python",
+    "-I",
+    "/workspace/scratch/7c897614ec09/theory/recursive_ssd/native_score.py",
+    "--problems",
+    "/workspace/scratch/7c897614ec09/theory/artifacts/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/inputs/problems.jsonl",
+    "--output",
+    "/workspace/scratch/7c897614ec09/theory/artifacts/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7",
+    "--raw",
+    "/workspace/scratch/7c897614ec09/theory/artifacts/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/inputs/raw.jsonl"
+  ],
+  "cwd": "/workspace/scratch/7c897614ec09/theory/artifacts/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7",
+  "started_epoch": 1791306989.6612747,
+  "ended_epoch": 1791307010.6013072,
+  "status": "completed",
+  "returncode": 0,
+  "timeout_seconds": 579.9409222602844,
+  "backend": "native_python",
+  "environment_scope": "allowlisted process environment; no GPU; not a security sandbox"
+}

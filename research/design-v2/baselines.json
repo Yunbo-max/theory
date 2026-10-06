@@ -1,0 +1,47 @@
+{
+  "existing": {
+    "hard": "one-hot raw own-policy recursive SSD adaptation; not exact Apple full-scale reproduction",
+    "full_soft": "CE against transformed round-frozen teacher distribution mu; a forward-KL-family baseline",
+    "arithmetic_anchor": "q=(1-c)mu+c*p0",
+    "lower_lr": "HARD target with half learning rate; not a full-soft learning-rate control",
+    "fixed_data": "hard-target continuous training on round-one generated records",
+    "fixed_alpha": "q=(1-a)p+a*one_hot(rollout_label); not deterministic soft mixing",
+    "fresh_alpha": "q=(1-a)p+a*one_hot(fresh independent draw from mu)",
+    "full_soft_sgd": "full-soft objective with SGD, comparator for M12"
+  },
+  "mandatory_published": {
+    "SSD": {
+      "status": "source_inspected; generation/evaluation released; local LoRA trainer is independent adaptation",
+      "repo": "https://github.com/apple-aiml-research/ml-ssd",
+      "commit": "2637d2021f1bc523385b48a1f88ea9aa4812b0a9"
+    },
+    "GKD": {
+      "status": "paper and maintainer code inspected; matched self-policy FKL/RKL/JSD and refresh factors unimplemented",
+      "paper": "https://arxiv.org/html/2306.13649v3",
+      "code": "https://github.com/huggingface/trl/blob/e765a16e4293ae7fb083846398782db0b0429879/trl/experimental/gkd/gkd_trainer.py",
+      "target": "mu_eps=(1-.02)*mu+.02*p_round; same full support for all three divergences",
+      "loss_factor": [
+        "forward_KL",
+        "reverse_KL",
+        "JSD_beta_0.5"
+      ],
+      "rollout_factor": [
+        "cached_each_round",
+        "current_student_each_update"
+      ],
+      "teacher": "frozen round-parent; same prefix; no teacher/rollout gradient",
+      "budget": "same 32 prompts, 64 sequences, 16 accumulation groups/round; report realized tokens and time; per-update schedule generates 4 new sequences before each group",
+      "identity_control": "identical untransformed deterministic teacher/student gives zero initial FKL gradient; not an improvement arm",
+      "classification": "GKD-inspired self-policy adaptation, not original-teacher reproduction"
+    },
+    "CRISP": {
+      "status": "related iterative self-policy work in prior source review; task-matched port, full same-setting code audit and qualification pending",
+      "paper": "https://arxiv.org/html/2603.05433v7",
+      "role": "closest-work and context/prompt-asymmetry comparison; no claim of beating it before a qualified matched implementation"
+    },
+    "stronger_teacher": {
+      "status": "excluded from equal-information primary family; optional additional-information reference only",
+      "reason": "changes access to task knowledge; no external labels/teacher in strict self-policy family"
+    }
+  }
+}

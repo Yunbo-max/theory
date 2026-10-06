@@ -4,6 +4,7 @@ Run after scripts/verify_local.py and after a source snapshot has been committed
 This emits no native experiment PASS and never turns a CPU check into GPU evidence.
 """
 from datetime import datetime, timezone
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -26,7 +27,12 @@ def put(path,obj):
 
 
 def main():
-    checks=read_json(ROOT/"research/verification/engineering-checks.json")
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--output-root",default="research/native-v1")
+    args=parser.parse_args()
+    base=ROOT/args.output_root
+    verification=base/"verification"
+    checks=read_json(verification/"engineering-checks.json")
     if any(c["exit_code"] for c in checks["checks"]):
         raise SystemExit("Actual software checks did not pass")
     if checks["source"]["sha256"]!=source_manifest(ROOT)["sha256"]:
@@ -35,14 +41,15 @@ def main():
     tree=subprocess.check_output(["git","rev-parse","HEAD^{tree}"],cwd=ROOT,text=True).strip()
     listing=subprocess.check_output(["git","ls-tree","-rz","HEAD"],cwd=ROOT)
     version=hashlib.sha256(listing).hexdigest()
-    source_files=[*sorted((ROOT/"recursive_ssd").glob("*.py")),ROOT/"docker/score.py",ROOT/"docker/Dockerfile",
+    source_files=[*sorted((ROOT/"recursive_ssd").glob("*.py")),ROOT/"pyproject.toml",
+        *sorted((ROOT/"scripts").glob("*.sh")),
         ROOT/"configs/2080ti_8h.json",ROOT/"recursive_ssd/templates/self_distillation_prompt_function.j2"]
     for path in source_files:
         committed=subprocess.check_output(["git","show",f"HEAD:{path.relative_to(ROOT)}"],cwd=ROOT)
         if committed!=path.read_bytes():
             raise SystemExit(f"Uncommitted source: {path}")
     refs=[ref(p) for p in source_files]
-    identity=put(ROOT/"research/verification/source-identity.json",{
+    identity=put(verification/"source-identity.json",{
         "git_commit":commit,"git_tree":tree,"git_tree_digest":version,
         "digest_definition":"SHA256 of exact git ls-tree -rz <source-commit> bytes",
         "tree_listing_hex":listing.hex(),"method_code_refs":refs,
@@ -81,17 +88,17 @@ def main():
                 "rationale":s["statement"]+". The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."} for s in card["derivation_steps"]],
             "software_checks":check_records,
             "limits":"CPU engine checks only; mathematical special cases are tested where tractable. No full model GPU run, independent review or empirical method verdict."}
-        pr=put(ROOT/f"research/implementations/{cid}.json",packet)
+        pr=put(base/f"implementations/{cid}.json",packet)
         rationales={"math_to_code":"Reviewed "+locations[cid]+" against "+card["method_expression"]+". Frozen references, completion masks and conditional scope are retained; see mapped statements for limitations.",
             "software_checks":"Actual pytest suite, dependency check, compilation, CLI and shell checks passed. Tests include target constraints, all-candidate backward passes, tiny-model recursion, optimizer/resume paths and inventory checks. This is an engineering scope, not native benchmark evidence.",
             "actual_code_identity":"Source files match committed bytes at "+commit+". Full source tree listing and SHA256 plus code-file hashes bind the review; later files added here are evidence-only."}
         review={"kind":"method-review","version":"1.0.0","subject_id":cid,"scope":"code",
             "artifact_ref":pr,"reviewer":"same-context assistant review; not independent",
             "reviewed_at":timestamp,"outcome":"verified","checks":{
-                k:{"status":"verified","rationale":v,"evidence_refs":[pr,identity,ref(ROOT/"research/verification/engineering-checks.json")]} for k,v in rationales.items()}}
-        rr=put(ROOT/f"research/reviews/{cid}-code.json",review)
+                k:{"status":"verified","rationale":v,"evidence_refs":[pr,identity,ref(verification/"engineering-checks.json")]} for k,v in rationales.items()}}
+        rr=put(base/f"reviews/{cid}-code.json",review)
         entry.update(implementation_ref=pr,code_review_ref=rr)
-    put(ROOT/"research/implementation-batch.json",batch)
+    put(base/"implementation-batch.json",batch)
     print(json.dumps({"source_commit":commit,"selected_implementations":len(selected),"scope":"CPU engineering review only"}))
 
 

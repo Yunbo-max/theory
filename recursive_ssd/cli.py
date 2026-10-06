@@ -14,7 +14,7 @@ from .io import atomic_json, digest, event, object_hash, read_json, source_manif
 
 def launch(args):
     from .data import verify_data
-    from .evaluation import docker_info
+    from .evaluation import evaluator_info
     from .runner import hardware, report, validate_config
     config=validate_config(read_json(args.config))
     run=Path(args.run_dir).resolve()
@@ -32,6 +32,10 @@ def launch(args):
             raise RuntimeError("run preflight for this exact configuration first")
         if preflight["hardware"]["name"]!=hardware_info["name"]:
             raise RuntimeError("GPU differs from preflight")
+        evaluator=evaluator_info()
+        source=source_manifest(Path(__file__).resolve().parents[1])
+        if preflight.get("evaluator")!=evaluator or preflight.get("source_sha256")!=source["sha256"]:
+            raise RuntimeError("native environment/source differs from preflight; rerun preflight")
         if not 0<args.hours<=8:
             raise ValueError("this authorization caps each run window at eight hours")
         start=datetime.fromisoformat(args.start_at).timestamp() if args.start_at else time.time()
@@ -41,11 +45,13 @@ def launch(args):
             state=read_json(run/"run.json")
             if state["config"]!=config or state["artifacts_manifest_sha"]!=digest(artifacts/"manifest.json"):
                 raise ValueError("resume config/data differs from frozen run")
+            if state.get("evaluator")!=evaluator or state["source"]["sha256"]!=source["sha256"]:
+                raise ValueError("resume source/native evaluator differs; preserve the original run and deadline")
             start=state["start_epoch"]
         else:
             state={"config":config,"start_epoch":start,"end_epoch":start+args.hours*3600,
                 "hours":args.hours,"hardware":hardware_info,"artifacts_manifest_sha":digest(artifacts/"manifest.json"),
-                "eval_image_id":docker_info(),"source":source_manifest(Path(__file__).resolve().parents[1]),
+                "evaluator":evaluator,"source":source,"runtime_version":"native-v1",
                 "scientific_gate_status":"PENDING native run; no PASS asserted"}
             atomic_json(run/"run.json",state)
         while time.time()<start:
@@ -77,14 +83,6 @@ def launch(args):
             else:
                 if code:
                     event(run,"worker_failed",returncode=code,log="worker.log")
-            finally:
-                # Remove only evaluator containers carrying this run's unique label,
-                # even if the worker was killed before its own cleanup completed.
-                stale=subprocess.run(["docker","ps","-aq","--filter",f"label=recursive-ssd.run={run_id}"],
-                    text=True,capture_output=True,timeout=5)
-                ids=stale.stdout.split()
-                if ids:
-                    subprocess.run(["docker","rm","-f",*ids],capture_output=True,timeout=5)
         report(run)
         print(f"Saved {run/'REPORT.md'}; return code {code}.")
         if code and code not in (-signal.SIGTERM,-signal.SIGKILL):
@@ -106,21 +104,23 @@ def collect(run, output):
 def main():
     parser=argparse.ArgumentParser(description="Recursive self-policy distillation pilot")
     sub=parser.add_subparsers(dest="command",required=True)
-    for command in ("prepare","preflight","run","worker","report","collect"):
+    for command in ("prepare","qualify","preflight","run","worker","report","collect"):
         p=sub.add_parser(command)
         if command in {"prepare","preflight","run"}:
             p.add_argument("--config",default="configs/2080ti_8h.json")
-        if command in {"prepare","preflight","run","worker"}:
+        if command in {"prepare","qualify","preflight","run","worker"}:
             p.add_argument("--artifacts",default="artifacts")
         if command in {"run","worker","report","collect"}:
-            p.add_argument("--run-dir",default="runs/2080ti-8h")
+            p.add_argument("--run-dir",default="runs/2080ti-native-8h")
+        if command=="qualify":
+            p.add_argument("--output",default="artifacts/native-qualification")
         if command=="prepare":
             p.add_argument("--skip-model",action="store_true",help="data-only preparation; insufficient for GPU run")
         if command=="run":
             p.add_argument("--hours",type=float,default=8)
             p.add_argument("--start-at",help="ISO timestamp with timezone; otherwise start now")
         if command=="collect":
-            p.add_argument("--output",default="returns/2080ti-8h.tar.gz")
+            p.add_argument("--output",default="returns/2080ti-native-8h.tar.gz")
     args=parser.parse_args()
     if args.command=="prepare":
         from .data import prepare
@@ -128,6 +128,19 @@ def main():
         prepare(args.artifacts,validate_config(read_json(args.config)),not args.skip_model)
         print("Pinned prompt-only train data and official benchmark prepared." if args.skip_model else
               "Pinned prompt-only train data, official benchmark and model prepared.")
+    elif args.command=="qualify":
+        from .evaluation import official_score
+        from .io import Deadline, jsonl, read_jsonl
+        output=Path(args.output)
+        output.mkdir(parents=True,exist_ok=True)
+        problems=read_jsonl(Path(args.artifacts)/"HumanEvalPlus-dev.jsonl")[:2]
+        if len(problems)!=2:
+            raise ValueError("qualification requires two released development tasks")
+        path=output/"problems.jsonl"
+        jsonl(path,problems)
+        result=official_score(None,path,output,1,Deadline(time.time()+600),qualify=True)
+        print(json.dumps({"status":"passed","backend":"native_python","task_ids":list(result["per_task"]),
+                          "scope":"official reference-solution scorer check; not model accuracy or GPU readiness"}))
     elif args.command=="preflight":
         from .runner import preflight
         print(json.dumps(preflight(read_json(args.config),Path(args.artifacts),Path(args.artifacts)/"preflight"),indent=2))

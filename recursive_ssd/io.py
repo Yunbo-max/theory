@@ -81,7 +81,7 @@ def event(folder, kind, **fields):
 def source_manifest(root):
     root=Path(root)
     paths=[*root.glob("recursive_ssd/*.py"),*root.glob("configs/*.json"),
-           *root.glob("docker/*"),*root.glob("scripts/*.sh"),
+           *root.glob("scripts/*.sh"),
            *root.glob("recursive_ssd/templates/*"),root/"pyproject.toml"]
     files={str(p.relative_to(root)):digest(p) for p in sorted(paths) if p.is_file()}
     return {"files":files,"sha256":object_hash(files)}

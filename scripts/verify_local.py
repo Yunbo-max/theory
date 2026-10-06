@@ -1,5 +1,6 @@
 """Record reproducible engineering evidence; never declares scientific success."""
 from datetime import datetime, timezone
+import argparse
 import importlib.metadata
 import json
 from pathlib import Path
@@ -13,13 +14,16 @@ from recursive_ssd.io import atomic_json, digest, read_json, source_manifest
 
 
 def main():
-    out=ROOT/"research/verification"
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--output",default="research/native-v1/verification")
+    args=parser.parse_args()
+    out=ROOT/args.output
     out.mkdir(parents=True,exist_ok=True)
     commands=[[sys.executable,"-m","pytest","-q"],
         [sys.executable,"-m","pip","check"],
-        [sys.executable,"-m","compileall","-q","recursive_ssd","scripts","tests","docker/score.py"],
+        [sys.executable,"-m","compileall","-q","recursive_ssd","scripts","tests"],
         [sys.executable,"-m","recursive_ssd.cli","--help"],
-        ["bash","-n","scripts/setup.sh","scripts/run_8h.sh"]]
+        ["bash","-n","scripts/setup.sh","scripts/run_8h.sh","scripts/python_env.sh"]]
     checks=[]
     for i,command in enumerate(commands):
         result=subprocess.run(command,cwd=ROOT,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
@@ -33,11 +37,11 @@ def main():
             raise SystemExit(f"Check failed: {command}; see {log}")
     environment={"python":platform.python_version(),"platform":platform.platform(),
         "packages":{d.metadata["Name"]:d.version for d in importlib.metadata.distributions()},
-        "device_scope":"CPU; no CUDA device or Docker daemon available in authoring workspace"}
+        "device_scope":"CPU; no target CUDA GPU available; official native scorer qualification is a separate retained check"}
     atomic_json(out/"environment.json",environment)
     atomic_json(out/"engineering-checks.json",{"checked_at":datetime.now(timezone.utc).isoformat(),
         "source":source_manifest(ROOT),"checks":checks,"log_path_aliases":["<PROJECT>","<VERIFY_ENV>"],
-        "scope":"engineering only; GPU, native sandbox replay and scientific outcomes pending"})
+        "scope":"engineering only; GPU and scientific method outcomes pending"})
     print(json.dumps({"checks":len(checks),"status":"passed","scope":"engineering only"}))
 
 

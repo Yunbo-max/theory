@@ -1,0 +1,60 @@
+{
+  "original_root": "/workspace/scratch/7c897614ec09/theory/artifacts/native-sanitizer-qualification",
+  "files": [
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/problems.jsonl",
+      "sha256": "d772944271551698ad440b50de9247b6e26584b6455602f196187eacb88bb75a"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/raw-whitespace.jsonl",
+      "sha256": "57c01bebb5e23792c4c8b62cddbf41b2d5776db53b9670aab8df2cfb4386ba53"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/raw.jsonl",
+      "sha256": "8462f65f361fda3ee29dcafd94b6236161d0424fb278a8213c41d68e4ca4bea6"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/metrics.json",
+      "sha256": "e0e44975a73d156f46ad79d768ee8aaae733d952c47a059e08c6193a633f377a"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/evaluator.log",
+      "sha256": "cdaf6942d4f3fa6f9410acf4aab8bc600b7d2bfc733264e1b118d2568cf58076"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/execution.json",
+      "sha256": "81081aa532442ef9a1429eb2d545769f59785da6931a3a69a61e0bc427e7ec75"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/inputs/problems.jsonl",
+      "sha256": "d772944271551698ad440b50de9247b6e26584b6455602f196187eacb88bb75a"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/inputs/raw.jsonl",
+      "sha256": "8462f65f361fda3ee29dcafd94b6236161d0424fb278a8213c41d68e4ca4bea6"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/samples.jsonl",
+      "sha256": "d951e985f00c23485c7424d65d0966b52a028ef5a575636b180fc2115266b86e"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native/attempt-2cc2f294a1e7/samples_eval_results.json",
+      "sha256": "5c51a391ba42659101852e70bf5da23d3e4d73384074e0bdb0491573354e2f43"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/native_receipt.json",
+      "sha256": "4fb325efa54e648ec1d5714d940194409a62fdcc0710526431d87df1b29bde08"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/scoring/samples_eval_results.json",
+      "sha256": "aa2f829a36d87b8fd846e3b00ea07c974cf21716443d5487d2e54d1a6b1dde3f"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/verification.json",
+      "sha256": "3c4f65553bcadc9b937a702f5ddf01f11ed5897fa574dfb7221a463b8085e2c5"
+    }
+  ],
+  "transformations": "none; exact source bytes; caches excluded",
+  "scope": "released official reference code only, not model-generated benchmark scores",
+  "intentional_whitespace_fixture": "raw-whitespace.jsonl retains an added terminal blank line to prove that changed input bytes invalidate a cached result. Do not normalize its bytes."
+}

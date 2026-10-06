@@ -1,0 +1,43 @@
+{
+  "original_root": "/workspace/scratch/7c897614ec09/theory/artifacts/native-cpu-qualification",
+  "files": [
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/metrics.json",
+      "sha256": "e0e44975a73d156f46ad79d768ee8aaae733d952c47a059e08c6193a633f377a"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native/attempt-a9657232c119/evaluator.log",
+      "sha256": "85473eb40322336996455f6ca58184f39fe19a05bd994cbb40dfe2916c175be4"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native/attempt-a9657232c119/execution.json",
+      "sha256": "a9cefe08a485efb294d22451b15300840d136a7d2249a7ee6aaceaa017670391"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native/attempt-a9657232c119/inputs/problems.jsonl",
+      "sha256": "d772944271551698ad440b50de9247b6e26584b6455602f196187eacb88bb75a"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native/attempt-a9657232c119/samples.jsonl",
+      "sha256": "ba8a8d22236c319bcf6a606b5ce494ed03621ebd8cccc6310a9d97f3ac193921"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native/attempt-a9657232c119/samples_eval_results.json",
+      "sha256": "9c5e401cc5be19963e12c221a117e81a209b3219014ff299fad6e5ec72cebe1d"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/native_receipt.json",
+      "sha256": "1262e4bb372d30065455e5712a0a962f75c63647ac0751d7b7cdce31b4cc12f7"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/problems.jsonl",
+      "sha256": "d772944271551698ad440b50de9247b6e26584b6455602f196187eacb88bb75a"
+    },
+    {
+      "path": "research/native-v1/verification/native-cpu-qualification/samples_eval_results.json",
+      "sha256": "7b717c37f93e2d7d1e47ede3a712196711d1bd3bf9a0c914566fee1e7c752207"
+    }
+  ],
+  "transformations": "none; exact source bytes; caches excluded",
+  "scope": "released official reference code only, not model-generated benchmark scores"
+}

@@ -1,0 +1,24 @@
+{
+  "benchmark": "HumanEval+ v0.1.10 pilot subset",
+  "task_count": 2,
+  "samples_per_task": 1,
+  "per_task": {
+    "HumanEval/72": {
+      "n": 1,
+      "base_correct": 1,
+      "plus_correct": 1,
+      "base_pass1": 1.0,
+      "plus_pass1": 1.0
+    },
+    "HumanEval/57": {
+      "n": 1,
+      "base_correct": 1,
+      "plus_correct": 1,
+      "base_pass1": 1.0,
+      "plus_pass1": 1.0
+    }
+  },
+  "base_pass1": 1.0,
+  "plus_pass1": 1.0,
+  "scientific_verdict": "INCONCLUSIVE: exploratory subset, one seed, confirmation pending"
+}

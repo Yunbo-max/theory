@@ -1,24 +1,102 @@
-"""Official native scoring in Docker. No generated code is executed by the host."""
+"""Pinned official EvalPlus in a bounded native Python child process."""
+import importlib.metadata
 import math
 import os
 from pathlib import Path
+import platform
 import shutil
 import subprocess
+import sys
+import time
 import uuid
 import numpy as np
-from .io import atomic_json, jsonl, read_json, read_jsonl, stable_seed
+import psutil
+from .io import atomic_json, digest, object_hash, read_json, read_jsonl
 
-IMAGE="recursive-ssd-eval:0.3.1"
+
+def evaluator_info():
+    """Bind actual interpreter, installed dependencies and official scorer bytes."""
+    expected={"evalplus":"0.3.1","tree-sitter":"0.23.2","tree-sitter-python":"0.23.6"}
+    for package,version in expected.items():
+        try:
+            actual=importlib.metadata.version(package)
+        except importlib.metadata.PackageNotFoundError as exc:
+            raise RuntimeError("Install this project's [evaluation] dependencies in the active Python environment") from exc
+        if actual!=version:
+            raise RuntimeError(f"native evaluator requires {package}=={version}, found {actual}")
+    distribution=importlib.metadata.distribution("evalplus")
+    code={str(p):digest(distribution.locate_file(p)) for p in distribution.files or []
+          if str(p).startswith("evalplus/") and str(p).endswith(".py")}
+    if not code:
+        raise RuntimeError("cannot fingerprint official EvalPlus source")
+    return {"backend":"evalplus-native","python":platform.python_version(),
+            "interpreter":str(Path(sys.executable).resolve()),
+            "packages":{d.metadata["Name"]:d.version for d in importlib.metadata.distributions()},
+            "official_code_sha256":object_hash(code),"official_code_files":code,
+            "wrapper_sha256":digest(Path(__file__).with_name("native_score.py")),
+            "parallel":2,"min_time_limit":1,"gt_time_limit_factor":4,
+            "max_memory_bytes":4*1024**3}
 
 
-def docker_info():
-    result=subprocess.run(["docker","image","inspect",IMAGE,"--format","{{.Id}}"],
-        text=True,capture_output=True,check=True,timeout=30)
-    return result.stdout.strip()
+def run_native_process(command, work, timeout):
+    """Resource cleanup, not an OS security sandbox. Inherit the worker group.
+
+    The supervisor can terminate the entire worker process group on its hard
+    deadline. On a local scorer timeout also stop its descendant processes.
+    """
+    work=Path(work).resolve()
+    work.mkdir(parents=True,exist_ok=True)
+    tmp=work/"tmp"
+    tmp.mkdir(exist_ok=True)
+    env={k:os.environ[k] for k in ("PATH","LANG","LC_ALL","LD_LIBRARY_PATH") if k in os.environ}
+    env.update(CUDA_VISIBLE_DEVICES="",TOKENIZERS_PARALLELISM="false",OMP_NUM_THREADS="1",
+               MKL_NUM_THREADS="1",OPENBLAS_NUM_THREADS="1",TMPDIR=str(tmp),
+               XDG_CACHE_HOME=str(work/"cache"),HF_HUB_OFFLINE="1",
+               EVALPLUS_MAX_MEMORY_BYTES=str(4*1024**3))
+    started=time.time()
+    status="interrupted"
+    child=None
+    try:
+        with (work/"evaluator.log").open("w") as log:
+            child=subprocess.Popen(command,cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT)
+            code=child.wait(timeout=timeout)
+        status="completed" if code==0 else "failed"
+        if code:
+            raise RuntimeError(f"official evaluator failed ({code}); inspect {work/'evaluator.log'}")
+        return code
+    except subprocess.TimeoutExpired:
+        status="timeout"
+        raise
+    finally:
+        if child is not None and child.poll() is None:
+            try:
+                parent=psutil.Process(child.pid)
+                processes=parent.children(recursive=True)+[parent]
+                for process in processes:
+                    try:
+                        process.terminate()
+                    except psutil.NoSuchProcess:
+                        pass
+                _,alive=psutil.wait_procs(processes,timeout=2)
+                for process in alive:
+                    try:
+                        process.kill()
+                    except psutil.NoSuchProcess:
+                        pass
+                child.wait(timeout=3)
+            except psutil.NoSuchProcess:
+                pass
+        atomic_json(work/"execution.json",{"argv":command,"cwd":str(work),
+            "started_epoch":started,"ended_epoch":time.time(),"status":status,
+            "returncode":child.returncode if child is not None else None,
+            "timeout_seconds":timeout,"backend":"native_python",
+            "environment_scope":"allowlisted process environment; no GPU; not a security sandbox"})
 
 
 def inventory(raw, problems, expected_samples):
     counts={p["task_id"]:0 for p in problems}
+    if not counts or len(counts)!=len(problems) or type(expected_samples) is not int or expected_samples<1:
+        raise ValueError("invalid native problem/sample inventory")
     identities=set()
     for row in raw:
         key=(row["task_id"],row["sample_id"])
@@ -32,44 +110,44 @@ def inventory(raw, problems, expected_samples):
 
 
 def official_score(raw_path, problems_path, output, expected_samples, deadline, qualify=False):
-    output=Path(output)
+    output=Path(output).resolve()
     output.mkdir(parents=True,exist_ok=True)
     result_path=output/"samples_eval_results.json"
-    if result_path.exists():
-        return summarize(result_path,expected_samples)
+    receipt_path=output/"native_receipt.json"
+    if result_path.exists() and not receipt_path.exists():
+        raise ValueError("unbound cached native result: provenance receipt missing; retain it and use a new attempt directory")
     raw=read_jsonl(raw_path) if raw_path is not None else []
     problems=read_jsonl(problems_path)
-    if not qualify:
-        inventory(raw,problems,expected_samples)
-    inputs=output/"inputs"
-    outputs=output/"native"
-    inputs.mkdir(exist_ok=True)
-    outputs.mkdir(exist_ok=True)
-    shutil.copyfile(problems_path,inputs/"problems.jsonl")
-    if raw_path is not None:
-        shutil.copyfile(raw_path,inputs/"raw.jsonl")
-    container="recursive-ssd-"+uuid.uuid4().hex[:12]
-    command=["docker","run","--rm","--name",container,
-        "--label",f"recursive-ssd.run={os.environ.get('RECURSIVE_SSD_RUN_ID','manual-qualification')}",
-        "--network","none","--read-only",
-        "--cap-drop=ALL","--security-opt=no-new-privileges","--pids-limit","256",
-        "--memory","3g","--cpus","2","--user",f"{os.getuid()}:{os.getgid()}",
-        "--tmpfs","/tmp:rw,nosuid,nodev,size=1g",
-        "--mount",f"type=bind,src={inputs.resolve()},dst=/input,readonly",
-        "--mount",f"type=bind,src={outputs.resolve()},dst=/output",IMAGE]
-    if qualify:
-        command.append("--qualify")
-    try:
+    if qualify and expected_samples!=1:
+        raise ValueError("canonical qualification uses one native reference per task")
+    inventory([{"task_id":p["task_id"],"sample_id":0} for p in problems] if qualify else raw,
+              problems,expected_samples)
+    info=evaluator_info()
+    identity={"problems_sha256":digest(problems_path),"raw_sha256":digest(raw_path) if raw_path is not None else None,
+              "expected_samples":expected_samples,"qualify":qualify,"evaluator":info}
+    if result_path.exists():
+        receipt=read_json(receipt_path)
+        if receipt["identity"]!=identity or receipt["result_sha256"]!=digest(result_path):
+            raise ValueError("cached native result provenance changed; create a new experiment identity")
+    else:
+        outputs=output/"native"/("attempt-"+uuid.uuid4().hex[:12])
+        inputs=outputs/"inputs"
+        inputs.mkdir(parents=True)
+        shutil.copyfile(problems_path,inputs/"problems.jsonl")
+        command=[sys.executable,"-I",str(Path(__file__).with_name("native_score.py")),
+                 "--problems",str(inputs/"problems.jsonl"),"--output",str(outputs)]
+        if qualify:
+            command.append("--qualify")
+        else:
+            shutil.copyfile(raw_path,inputs/"raw.jsonl")
+            command.extend(["--raw",str(inputs/"raw.jsonl")])
         deadline.check(45)
-        with (output/"evaluator.log").open("w") as log:
-            completed=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,
-                timeout=max(1,min(1800,deadline.remaining()-20)))
-        if completed.returncode:
-            raise RuntimeError(f"official evaluator failed; inspect {output/'evaluator.log'}")
-    finally:
-        # A timed-out/interrupted docker client need not stop its container.
-        subprocess.run(["docker","rm","-f",container],capture_output=True,timeout=20)
-    shutil.copyfile(outputs/"samples_eval_results.json",result_path)
+        run_native_process(command,outputs,max(1,min(1800,deadline.remaining()-20)))
+        # Atomic cache publication; raw official output and every attempt remain.
+        atomic_json(result_path,read_json(outputs/"samples_eval_results.json"))
+        atomic_json(receipt_path,{"identity":identity,"result_sha256":digest(result_path),
+                    "native_output":str((outputs/"samples_eval_results.json").relative_to(output)),
+                    "execution":str((outputs/"execution.json").relative_to(output))})
     result=summarize(result_path,expected_samples)
     if set(result["per_task"])!={p["task_id"] for p in problems}:
         raise ValueError("official output task inventory mismatch")
