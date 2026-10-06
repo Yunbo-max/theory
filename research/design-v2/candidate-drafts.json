@@ -84,7 +84,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M03.json",
+        "sha256": "af7a013612ca2ff50f378a65ec9df677381694619d9563091890dc76365dc500"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M04",
@@ -148,7 +156,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M04.json",
+        "sha256": "9c2d9ee1250eb5f6c07867b109f716d0213eb1f1c243fccce46085cb22b1e86a"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M05",
@@ -213,7 +229,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M05.json",
+        "sha256": "25659566ef03ff2d9f81b24e8418ea86395e5074a5259e2f49094d5d9b2dea22"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M01",
@@ -277,7 +301,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M01.json",
+        "sha256": "2da10cb292a909ac58a0889f7574310b58122782d37b47a93b831c738c7bf481"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M07",
@@ -340,7 +372,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M07.json",
+        "sha256": "d30efe6d4a45cdfa229c084167dc75fd346a5b00a2fb6c76d2ec31cb6d4a6c9b"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M02",
@@ -404,7 +444,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M02.json",
+        "sha256": "2262137415994828e6b581909a3845eae570206e50f4a41017201e4cf92f236b"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M06",
@@ -467,7 +515,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M06.json",
+        "sha256": "3326a031dac19440d591f487e3090ef08a10f21e3297cd0406eab138062b8732"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M08",
@@ -531,7 +587,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M08.json",
+        "sha256": "22b3f90c465ae2a375abdcdea33e38d7333549adc057f6be1ddb6610aeaa14a9"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M09",
@@ -597,7 +661,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M09.json",
+        "sha256": "52c692b718d251546edaf4dd3583e8244373f0258a038a592b156144abda827b"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M10",
@@ -661,7 +733,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M10.json",
+        "sha256": "78619e3f13d5749538ee5e96d4aaa803a55e25209ef32b2f841e51d314564816"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M11",
@@ -724,7 +804,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M11.json",
+        "sha256": "e073ba0aea8e6b0e0e1f6926d458ffa9a26d254b94ef1d47aa0a3faee896a8e8"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M12",
@@ -787,7 +875,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M12.json",
+        "sha256": "6c483b39dbd97360c917331b2789494d568d34f808cb11f7f56f70ba0122400e"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M13",
@@ -851,7 +947,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M13.json",
+        "sha256": "7d166b547faac7ee86b99bf2e51f61e4316b5e7a11b4dea9a8d9a098a6865c94"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M14",
@@ -913,7 +1017,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M14.json",
+        "sha256": "4db7842822a65588e0be1a275d5f1e0503760051c2f54e5af7459d706c916b90"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     },
     {
       "candidate_id": "M15",
@@ -978,7 +1090,15 @@
       ],
       "primary_checkpoint": 3,
       "missing_formal_design_ref_reason": "native baseline/current parent, complete controls, resource/precision review and frozen protocol absent",
-      "native_result_count": 0
+      "native_result_count": 0,
+      "current_implementation_ref": {
+        "path": "research/native-v1/implementations/M15.json",
+        "sha256": "b02fcd25fc9c744175ae67ec1204abbfc9f840e56a02486efcdb65645546a863"
+      },
+      "current_code_batch_ref": {
+        "path": "research/native-v1/implementation-batch.json",
+        "sha256": "c340dc5780894271019efc119e9cd426833e37cb0b76f8aba110134b6de9bead"
+      }
     }
   ]
 }

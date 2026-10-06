@@ -1,0 +1,357 @@
+{
+  "kind": "method-verification-batch",
+  "version": "1.0.0",
+  "batch_id": "recursive-ssd-20261006",
+  "pool_target": 20,
+  "selection_target": 15,
+  "candidates": [
+    {
+      "candidate_id": "M01",
+      "math_card_ref": {
+        "path": "research/cards/M01.json",
+        "sha256": "fae0f744ec187c3f6d15d48c748d8ac748889b8afe8ad7aa870dce95421dd58f"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M01-math.json",
+        "sha256": "dc9b4586b89de95823255949d2f127ae80061a9566b3872cc6898415d9d988d1"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M01.json",
+        "sha256": "2da10cb292a909ac58a0889f7574310b58122782d37b47a93b831c738c7bf481"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M01-code.json",
+        "sha256": "ac0888c656422ed9a3c8ef39c47cfad7f06d8cb666789bdcea86b096502f05db"
+      }
+    },
+    {
+      "candidate_id": "M02",
+      "math_card_ref": {
+        "path": "research/cards/M02.json",
+        "sha256": "77c4f9f08d7a3ddba93be6f1447235298f75368aaa75adac6bd846683d9e904c"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M02-math.json",
+        "sha256": "ef1501f39d3ffc0bff4ba4d2ded335c80d82dfb667639cb76eae4b021d526031"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M02.json",
+        "sha256": "2262137415994828e6b581909a3845eae570206e50f4a41017201e4cf92f236b"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M02-code.json",
+        "sha256": "a5aab09de8c3df26a64a3fb497c1b9cf0b4b8a634370901a85b4c46a347d0e9b"
+      }
+    },
+    {
+      "candidate_id": "M03",
+      "math_card_ref": {
+        "path": "research/cards/M03.json",
+        "sha256": "cc3a8173652168afc6f876b700f42581ca6ee7288d5f23ec4370695e0397e0e3"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M03-math.json",
+        "sha256": "6cd6e5d16f5991349fbc3874d74ae8c386a4cc75230aa1f67881d8f4fd6ab4cc"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M03.json",
+        "sha256": "af7a013612ca2ff50f378a65ec9df677381694619d9563091890dc76365dc500"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M03-code.json",
+        "sha256": "563026ab15ec3be4997ef8cc9f3e649c1c58d1d20ed95dcebb72fbc7daee3fc4"
+      }
+    },
+    {
+      "candidate_id": "M04",
+      "math_card_ref": {
+        "path": "research/cards/M04.json",
+        "sha256": "c99642caaa749f09aead5e110a6805aa2be2467b5ca8363c6d0e6280b2b3c3fb"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M04-math.json",
+        "sha256": "8b8bb4a13b5709ce265aac9f470cfcd20e69fb1399baf8ad74f5d80227eb3005"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M04.json",
+        "sha256": "9c2d9ee1250eb5f6c07867b109f716d0213eb1f1c243fccce46085cb22b1e86a"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M04-code.json",
+        "sha256": "6772075a41c088ee4d5f3e9ddb956a9b69a3222eb9b7d016f7c7e0210ed44921"
+      }
+    },
+    {
+      "candidate_id": "M05",
+      "math_card_ref": {
+        "path": "research/cards/M05.json",
+        "sha256": "ed787bf8d7743f40e0f6ad3aa9e02caff4aca0eaafd3d581769a349925158f42"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M05-math.json",
+        "sha256": "ebecc17822dbc6beeb5dba8cb90f5904fda216e64b10d4ce6fcdf3031e3b5bbd"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M05.json",
+        "sha256": "25659566ef03ff2d9f81b24e8418ea86395e5074a5259e2f49094d5d9b2dea22"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M05-code.json",
+        "sha256": "dab5cb355ee6baab9cfd9b6e3976acb604ef374520e940abf188005e11a1cf31"
+      }
+    },
+    {
+      "candidate_id": "M06",
+      "math_card_ref": {
+        "path": "research/cards/M06.json",
+        "sha256": "8129718c8420c38ea4715e182d56c023a143fed60d80098cc5cb0850b289f7ee"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M06-math.json",
+        "sha256": "1446f19dc21197a5bd8632b58804baff20e5aa69826cce17777fbea0b895a49a"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M06.json",
+        "sha256": "3326a031dac19440d591f487e3090ef08a10f21e3297cd0406eab138062b8732"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M06-code.json",
+        "sha256": "a16851f7d2ae11223bdafb24efa34d54cb64e6dae7e329b942512aa87916d242"
+      }
+    },
+    {
+      "candidate_id": "M07",
+      "math_card_ref": {
+        "path": "research/cards/M07.json",
+        "sha256": "d6fef8aa306505e79cc177ee4b37ae141928d7a7a968ac9d2f8d1fc5f4960cce"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M07-math.json",
+        "sha256": "51feea06abaf02f18e0880bd28c9d91b7029bb8ecedafc981c4502aded2b47e7"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M07.json",
+        "sha256": "d30efe6d4a45cdfa229c084167dc75fd346a5b00a2fb6c76d2ec31cb6d4a6c9b"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M07-code.json",
+        "sha256": "43fb3751c653ff91d5fd03a41659d01131017e0dccd43738f81d80fb1a6ccb0e"
+      }
+    },
+    {
+      "candidate_id": "M08",
+      "math_card_ref": {
+        "path": "research/cards/M08.json",
+        "sha256": "29330f13a82e3f305dc599a17766b3add6c3707ec4f64ed67b0be097232ab469"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M08-math.json",
+        "sha256": "0ac92c84a5a8c9f17b5952df9151c35cc9c0062057d83279fa04374c72a99058"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M08.json",
+        "sha256": "22b3f90c465ae2a375abdcdea33e38d7333549adc057f6be1ddb6610aeaa14a9"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M08-code.json",
+        "sha256": "2d5c89c38f238dc9fe565677ad22f1f0502b7d3147ae90ff5d172b1bda9d95da"
+      }
+    },
+    {
+      "candidate_id": "M09",
+      "math_card_ref": {
+        "path": "research/cards/M09.json",
+        "sha256": "e9f1d23491961e3eaff7b98e11047571637b335d4b7704fc78641f0c7a2d748b"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M09-math.json",
+        "sha256": "b801a8431d64892cb8b02d2c2e20becdc9ecec29b324fda8ce3bc1ee0b58a268"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M09.json",
+        "sha256": "52c692b718d251546edaf4dd3583e8244373f0258a038a592b156144abda827b"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M09-code.json",
+        "sha256": "87e260c166c8af6d206fb7b00c1a8cd1819e6453a769890e996762363666b9c2"
+      }
+    },
+    {
+      "candidate_id": "M10",
+      "math_card_ref": {
+        "path": "research/cards/M10.json",
+        "sha256": "20fc231b543b58932772e0d1b8c011e6387f06008ed29c376ad36d133791aac8"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M10-math.json",
+        "sha256": "f28c4e1c552434bb87b6ff7d9eea596235e0dbb4ab93d51197278e9ee4362397"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M10.json",
+        "sha256": "78619e3f13d5749538ee5e96d4aaa803a55e25209ef32b2f841e51d314564816"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M10-code.json",
+        "sha256": "6e194eb9d74075fdb42aba91e40a7b40a899aa9fb2a931143344be512e5888f4"
+      }
+    },
+    {
+      "candidate_id": "M11",
+      "math_card_ref": {
+        "path": "research/cards/M11.json",
+        "sha256": "19bcd0af34f8abddfb685f72a9a5eb57beef8a03e6f87afce9729d891e8d4092"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M11-math.json",
+        "sha256": "6c7bdba363449d40d643e01f7b6fa6d7c8bc2583dcb3059a930118f08c0afda4"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M11.json",
+        "sha256": "e073ba0aea8e6b0e0e1f6926d458ffa9a26d254b94ef1d47aa0a3faee896a8e8"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M11-code.json",
+        "sha256": "a06884b976d43aba51f1fc01acd4b3b87bb582918f7ac04a994f0172b4fdbd89"
+      }
+    },
+    {
+      "candidate_id": "M12",
+      "math_card_ref": {
+        "path": "research/cards/M12.json",
+        "sha256": "c4e7595702a1a8a886c65ff3292f39892112bc346cb73aca71bf4253091883a9"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M12-math.json",
+        "sha256": "d5931f269060bce61f3677c67abe305b77c7f2c4d83efebb4c2e0a7d472bb552"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M12.json",
+        "sha256": "6c483b39dbd97360c917331b2789494d568d34f808cb11f7f56f70ba0122400e"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M12-code.json",
+        "sha256": "60253ed64e801afe143fc29b99a0f2b6c5830de77eff6f16fb7d6d84951b1a40"
+      }
+    },
+    {
+      "candidate_id": "M13",
+      "math_card_ref": {
+        "path": "research/cards/M13.json",
+        "sha256": "3256b16a8d45556960de448634e49a713d20a8d4a7750480088b16ab9c98de07"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M13-math.json",
+        "sha256": "8d6a126f1d5c4be4170199cc1c6bc0430491f514023219ba51d29237e74a72be"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M13.json",
+        "sha256": "7d166b547faac7ee86b99bf2e51f61e4316b5e7a11b4dea9a8d9a098a6865c94"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M13-code.json",
+        "sha256": "96152f53ee23dc5d20bc0acda453afef13709d0ccbe6d6b6414fa7705e8171a6"
+      }
+    },
+    {
+      "candidate_id": "M14",
+      "math_card_ref": {
+        "path": "research/cards/M14.json",
+        "sha256": "854957fbecc9c22b8f8a6aa78a93ee8dd18a93dcacf654b9cc9175575fb95279"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M14-math.json",
+        "sha256": "7ebdaa5d623efe56b495a4ab40c741dbe401ea934cdb9387ea8eac563d5bd651"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M14.json",
+        "sha256": "4db7842822a65588e0be1a275d5f1e0503760051c2f54e5af7459d706c916b90"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M14-code.json",
+        "sha256": "6d208e9d0d2de627ef99bcb2c22ee5b328ca803733a630c4eb30ba2586389254"
+      }
+    },
+    {
+      "candidate_id": "M15",
+      "math_card_ref": {
+        "path": "research/cards/M15.json",
+        "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M15-math.json",
+        "sha256": "65323fda4fa3a0ae8d80bcbde9341d714ec5be49188ac58711a3520c89025593"
+      },
+      "implementation_ref": {
+        "path": "research/native-v1/implementations/M15.json",
+        "sha256": "b02fcd25fc9c744175ae67ec1204abbfc9f840e56a02486efcdb65645546a863"
+      },
+      "code_review_ref": {
+        "path": "research/native-v1/reviews/M15-code.json",
+        "sha256": "40d15a50fdb1523d725cf5446ba008b1be26bba5e18df315adf0733300c322ab"
+      }
+    },
+    {
+      "candidate_id": "M16",
+      "math_card_ref": {
+        "path": "research/cards/M16.json",
+        "sha256": "306a56d11d0b6d3d5f65b93169b4a249d47750d2558e1e16aaec07da4a5d1fbc"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M16-math.json",
+        "sha256": "549ba80a1dbfada2cc7ec85dbe7c2c28e8062655a4df78dbefdc177f5cf02abd"
+      }
+    },
+    {
+      "candidate_id": "M17",
+      "math_card_ref": {
+        "path": "research/cards/M17.json",
+        "sha256": "8aa60c35bbd86cb0f51ca328a83598f6c1cf99147646c57c7071029cd35cfa3c"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M17-math.json",
+        "sha256": "2c9ac8cd722bc9e5c28653dc61bcdddf1c6ef32a13378632be7f7849e88ff429"
+      }
+    },
+    {
+      "candidate_id": "M18",
+      "math_card_ref": {
+        "path": "research/cards/M18.json",
+        "sha256": "731736d08310e4d7639f947bee62bb505f819e390ed5a190343d663f0099e313"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M18-math.json",
+        "sha256": "02aedad3ae2bc7e53e4338415c8855502c502b5db762a6f0426c8177edfc20db"
+      }
+    },
+    {
+      "candidate_id": "M19",
+      "math_card_ref": {
+        "path": "research/cards/M19.json",
+        "sha256": "a30e25fcf67d3e001b7c22625fbd14e58d93ef80c101743865eab7e375ebba99"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M19-math.json",
+        "sha256": "ecd7c7d6e8d603217213b10e05b9b2b12d5c5c92bf1b1a1b38b5bf868aa4149c"
+      }
+    },
+    {
+      "candidate_id": "M20",
+      "math_card_ref": {
+        "path": "research/cards/M20.json",
+        "sha256": "e1e08834f983b84d0d59ccbf7351e34a04295c134704a4d3441a68046ba027a1"
+      },
+      "math_review_ref": {
+        "path": "research/reviews/M20-math.json",
+        "sha256": "ac160ac4a227478684999014ee448ee2d845177c936f08e7f30f80d3e83fd0d2"
+      }
+    }
+  ],
+  "selection_ref": {
+    "path": "research/selection.json",
+    "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+  },
+  "selection_review_ref": {
+    "path": "research/selection-review.json",
+    "sha256": "6aa1c244d2bb98f0212bb443773a8f4bfc8e095a9df7967c3074b254fdace207"
+  }
+}

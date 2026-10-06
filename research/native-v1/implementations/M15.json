@@ -1,0 +1,526 @@
+{
+  "kind": "implementation-card",
+  "version": "1.0.0",
+  "candidate_id": "M15",
+  "math_card_ref": {
+    "path": "research/cards/M15.json",
+    "sha256": "2305b9fda144c96189595c9f6a3215eb7b46602c1f3f18fc6a19558156b9ad0d"
+  },
+  "selection_ref": {
+    "path": "research/selection.json",
+    "sha256": "4c1d5bdf84ff29029fb54bf85ffc1073d8aef66757aeacab5c4ae0ca569e0124"
+  },
+  "code_refs": [
+    {
+      "path": "recursive_ssd/__init__.py",
+      "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+    },
+    {
+      "path": "recursive_ssd/cli.py",
+      "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+    },
+    {
+      "path": "recursive_ssd/data.py",
+      "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+    },
+    {
+      "path": "recursive_ssd/evaluation.py",
+      "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+    },
+    {
+      "path": "recursive_ssd/io.py",
+      "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+    },
+    {
+      "path": "recursive_ssd/methods.py",
+      "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+    },
+    {
+      "path": "recursive_ssd/model.py",
+      "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+    },
+    {
+      "path": "recursive_ssd/native_score.py",
+      "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+    },
+    {
+      "path": "recursive_ssd/runner.py",
+      "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+    },
+    {
+      "path": "recursive_ssd/train.py",
+      "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+    },
+    {
+      "path": "scripts/python_env.sh",
+      "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+    },
+    {
+      "path": "scripts/run_8h.sh",
+      "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+    },
+    {
+      "path": "scripts/setup.sh",
+      "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+    },
+    {
+      "path": "configs/2080ti_8h.json",
+      "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+    },
+    {
+      "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+      "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+    }
+  ],
+  "code_version": "0fb8b46bdd5f6bb1e5df5bb15606309104afb07a2ab71b5e00554bc3176a3326",
+  "method_version": "d21692b61a39f4c3423deedc24730a4c9a7d207c5c730e0d62b85fb65fd8e9e8",
+  "source_identity_ref": {
+    "path": "research/native-v1/verification/source-identity.json",
+    "sha256": "7b604b800d102fe587dee699081c5e415168a915c4f421225aaffdd1e792ddc6"
+  },
+  "mapping": [
+    {
+      "derivation_step": "M15-S1",
+      "code_ref": {
+        "path": "recursive_ssd/model.py",
+        "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+      },
+      "location": "model.Policy.generate exploration branch and runner.generate_records",
+      "rationale": "ν_v≥ε μ_0v holds pointwise at each prefix. The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    },
+    {
+      "derivation_step": "M15-S2",
+      "code_ref": {
+        "path": "recursive_ssd/model.py",
+        "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+      },
+      "location": "model.Policy.generate exploration branch and runner.generate_records",
+      "rationale": "Multiply conditional inequalities along a fixed L-token path to get Pν(path)≥ε^L Pμ0(path). The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    },
+    {
+      "derivation_step": "M15-S3",
+      "code_ref": {
+        "path": "recursive_ssd/model.py",
+        "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+      },
+      "location": "model.Policy.generate exploration branch and runner.generate_records",
+      "rationale": "Train on unverified ν samples; preserving proposal support does not establish correctness or student support after fitting. The implementation constructs/checks this object under the card's conditions; the distributional proof is not asserted as a neural guarantee."
+    }
+  ],
+  "software_checks": [
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/native_score.py",
+          "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+        },
+        {
+          "path": "scripts/python_env.sh",
+          "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+        },
+        {
+          "path": "scripts/run_8h.sh",
+          "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+        },
+        {
+          "path": "scripts/setup.sh",
+          "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/native-v1/verification/check-1.log",
+          "sha256": "04cfb2ca983940a153561075d552316ccf3e436d7bf34453b08fe7484d46140f"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/native_score.py",
+          "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+        },
+        {
+          "path": "scripts/python_env.sh",
+          "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+        },
+        {
+          "path": "scripts/run_8h.sh",
+          "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+        },
+        {
+          "path": "scripts/setup.sh",
+          "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/native-v1/verification/check-2.log",
+          "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "recursive_ssd",
+        "scripts",
+        "tests"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/native_score.py",
+          "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+        },
+        {
+          "path": "scripts/python_env.sh",
+          "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+        },
+        {
+          "path": "scripts/run_8h.sh",
+          "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+        },
+        {
+          "path": "scripts/setup.sh",
+          "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/native-v1/verification/check-3.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "python",
+        "-m",
+        "recursive_ssd.cli",
+        "--help"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/native_score.py",
+          "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+        },
+        {
+          "path": "scripts/python_env.sh",
+          "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+        },
+        {
+          "path": "scripts/run_8h.sh",
+          "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+        },
+        {
+          "path": "scripts/setup.sh",
+          "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/native-v1/verification/check-4.log",
+          "sha256": "a97f82fa42d34f37885b2983d3ddd2f91c8c1f9d8d7845ac32e6f5a715f0b4a4"
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "command": [
+        "bash",
+        "-n",
+        "scripts/setup.sh",
+        "scripts/run_8h.sh",
+        "scripts/python_env.sh"
+      ],
+      "tested_code_refs": [
+        {
+          "path": "recursive_ssd/__init__.py",
+          "sha256": "ea627e2a885b5dbae2f29564615b2e1b1a16054e84fd3aee111fd36fede643eb"
+        },
+        {
+          "path": "recursive_ssd/cli.py",
+          "sha256": "ec0c4eeb001b7c69e5b14a742f8659ed261554fea0ecce0c1808eb9ebbe68ecb"
+        },
+        {
+          "path": "recursive_ssd/data.py",
+          "sha256": "44736cc0e63768518af5241e8abf8f932660c76f9da0c7ff63b0792e2958f51b"
+        },
+        {
+          "path": "recursive_ssd/evaluation.py",
+          "sha256": "2fb17c67409994eaa98d0f1d3afb922ac6bfab4f75ef8fee8c48902fa356107f"
+        },
+        {
+          "path": "recursive_ssd/io.py",
+          "sha256": "779247089ba26dbc788452239e1735862a9c116d82e34ab459418a44735b8e64"
+        },
+        {
+          "path": "recursive_ssd/methods.py",
+          "sha256": "669f62b507ad22d4b52572c8d8f50679e7d69ecbee72de933a9d02c1324f7767"
+        },
+        {
+          "path": "recursive_ssd/model.py",
+          "sha256": "e9efcad326b2c87349599501c85869a71719d6f36d270dc5c95cfd1b46a1d077"
+        },
+        {
+          "path": "recursive_ssd/native_score.py",
+          "sha256": "f89f4e8b75c7925e399603c53494cfcdb744e17cee1fd9a040a8a081a953fa93"
+        },
+        {
+          "path": "recursive_ssd/runner.py",
+          "sha256": "e191004b98dcbea99781b2aaae1d324e85ff8c90b683ff643a816dfdd55f22c1"
+        },
+        {
+          "path": "recursive_ssd/train.py",
+          "sha256": "a6a68291ad34b892e67ffc621c258f4a1491c52a5dfb2a24b20bb51f42808833"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "931c3d86856d311e1ec7ca51e84a9b0e33e6b4042be1f5dc58feab6108303124"
+        },
+        {
+          "path": "scripts/python_env.sh",
+          "sha256": "a335559f44c50555c6b6801ba990bea40fa90bdc193439fb4f9a9e39f1198246"
+        },
+        {
+          "path": "scripts/run_8h.sh",
+          "sha256": "f3814f9a8ec3837d12633da7d996999ff939974e57a6d39f230088227364f283"
+        },
+        {
+          "path": "scripts/setup.sh",
+          "sha256": "cb69b6a4c801bd1ca2442b5ecb80f6610a7e433f825ed489496a4b84d1479a41"
+        },
+        {
+          "path": "configs/2080ti_8h.json",
+          "sha256": "86e69ad627aa385e2f5cc81dd0ad742cbc7a1bfe231086c11f32e6fa88d39a7a"
+        },
+        {
+          "path": "recursive_ssd/templates/self_distillation_prompt_function.j2",
+          "sha256": "1d00e2c1d443949306aec819bd7b6c794d2283f494fbc7038703fb27df897fb2"
+        }
+      ],
+      "log_refs": [
+        {
+          "path": "research/native-v1/verification/check-5.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "limits": "CPU engine checks only; mathematical special cases are tested where tractable. No full model GPU run, independent review or empirical method verdict."
+}

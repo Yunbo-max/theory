@@ -121,3 +121,5 @@ CPU 测试中的小型随机模型和有限概率向量只是工程夹具。没�
 相关论文及模型/数据固定版本见 [research/SOURCES.md](research/SOURCES.md)，实验协议见 [docs/PROTOCOL.md](docs/PROTOCOL.md)，工程验证范围见 [docs/VALIDATION.md](docs/VALIDATION.md)。
 
 原生运行细节、独立评分命令和迁移说明见 [docs/NATIVE_RUNTIME.md](docs/NATIVE_RUNTIME.md)。正式 design_verified 仍为 0，等待完整基线/控制、目标 GPU 成本与协议冻结；官方参考答案检查不等于模型跑分或 GPU 资格。
+
+当前源码的 skill 检查记录见 [research/native-v1/implementation-check.json](research/native-v1/implementation-check.json)：20 项条件数学记录、15 项代码绑定通过；正式实验设计验证与实验结果验证均为 0。76 项工程测试和两题官方参考回放的记录见 [research/native-v1/verification/](research/native-v1/verification/)。

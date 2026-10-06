@@ -53,8 +53,15 @@
   "next_evidence": "Target-host preflight and bounded baseline/resource measurements; implement missing matched controls and freeze v2 protocol before formal method dispatch. The default remains the legacy 32-task development queue.",
   "historical_source_commit": "9ae7ad033f2344a66b60208289e14268ba4057f1",
   "runtime_version": "native-v1",
-  "current_source_identity": "research/native-v1/verification/source-identity.json (created after source snapshot commit)",
+  "current_source_identity": "research/native-v1/verification/source-identity.json",
   "design_drafts": 15,
   "design_verified": 0,
-  "design_ref": "research/design-v2/G01_EXPERIMENT_DESIGN.md"
+  "design_ref": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+  "source_commit": "bfe8a4058590853ecf1c7108703fcf1021e85c05",
+  "current_method_verification_ref": {
+    "path": "research/native-v1/implementation-check.json",
+    "sha256": "014a39d37dab409c17a279913b5db88d749635a03c09ba9c573053ba5123e064"
+  },
+  "code_verified": 15,
+  "gpu_results_verified": 0
 }

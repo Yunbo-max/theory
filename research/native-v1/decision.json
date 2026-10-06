@@ -1,0 +1,40 @@
+{
+  "decision": "Keep the prior mathematical pool and selection, repair G01 design coverage, and replace all container evaluation entry points with native Python at the user's request. Retain design_verified=0 pending complete host/baseline/control/protocol evidence.",
+  "rationale": "The original pilot was not a systematic multi-benchmark design. Concrete source inspection exposed mismatched simple controls and 14 exact MBPP+ prompt overlaps. Native CPU reference scoring and 76 engineering tests establish the new entry point, not target-GPU readiness or scientific improvement.",
+  "recorded_at": "2026-10-06T17:26:09.859422+00:00",
+  "skill": "research-autopilot",
+  "scope": "same-context audit, implementation repair and conditional experimental design",
+  "source_commit": "bfe8a4058590853ecf1c7108703fcf1021e85c05",
+  "evidence_refs": [
+    {
+      "path": "research/design-v2/G01_EXPERIMENT_DESIGN.md",
+      "sha256": "f9aab55a79480a5c3147dfd74112998f3da6cfcae2f93feb7a72e01ccd977701"
+    },
+    {
+      "path": "research/design-v2/audit-result.json",
+      "sha256": "72e2754edbfd2c9ead9c07c27966be7f3f73ce0154e9a02b9dc45a0de70bfb80"
+    },
+    {
+      "path": "research/native-v1/implementation-check.json",
+      "sha256": "014a39d37dab409c17a279913b5db88d749635a03c09ba9c573053ba5123e064"
+    },
+    {
+      "path": "research/native-v1/verification/engineering-checks.json",
+      "sha256": "2f7b9a682adaf377b08dc3753aa7e95b26f9b8ba0df383403a6011fda25a582f"
+    },
+    {
+      "path": "research/native-v1/verification/native-sanitizer-qualification/verification.json",
+      "sha256": "3c4f65553bcadc9b937a702f5ddf01f11ed5897fa574dfb7221a463b8085e2c5"
+    }
+  ],
+  "resource_decision": "No GPU launched, no container used, no new paid compute or extension of original eight-hour authorization. User-host start and remaining time unobserved.",
+  "next_action": "Deliver the versioned source/design/evidence. On the actual GPU host qualify dependencies and measured budget; complete necessary controls and freeze the child protocol before formal method comparisons.",
+  "counts": {
+    "math_candidates": 20,
+    "selected": 15,
+    "code_verified": 15,
+    "design_drafts": 15,
+    "design_verified": 0,
+    "gpu_comparisons": 0
+  }
+}
