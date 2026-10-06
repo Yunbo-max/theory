@@ -35,7 +35,7 @@
     ],
     "execution_role": "local_executor",
     "role_source": "Continued authorized workspace code implementation/repair, actual CPU checks and GitHub delivery; the user will run the separate one-GPU host. No target-GPU execution assignment or access here.",
-    "work_phase": "verified engineering delivery",
+    "work_phase": "repository handoff",
     "project_id": "recursive-ssd",
     "observed_at": "2026-10-06T19:05:44.255639+00:00",
     "canonical_ledger_ref": null,
@@ -56,7 +56,7 @@
       "research/native-v1/implementation-check.json",
       "research/suite-v3/native-qualification/retention-manifest.json"
     ],
-    "readiness": "CPU engineering verified; native target-host scientific dispatch still blocked",
+    "readiness": "complete design and implementation delivered; current CPU code qualification verified; scientific dispatch blocked",
     "missing_requirements": [
       "target GPU access and measurements",
       "LCB required IPC on native evaluation host",
@@ -64,7 +64,7 @@
       "canonical scientific gates/freeze/current design review",
       "GPU outcomes/E04"
     ],
-    "next_legal_action": "Commit current source, bind implementation records to exact source, push and read back GitHub delivery",
+    "next_legal_action": "GPU host verifies actual native IPC/scorers, current baseline/gates and measured finite whole-comparison capacity; no automatic new eight-hour authorization",
     "remaining_budget_ref": null,
     "budget_observation": "Original user-run one-GPU eight-hour window retained; actual host start/consumption unobserved; no extension authorized",
     "execution_harness_plan_ref": {
@@ -80,6 +80,15 @@
         "path": "research/suite-v3/G01_COVERAGE.md",
         "sha256": "b46bbc539959cf54da1fe8594ffa4d4a804799dbff4a2c08ded08ea750a1b328"
       }
+    ],
+    "boundary_check_ref": {
+      "path": "research/suite-v3/implementation-check.json",
+      "sha256": "62f329dfa9c4f78c84c67e983ce5f313a759b5ee01156208db1aec035c6636c3"
+    },
+    "continuation_refs": [
+      "research/suite-v3/source-delivery.json",
+      "docs/RUN_MULTIBENCH.md",
+      "docs/SCIENTIFIC_ADMISSION.md"
     ]
   }
 }

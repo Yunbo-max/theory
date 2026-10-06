@@ -66,7 +66,7 @@
 - [x] Implement full comparison inventory and crossed task/seed uncertainty with frozen endpoint/multiplicity rules.
 - [x] Verify with engineering fixtures and actual official released scorer cases; report GPU validation separately.
 - [x] Review source-to-design coverage, update every implementation obligation with concrete file/test evidence and retain remaining host/scientific evidence gaps.
-- [ ] Push source and bound evidence to Yunbo-max/theory and read back exact remote files.
+- [x] Push source and bound evidence to Yunbo-max/theory and read back exact remote files.
 
 ## Observed integration verification
 

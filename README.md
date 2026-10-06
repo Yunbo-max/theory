@@ -23,7 +23,7 @@
 | 边界实验 | R5 与 0.5B 模型分别建立独立队列；不替代主要 R3 确认结果 |
 | 统计 | 配对任务 × 训练种子 bootstrap；预定完整比较族；缺失、失败、不合格对照全部保留 |
 
-详细问题、可证伪预测和对照见 [G01 实验设计](research/design-v2/G01_EXPERIMENT_DESIGN.md)、[方法矩阵](research/design-v2/METHOD_MATRIX.md)。实现与执行契约见 [运行说明](docs/RUN_MULTIBENCH.md)、[基准适配器](docs/BENCHMARK_ADAPTERS.md)、[分析规则](docs/ANALYSIS.md)。
+完整设计、实现覆盖和当前证据见 [G01 完整覆盖](research/suite-v3/G01_COVERAGE.md)，逐方法问题和对照见 [方法矩阵](research/design-v2/METHOD_MATRIX.md)。[design-v2](research/design-v2/G01_EXPERIMENT_DESIGN.md) 保留历史审查状态。实际执行契约见 [运行说明](docs/RUN_MULTIBENCH.md)、[基准适配器](docs/BENCHMARK_ADAPTERS.md)、[分析规则](docs/ANALYSIS.md)。
 
 完整设计可以大于一次八小时窗口。队列先用目标主机实际测量的成本判断**整组比较**是否装得下；不通过删题、减少确认种子或漏掉难跑对照来声称完成。未启动或未完成的项目保留为 pending/incomplete。
 

@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-06T19:17:10.914662+00:00",
+  "repository": "https://github.com/Yunbo-max/theory",
+  "branch": "main",
+  "source_commit": "f12e6b3a976d00d99fedff9c23b63c39e6f352d2",
+  "source_tree": "c9de7489755e237a9b40626b978ae8022a928032",
+  "parent_commit": "99c601c39ee6a0a1524faeafe87d0b22ba1206e6",
+  "transport": "Connected GitHub create_blob/create_tree/create_commit/update_ref; non-forced expected-head lease",
+  "source_tree_matches_verified_local_snapshot": true,
+  "provider_update_success": true,
+  "readback": {
+    "git_fetch_head": "f12e6b3a976d00d99fedff9c23b63c39e6f352d2",
+    "tree_identity_verified": true,
+    "files": [
+      {
+        "path": "research/suite-v3/verification/check-1.log",
+        "git_blob": "3bc78da10370b59638d42a8a104a28325b18e404",
+        "observed": "332 passed,56 warnings"
+      },
+      {
+        "path": "research/suite-v3/G01_COVERAGE.md",
+        "git_blob": "a0bcc0880a9c9e66341c18eeb2b324f3802412d1",
+        "observed": "full coverage document"
+      }
+    ]
+  },
+  "scope": "source/design/current CPU checks delivered; no GPU or scientific gate"
+}

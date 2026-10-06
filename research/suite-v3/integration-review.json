@@ -1,0 +1,41 @@
+{
+  "scope": "One bounded final integration source review plus targeted regression fixes; not an independent scientific review",
+  "reviewer_task": "/root/scientific_admission",
+  "reviewed_against": "research/suite-v3/G01_COVERAGE.md and prior design-v2 obligations",
+  "issues": [
+    {
+      "issue": "Confirmation could restore or substitute tuned parameters",
+      "resolution": "compile_selected_suite inherits bound development tuning/config/calibration and rejects different overrides",
+      "verification": "test_selected_stages_inherit_exact_development_hyperparameters_and_calibration"
+    },
+    {
+      "issue": "Calibration overrides not included in frozen protocol/shared-baseline identity",
+      "resolution": "calibration_digest frozen, overlapping suite values immutable; native head origin/model/round/lineage verified",
+      "verification": "test_shared_baseline_cannot_reuse_different_bound_calibration and test_head_calibration_rejects_wrong_development_model_and_metadata_only_provenance"
+    },
+    {
+      "issue": "Freeze CLI example omitted required flags",
+      "resolution": "RUN_MULTIBENCH example includes queue and finite replay count",
+      "verification": "source inspection and current CLI help"
+    }
+  ],
+  "red_observation": {
+    "run_id": "final-confirmation-handoff-red-a64a8505d2",
+    "passed": 16,
+    "failed": 3,
+    "scope": "expected queue regressions before repair"
+  },
+  "green_observation": {
+    "run_id": "suite-v3-final-verification-73aefe2e5c",
+    "passed": 332,
+    "failed": 0,
+    "queue_tests": 19,
+    "scope": "complete CPU software tests"
+  },
+  "known_limits": [
+    "No CUDA/GPU workload on target host",
+    "LCB official runner IPC blocked on authoring host",
+    "Boundary calibration transfer explicitly scoped; no scientific confirmation verdict",
+    "Parent/Gate0/IPCG/full design freeze/E04 remain pending"
+  ]
+}
