@@ -1,6 +1,12 @@
 # Engineering validation and outstanding checks
 
-Historical validation is retained below. Current native-v1 evidence is in `research/native-v1/verification/`; Docker instructions in the historical paragraph no longer apply. See [NATIVE_RUNTIME.md](NATIVE_RUNTIME.md).
+Historical validation is retained below. Current suite-v3 historical CPU evidence
+is in `research/suite-v3/verification/`; new Web handoff repairs are
+`generated_unexecuted` and require Local checks. Start with
+[LOCAL_AGENT_RUNBOOK.md](../LOCAL_AGENT_RUNBOOK.md) and the
+[current handoff](../rounds/2026-10-07-local-handoff/WEB_HANDOFF.md).
+`research/native-v1/verification/` is an earlier snapshot. All execution is native
+Conda/Python; no container-based qualification is part of the current protocol.
 
 The checked test suite exercises:
 
@@ -14,7 +20,11 @@ Real public-data preparation was also exercised: the pinned MBPP split is reduce
 
 Logs in `research/verification/` record the actual final test command/output, environment, public-data manifest and source fingerprint. Read their timestamp and file identity; these checks are scoped engineering evidence, not scientific outcomes. Random tiny-model fixtures and probability vectors are not a substitute benchmark.
 
-**Not available in the authoring environment:** CUDA/RTX 2080 Ti, a Docker daemon, native sandbox execution, actual FP16 GPU training, and an eight-hour throughput measurement. `scripts/setup.sh` performs the on-machine GPU canary before the timed run. The worker qualifies the official scorer on actual canonical tasks in Docker before evaluating generated code. Until those run successfully, hardware and native-evaluation readiness remain pending.
+**Not observed by Web:** target CUDA/RTX 2080 Ti execution, actual FP16 GPU
+training and full-workload throughput. Current setup performs dependency/software/
+asset preparation through the native harness; reference qualification and reviewed
+GPU preflight are separate commands in the runbook. Target-host and complete
+model-comparison readiness remain pending until their real receipts exist.
 
 Full-scale/native confirmation, independent review, multiple seeds, all candidate-specific matched controls and a novelty review remain future evidence requirements. No code here should be described as empirically improving the model before those observations exist.
 

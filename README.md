@@ -6,6 +6,21 @@
 
 **尚无本项目的 2080 Ti 实验结果。** 软件检查、官方评分器参考回放和科学结论是不同层面的证据；代码完成不能证明递归提升或方法新颖性。
 
+## Local Codex: start here
+
+用户已明确：Web 完成代码与完整实验设计，**由 Local 来测试和运行实验**。
+先在实际交付 commit 阅读 [AGENTS.md](AGENTS.md)、
+[LOCAL_AGENT_RUNBOOK.md](LOCAL_AGENT_RUNBOOK.md) 和
+[当前 Web handoff](rounds/2026-10-07-local-handoff/WEB_HANDOFF.md)。
+[模型/数据下载入口](LOCAL_AGENT_RUNBOOK.md#download-datasets-and-models) 指向
+[完整资产清单](docs/LOCAL_ASSETS.md)；[输入契约与模板](docs/LOCAL_INPUT_CONTRACTS.md)
+说明如何从真实证据构造缺失的 native/protocol/dispatch 输入。
+
+Local Codex 在用户电脑上通过 SSH 控制远程 GPU，远程不需要安装 Codex。
+新交付的修改标记 `generated_unexecuted`；历史 332 项 CPU 检查不代表这些修改
+或目标机器已经验收。以下命令必须结合 runbook 的顺序和真实授权使用；旧日期
+不是现在可直接重开的八小时预算。
+
 ## 完整设计
 
 | 环节 | 固定设置 |
@@ -34,14 +49,15 @@ Linux，Python 3.11/3.12，目标主机一张 RTX 2080 Ti。FP16 基座配 LoRA�
 ```bash
 git clone https://github.com/Yunbo-max/theory.git
 cd theory
-conda create -n recursive-ssd python=3.11 -y
-conda activate recursive-ssd
+# Conda 环境创建和激活按 LOCAL_AGENT_RUNBOOK.md 的预算内 harness 步骤进行。
+# 以下仅适用于已激活且经核对的 native Conda 环境。
+: "${SSD_ORIGINAL_START:?先读取实际原始授权及已用预算}"
 python scripts/research.py budget --queue runs/multibench-v3 \
-  --original-start '2026-10-06T16:00:00+01:00'
+  --original-start "$SSD_ORIGINAL_START"
 bash scripts/setup.sh --queue runs/multibench-v3
 ```
 
-时间仅为之前讨论的英国夏令时 16:00；必须填写实际原始授权时间，不能用当前时间重开八小时。已有消耗用 `--already-used-seconds` 计入；后续队列用 `--budget-from runs/multibench-v3` 共用原始预算。
+原计划为 2026-10-06 英国夏令时 16:00；不能用当前时间重开八小时。首次建立账本时按 runbook 计入真实已有消耗；恢复已有账本不再次传入累计消耗。后续队列用 `--budget-from runs/multibench-v3` 共用原始预算。
 
 安装、依赖检查、软件测试、数据与模型下载都经仓库固定版本的 research-autopilot harness。也可分步执行：
 
@@ -60,16 +76,17 @@ python scripts/research.py qualify --queue runs/multibench-v3 --data artifacts/m
 ## 编译、运行与恢复
 
 ```bash
-python scripts/research.py design --stage development --output runs/development-suite.json
-python scripts/research.py build --suite runs/development-suite.json \
-  --data artifacts/multibench-v3 --queue runs/multibench-v3 \
-  --original-start '2026-10-06T16:00:00+01:00'
-python scripts/research.py status --queue runs/multibench-v3
+python scripts/research.py design --stage tuning --output runs/tuning-suite.json
+python scripts/research.py design --stage development --output runs/development-preview.json
+python scripts/research.py build --suite runs/tuning-suite.json \
+  --data artifacts/multibench-v3 --queue runs/tuning \
+  --budget-from runs/multibench-v3 --original-start "$SSD_ORIGINAL_START"
+python scripts/research.py status --queue runs/tuning
 ```
 
-上面的时间仅为之前讨论的英国夏令时 16:00；应与实际原始授权一致。`build` 不启动 GPU。已有消耗必须计入同一原始预算，跨阶段共用预算；恢复不会重新获得八小时。
+`build` 不启动 GPU。先按 runbook 完成实际调参及选择，再生成带真实调参结果的开发 suite 和队列；不要把 preview 当调参结果或覆盖已绑定的不可变队列。跨阶段共用预算，恢复不会重新获得八小时。
 
-准备并检查真实主机、基线、协议和方法证据后，通过 `native-assets`、`protocol`、`freeze`、`admit` 建立明确的准入绑定，再运行：
+开发队列建立后，准备并检查真实主机、基线、协议和方法证据，通过 `native-assets`、`protocol`、`freeze`、`admit` 建立准入绑定，再运行：
 
 ```bash
 python scripts/research.py admit --queue runs/multibench-v3 --bundle M03 \

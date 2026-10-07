@@ -1,0 +1,579 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE; the CLI accepts strict JSON, not JSONC.
+// M03 DEVELOPMENT only. Complete 16-arm catalog retained. Nulls deliberately block use. Confirmation requires a separate reviewed protocol and actual selected suite; never reuse this one.
+{
+  "benchmark_manifest": {
+    "he-dev": {
+      "path": null,
+      "sha256": null
+    }
+  },
+  "arms": {
+    "initial": {
+      "name": "initial",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "baseline": {
+      "name": "hard",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "full_soft": {
+      "name": "full_soft",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "fixed_data": {
+      "name": "fixed_data",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "treatment": {
+      "name": "M03",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "arithmetic_anchor": {
+      "name": "arithmetic_anchor",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "lower_lr": {
+      "name": "lower_lr",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "floor_zero": {
+      "name": "floor_zero",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "arithmetic_anchor_tuned": {
+      "name": "arithmetic_anchor_tuned",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "full_soft_lr_half": {
+      "name": "full_soft_lr_half",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_fkl_cached": {
+      "name": "gkd_fkl_cached",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_fkl_update": {
+      "name": "gkd_fkl_update",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_rkl_cached": {
+      "name": "gkd_rkl_cached",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_rkl_update": {
+      "name": "gkd_rkl_update",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_jsd_cached": {
+      "name": "gkd_jsd_cached",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    },
+    "gkd_jsd_update": {
+      "name": "gkd_jsd_update",
+      "revision": null,
+      "implementation_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ]
+    }
+  },
+  "seeds": [
+    17
+  ],
+  "groups": [
+    "he-dev"
+  ],
+  "scorer_spec": {
+    "he-dev": {
+      "native_definition_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "baseline_qualification": {
+        "metric": "pass@1",
+        "operator": null,
+        "threshold": null,
+        "reference_ref": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "control_qualifications": [
+        {
+          "role": "initial",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "full_soft",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "fixed_data",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "arithmetic_anchor",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "lower_lr",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "floor_zero",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "arithmetic_anchor_tuned",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "full_soft_lr_half",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_fkl_cached",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_fkl_update",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_rkl_cached",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_rkl_update",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_jsd_cached",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        },
+        {
+          "role": "gkd_jsd_update",
+          "metric": "pass@1",
+          "operator": null,
+          "threshold": null,
+          "reference_ref": {
+            "path": null,
+            "sha256": null
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "protocol": {
+      "schema_id": "gate-a-protocol",
+      "schema_version": "1.0.0",
+      "protocol_id": "recursive-ssd-M03-development-v3",
+      "evidence_mode": null,
+      "evidence_snapshot_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "min_valid_runs": null,
+      "guardrails": null,
+      "criteria": null,
+      "design": "paired",
+      "aggregation": "project",
+      "rounding_policy": "none",
+      "missing_policy": "inconclusive",
+      "claim_ids": null,
+      "eligibility": null,
+      "statistical_design": null,
+      "multiple_comparison_policy": "bonferroni",
+      "method_version": null,
+      "project_version": null,
+      "analysis_plan_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "parent_problem_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "natural_gate_0_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "importance_decision_ref": {
+        "path": null,
+        "sha256": null
+      },
+      "suite_binding": {
+        "suite_digest": null,
+        "benchmark_manifest_ref": {
+          "path": "artifacts/multibench-v3/benchmarks-manifest.json",
+          "sha256": null
+        },
+        "model_manifest_ref": {
+          "path": "artifacts/multibench-v3/model-manifest.json",
+          "sha256": null
+        },
+        "code_digest": null,
+        "environment_digest": null,
+        "config_digest": null,
+        "calibration_digest": null
+      },
+      "suite_qualification_evidence": {
+        "he-dev": {
+          "comparators": {
+            "initial": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "baseline": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "full_soft": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "fixed_data": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "arithmetic_anchor": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "lower_lr": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "floor_zero": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "arithmetic_anchor_tuned": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "full_soft_lr_half": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_fkl_cached": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_fkl_update": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_rkl_cached": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_rkl_update": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_jsd_cached": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            },
+            "gkd_jsd_update": {
+              "protocol_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "manifest_ref": {
+                "path": null,
+                "sha256": null
+              },
+              "source_arm_role": null
+            }
+          }
+        }
+      },
+      "suite_qualification_provenance": {
+        "he-dev": {
+          "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+          "environment_digest": null,
+          "data_revision": null
+        }
+      }
+    },
+    "method_discovery": {
+      "candidate_id": "M03",
+      "batch_ref": {
+        "path": "research/suite-v3/implementation-batch.json",
+        "sha256": null
+      }
+    }
+  },
+  "output": "research/frozen-m03.json"
+}

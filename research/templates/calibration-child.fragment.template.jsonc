@@ -1,0 +1,21 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE. JSONC comments and nulls deliberately block direct execution.
+// FRAGMENT ONLY: insert as bindings.protocol.suite_calibration_child. Keep method_discovery, genuine own-method reviewed/frozen child protocol and full design batch. node_ids/node_roles/node_seconds must come from exact compiled catalogue plus reviewed finite bounds.
+{
+  "purpose": "native-comparator-calibration",
+  "suite_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "bundle_id": "M03",
+  "node_ids": null,
+  "node_roles": null,
+  "node_seconds": null,
+  "config": {},
+  "calibration": {},
+  "tuning_budget": null,
+  "execution_provenance": {
+    "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+    "data_revision": null,
+    "environment_digest": null
+  }
+}

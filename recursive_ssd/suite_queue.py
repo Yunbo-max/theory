@@ -99,6 +99,13 @@ def _rebase_paths(value, old, new):
 def source_refs(root):
     root = Path(root).resolve()
     paths = [root / "pyproject.toml"]
+    # These small retained source records are runtime dependencies, not caches:
+    # training verifies clean IDs from DESIGN_DATA and catalogue reconstruction
+    # reads the method specification inside the isolated attempt workspace.
+    paths.append(root / "research/design-v2/method-specs.json")
+    paths.extend(root / "research/design-v2/data" / name for name in (
+        "train_prompts-clean-v2.jsonl", "clean-training-manifest.json",
+        "humaneval-manifest.json", "mbpp-plus-audit.json", "lcb-native-row-audit.json"))
     for name in ("recursive_ssd", "scripts", "configs", "vendor", "tests"):
         paths.extend(p for p in (root / name).rglob("*") if p.is_file()
                      and "__pycache__" not in p.parts and p.suffix != ".pyc" and not p.is_symlink())
@@ -403,14 +410,13 @@ def _node_scope(node, bindings, suite):
 def _qualification_replay_count(root, protocol):
     import _native_eval as N
     total = 0
-    evidence = protocol.get("suite_qualification_evidence", {})
-    if set(evidence) != set(protocol["required_groups"]):
-        _fail("COMPLETE_QUALIFICATION_EVIDENCE_REQUIRED")
     for group in protocol["required_groups"]:
-        qualifier = read_json(verify_ref(root, evidence[group]["protocol_ref"]))
-        manifest = read_json(verify_ref(root, evidence[group]["manifest_ref"]))
-        contract = N.contract_for_group(qualifier, manifest["group"])
-        total += len(contract["arm_requirements"]) * (2 if contract["scorer"]["kind"] == "faithful_harness" else 1)
+        for source in admission.qualification_sources(protocol, group):
+            record = source["record"]
+            qualifier = read_json(verify_ref(root, record["protocol_ref"]))
+            manifest = read_json(verify_ref(root, record["manifest_ref"]))
+            contract = N.contract_for_group(qualifier, manifest["group"])
+            total += len(contract["arm_requirements"]) * (2 if contract["scorer"]["kind"] == "faithful_harness" else 1)
     return total
 
 
@@ -447,6 +453,148 @@ def validate_qualification_job(job):
     if kind == "preflight" and set(job.get("methods", ["hard", "full_soft"])) - {"hard", "full_soft"}:
         _fail("QUALIFICATION_CANDIDATE_FORBIDDEN")
     return arm
+
+
+def materialize_comparator_qualification(root, request, data, bindings, protocol):
+    """Derive an exact comparator job from real, protocol-bound dependencies.
+
+    The caller supplies only a catalogue node ID, never training settings or a
+    checkpoint. Selected methods require their own frozen child route;
+    measured controls consume only verified, charged child dependencies.
+    """
+    root, data = Path(root).resolve(), _path(root, data)
+    scope = admission._qualification(protocol, root)
+    if scope["purpose"] != "comparator-qualification" or set(request) != {"node_id"}:
+        _fail("QUALIFICATION_CATALOGUE_NODE_REQUEST_REQUIRED")
+    suite = read_json(verify_ref(root, scope["suite_ref"]))
+    nodes = {node["node_id"]: node for node in compile_nodes(suite)}
+    node = nodes.get(request["node_id"])
+    expected_arm = scope["arm_bindings"].get(bindings["arm_role"])
+    if (not node or node["kind"] not in {"train", "evaluate"}
+            or node["arm_id"] != expected_arm or scope["bundle_id"] not in node["bundles"]):
+        _fail("QUALIFICATION_EXACT_CATALOGUE_NODE_REQUIRED")
+    from .suite_precursor import validate_node_native_inputs
+    native_inputs = validate_node_native_inputs(root, data, node, protocol, bindings["group"])
+    if bindings.get("config", {}) != scope["config"] or bindings.get("calibration", {}) != scope["calibration"]:
+        _fail("QUALIFICATION_FROZEN_SETTINGS_MISMATCH")
+    if bindings.get("tuning_budget") != scope.get("tuning_budget"):
+        _fail("QUALIFICATION_FROZEN_TUNING_ALLOWANCE_REQUIRED")
+    dependencies = set()
+    def visit(identifier):
+        if identifier in dependencies:
+            return
+        parent = nodes[identifier]
+        if parent["kind"] not in {"train", "derive-calibration"}:
+            _fail("QUALIFICATION_PRECURSOR_DESIGN_REQUIRED", identifier)
+        dependencies.add(identifier)
+        for predecessor in parent["depends_on"]:
+            visit(predecessor)
+    for identifier in node["depends_on"]:
+        visit(identifier)
+    state = {"nodes": {}}
+    inputs = [scope["suite_ref"], scope["method_verification_ref"], *native_inputs]
+    source = bindings.get("dependency_state_ref")
+    if source:
+        state = read_json(verify_ref(root, source))
+        inputs.append(source)
+    if set(state.get("nodes", {})) != dependencies:
+        _fail("QUALIFICATION_EXACT_DEPENDENCY_CLOSURE_REQUIRED")
+    for identifier in sorted(dependencies):
+        entry = state["nodes"][identifier]
+        _completed_output(root, state, identifier)
+        native = read_json(verify_ref(root, entry["receipt_ref"]))
+        provenance = native.get("provenance", {})
+        if provenance.get("admission_scope") == "candidate-calibration-child":
+            from .suite_precursor import validate_child_dependency
+            validate_child_dependency(root, state, identifier, suite=suite, scope=scope,
+                                      budget_path=bindings["budget_path"])
+            inputs += list(_nested_refs(entry))
+            continue
+        if nodes[identifier]["arm_id"] != expected_arm or nodes[identifier]["kind"] != "train":
+            _fail("QUALIFICATION_CANDIDATE_DEPENDENCY_REQUIRES_CHILD", identifier)
+        expected = {"admission_scope": "comparator-qualification",
+                    "qualification_protocol_ref": bindings["protocol_ref"],
+                    "qualification_arm_role": bindings["arm_role"],
+                    "node_id": identifier, "qualification_suite_digest": suite["suite_digest"],
+                    **scope["execution_provenance"]}
+        if any(provenance.get(key) != value for key, value in expected.items()):
+            _fail("QUALIFICATION_DEPENDENCY_SCOPE_MISMATCH", identifier)
+        budget = admission._read_budget(_path(root, bindings["budget_path"]))
+        if not any(row["receipt_ref"] == entry["receipt_ref"] for row in budget["charges"]):
+            _fail("QUALIFICATION_DEPENDENCY_CHARGE_REQUIRED", identifier)
+        for previous_attempt in entry["attempts"]:
+            plan = read_json(verify_ref(root, previous_attempt["native_plan_ref"]))
+            if plan["protocol_ref"] != bindings["protocol_ref"]:
+                _fail("QUALIFICATION_DEPENDENCY_PROTOCOL_MISMATCH")
+            _, R, _ = runtime()
+            R.validate_plan(root, plan)
+            validate_bound_comparator_plan(root, plan, protocol)
+        inputs += list(_nested_refs(entry))
+    # materialize_job also resolves lag and fixed-data ancestry by ordered round.
+    state["nodes"][node["node_id"]] = {"status": "pending"}
+    queue = {"identity": {"project_root": str(root), "suite_ref": scope["suite_ref"],
+        "benchmark_manifest_ref": ref(root, data / "benchmarks-manifest.json"),
+        "model_manifest_ref": ref(root, data / "model-manifest.json")}}
+    job, dependency_inputs = materialize_job(root, queue, state, suite, node, bindings)
+    return job, _unique_refs([*inputs, *dependency_inputs])
+
+
+def validate_bound_comparator_plan(root, plan, protocol):
+    """Prevent direct build_scientific_plan callers from supplying arbitrary argv."""
+    provenance = plan["provenance"]
+    bindings_ref = provenance.get("qualification_bindings_ref")
+    job_ref = provenance.get("qualification_job_ref")
+    bindings = read_json(verify_ref(root, bindings_ref))
+    actual_job = read_json(verify_ref(root, job_ref))
+    if (bindings.get("protocol_ref") != plan["protocol_ref"]
+            or len(plan["jobs"]) != 1
+            or provenance.get("qualification_protocol_ref") != plan["protocol_ref"]):
+        _fail("QUALIFICATION_PROTOCOL_BINDING_MISMATCH")
+    entry = plan["jobs"][0]
+    if entry["arm_role"] != bindings["arm_role"] or entry["group"] != bindings["group"]:
+        _fail("QUALIFICATION_PLAN_ROLE_MISMATCH")
+    expected_job, required = materialize_comparator_qualification(
+        root, {"node_id": provenance.get("node_id")}, bindings["data"], bindings, protocol)
+    if actual_job != expected_job:
+        _fail("QUALIFICATION_DERIVED_JOB_MISMATCH")
+    scope = protocol["suite_qualification"]
+    if any(provenance.get(key) != value for key, value in scope["execution_provenance"].items()):
+        _fail("QUALIFICATION_PROVENANCE_MISMATCH")
+    if provenance["environment_digest"] != object_hash(current_environment()):
+        _fail("QUALIFICATION_CURRENT_ENVIRONMENT_MISMATCH")
+    if _unique_refs(entry["code_refs"]) != _unique_refs(source_refs(root)):
+        _fail("QUALIFICATION_CURRENT_SOURCE_INVENTORY_MISMATCH")
+    data = _path(root, bindings["data"])
+    if (read_json(data / "model-manifest.json")["revision"] != provenance["model_revision"]
+            or ref(root, data / "benchmarks-manifest.json")["sha256"] != provenance["data_revision"]):
+        _fail("QUALIFICATION_DATA_MODEL_BINDING_MISMATCH")
+    if provenance.get("qualification_suite_digest") != actual_job["suite_digest"]:
+        _fail("QUALIFICATION_SUITE_BINDING_MISMATCH")
+    if actual_job["stage"] == "tuning" and actual_job["kind"] == "train":
+        state_ref = bindings.get("dependency_state_ref")
+        state = read_json(verify_ref(root, state_ref)) if state_ref else {"nodes": {}}
+        paid = sum(read_json(verify_ref(root, item["receipt_ref"]))["resources"]["seconds"]
+                   for item in state["nodes"].values())
+        if paid + plan["limits"]["wall_time_seconds"] > scope["tuning_budget"]["trial_wall_seconds"]:
+            _fail("QUALIFICATION_TUNING_TRIAL_ALLOWANCE_EXCEEDED")
+    identity = actual_job.get("trajectory", actual_job.get("unit", {}))
+    if entry["seed"] != identity["seed"]:
+        _fail("QUALIFICATION_PLAN_SEED_MISMATCH")
+    argv = entry["command"]
+    expected_tail = ["-m", "recursive_ssd.suite", "execute", "--job", str(verify_ref(root, job_ref)),
+                     "--data", bindings["data"], "--output", "results", "--seconds",
+                     str(plan["limits"]["wall_time_seconds"])]
+    if argv[1:] != expected_tail or Path(argv[0]).resolve() != Path(sys.executable).resolve():
+        _fail("QUALIFICATION_COMMAND_NOT_DERIVED")
+    if entry["output_paths"] != ["results/receipt.json"]:
+        _fail("QUALIFICATION_OUTPUT_SCOPE_MISMATCH")
+    manifest = ref(root, data / "benchmarks-manifest.json")
+    model_manifest = ref(root, data / "model-manifest.json")
+    required += [bindings_ref, job_ref, scope["suite_ref"], scope["method_verification_ref"],
+                 manifest, model_manifest, *_manifest_files(root, manifest), *_manifest_files(root, model_manifest)]
+    declared = {(value["path"], value["sha256"]) for value in entry["input_refs"]}
+    if any((value["path"], value["sha256"]) not in declared for value in required):
+        _fail("QUALIFICATION_DEPENDENCY_INPUTS_REQUIRED")
 
 
 def admit_bundle(root, directory, bundle, bindings, *, environment=None):
@@ -1416,10 +1564,24 @@ def _snapshot_inputs(root, directory, *, exclude=()):
 
 def metadata_operation(root, *, operation, directory, seconds, output=None, evidence_context=None,
                        include_checkpoints=False):
+    """Charge bounded analysis/export to the original, still-live authorization.
+
+    Admission's finalization margin is headroom, not a second authorization.
+    Reserve before hashing the snapshot because its inputs include the ledger.
+    A later file transfer may copy retained outputs, but it must not rerun this
+    worker after the original deadline or silently create another budget.
+    """
+    if operation not in {"report", "select", "collect"}:
+        _fail("METADATA_OPERATION_UNSUPPORTED", operation)
     root, directory = Path(root).resolve(), _path(root, directory)
     output_path = _path(root, output) if output else None
     exclude = [output_path, output_path.with_name(output_path.stem + "-native-report.json")] if output_path else []
     with _lock(directory):
+        budget_path = authorization_path(root, directory)
+        _time_left(budget_path)
+        reservation_id = "finalize-" + operation + "-" + uuid.uuid4().hex[:20]
+        admission.reserve_preparation(budget_path, preparation_id=reservation_id,
+            bound_seconds=seconds, purpose="engineering-preparation")
         inputs = _snapshot_inputs(root, directory, exclude=exclude)
         command = [sys.executable, "-m", "recursive_ssd.suite_queue", "_" + operation,
                    "--root", ".", "--queue", str(directory.relative_to(root))]
@@ -1433,9 +1595,10 @@ def metadata_operation(root, *, operation, directory, seconds, output=None, evid
         if include_checkpoints:
             command.append("--include-checkpoints")
         folder = root / "runs/controller" / (operation + "-" + uuid.uuid4().hex[:12])
-        task = _engineering(root, folder, command, inputs=inputs, outputs=["results/export.json"], seconds=seconds)
+        task = _engineering(root, folder, command, inputs=inputs, outputs=["results/export.json"], seconds=seconds,
+                            budget_path=budget_path, reservation_id=reservation_id)
         if task["status"] != "completed":
-            return task
+            return {**task, "budget_ref": ref(root, budget_path)}
         native = read_json(verify_ref(root, task["receipt_ref"]))
         attempt = next(a for a in native["attempts"] if a["status"] == "completed")
         workspace = _path(root, attempt["attempt_path"]) / "workspace"
@@ -1448,53 +1611,142 @@ def metadata_operation(root, *, operation, directory, seconds, output=None, evid
             if digest(target) != item["sha256"]:
                 _fail("REPORT_PROMOTION_DIGEST_MISMATCH")
         atomic_json(folder / "promoted-outputs.json", {"native_receipt_ref": task["receipt_ref"], "outputs": export["files"]})
-        return {"status": "completed", "receipt_ref": task["receipt_ref"], "outputs": export["files"]}
+        return {"status": "completed", "receipt_ref": task["receipt_ref"], "outputs": export["files"],
+                "budget_ref": ref(root, budget_path),
+                "accounting_scope": "export uses pre-settlement inputs; current budget_ref includes this metadata attempt"}
 
 
 def qualification_job(root, *, job, data, bindings, seconds, budget_path):
-    """Execute an explicit baseline-only native qualification with no candidate escape."""
+    """Execute bounded baseline or exact-catalogue comparator qualification."""
     _conda()
     root, data = Path(root).resolve(), _path(root, data)
-    arm = validate_qualification_job(job)
-    if bindings.get("verification_ref") is not None:
-        _fail("QUALIFICATION_CANDIDATE_SCOPE_CONFLICT")
+    seconds = float(seconds)
+    protocol, contract, required = _native_inputs(root, bindings["protocol_ref"], bindings["group"])
+    child = bool(protocol.get("suite_calibration_child"))
+    if child:
+        from .suite_precursor import child_scope, prepare_child_job
+        scope, _, _ = child_scope(root, protocol)
+        admission.validate_candidate_binding(root, bindings["protocol_ref"], bindings.get("verification_ref"))
+    else:
+        if bindings.get("verification_ref") is not None:
+            _fail("QUALIFICATION_CANDIDATE_SCOPE_CONFLICT")
+        scope = admission._qualification(protocol, root)
+    comparator = not child and scope["purpose"] == "comparator-qualification"
+    bindings = deepcopy(bindings)
+    bound_inputs = []
+    if comparator or child:
+        bindings["data"] = str(data.relative_to(root))
+        bindings["budget_path"] = str(_path(root, budget_path).relative_to(root))
+        if child:
+            job, bound_inputs = prepare_child_job(root, job, data, bindings, protocol, budget_path=budget_path)
+            if seconds != scope["node_seconds"][job["node_id"]]:
+                _fail("CALIBRATION_CHILD_FROZEN_NODE_BOUND_REQUIRED")
+            arm = contract["arm_requirements"][bindings["arm_role"]]["name"]
+        else:
+            job, bound_inputs = materialize_comparator_qualification(root, job, data, bindings, protocol)
+            arm = scope["arm_bindings"][bindings["arm_role"]]
+    else:
+        arm = validate_qualification_job(job)
     folder = root / "runs/controller" / ("qualification-" + uuid.uuid4().hex[:14])
     folder.mkdir(parents=True)
     job = deepcopy(job)
     job.update(project_root=str(root), model_manifest=str(data / "model-manifest.json"))
     atomic_json(folder / "job.json", job)
     manifest, model = ref(root, data / "benchmarks-manifest.json"), ref(root, data / "model-manifest.json")
-    protocol, contract, required = _native_inputs(root, bindings["protocol_ref"], bindings["group"])
     expected = "initial" if arm == "base" else arm
     if contract["arm_requirements"][bindings["arm_role"]]["name"] != expected:
         _fail("QUALIFICATION_ARM_BINDING_MISMATCH")
     inputs = _unique_refs([ref(root, folder / "job.json"), manifest, model,
                           *_manifest_files(root, manifest), *_manifest_files(root, model), *required,
-                          *bindings.get("input_refs", [])])
+                          *bindings.get("input_refs", []), *bound_inputs])
     env = current_environment()
     atomic_json(folder / "environment.json", env)
     run_id = "qualification-" + uuid.uuid4().hex[:16]
-    admission.reserve_calibration(budget_path, calibration_id=run_id, bound_seconds=seconds,
-                                  arm_ids=[expected])
+    reservation_id = run_id
+    replay_context = None
+    provenance = {"git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
+        "model_revision": read_json(data / "model-manifest.json")["revision"], "data_revision": manifest["sha256"],
+        "config_digest": object_hash(job.get("config", {})),
+        "environment_digest": object_hash(env), "environment_refs": [ref(root, folder / "environment.json")]}
+    if comparator or child:
+        atomic_json(folder / "bindings.json", bindings)
+        binding_ref = ref(root, folder / "bindings.json")
+        inputs = _unique_refs([*inputs, binding_ref])
+        provenance.update(node_id=job["node_id"], qualification_protocol_ref=bindings["protocol_ref"],
+            qualification_suite_digest=job["suite_digest"], qualification_arm_role=bindings["arm_role"],
+            qualification_bindings_ref=binding_ref, qualification_job_ref=ref(root, folder / "job.json"),
+            qualification_budget_path=bindings["budget_path"])
+        if child:
+            reservation_id = "calibration-child-" + bindings["protocol_ref"]["sha256"]
+            calls = _qualification_replay_count(root, protocol)
+            timeout = bindings.get("replay_timeout_seconds")
+            if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not 0 < timeout <= 3600:
+                _fail("FINITE_LIVE_REPLAY_BUDGET_REQUIRED")
+            if calls != bindings.get("replay_calls_per_node"):
+                _fail("EXACT_NATIVE_REPLAY_CALL_INVENTORY_REQUIRED")
+            budget = admission._read_budget(budget_path)
+            charged_ids = {entry["reservation_id"] for entry in budget["charges"]}
+            child_reservation = budget["reservations"].get(reservation_id)
+            needed = 0 if child_reservation else sum(scope["node_seconds"].values())
+            replay_inventory = {node: [reservation_id + "-" + node + "-replay-" + str(index)
+                                      for index in range(calls)] for node in scope["node_ids"]}
+            missing_replays = [identifier for values in replay_inventory.values() for identifier in values
+                               if identifier not in budget["reservations"] and identifier not in charged_ids]
+            if needed + timeout * len(missing_replays) > admission.remaining_budget(budget_path):
+                _fail("COMPLETE_CALIBRATION_CHILD_WITH_REPLAY_EXCEEDS_REMAINING_BUDGET")
+            admission.reserve_calibration_child(root, budget_path, protocol_ref=bindings["protocol_ref"],
+                verification_ref=bindings["verification_ref"], node_id=job["node_id"], reservation_id=reservation_id)
+            atomic_json(folder / "budget-location.json", {"project_root": str(root), "path": bindings["budget_path"]})
+            for identifier in missing_replays:
+                admission.reserve_preparation(budget_path, preparation_id=identifier,
+                    bound_seconds=timeout, purpose="native-reference-replay")
+            replay_context = _live_replay(root, folder, bindings, {"remaining_replay_calls": calls,
+                "next_replay_index": 0, "replay_reservations": replay_inventory[job["node_id"]]})
+        else:
+            admission.reserve_comparator_qualification(root, budget_path, calibration_id=run_id,
+                bound_seconds=seconds, protocol_ref=bindings["protocol_ref"], arm_role=bindings["arm_role"])
+    else:
+        admission.reserve_calibration(budget_path, calibration_id=run_id, bound_seconds=seconds,
+                                      arm_ids=[expected])
     native = admission.build_scientific_plan(root, run_id=run_id,
         command=[sys.executable, "-m", "recursive_ssd.suite", "execute", "--job", str(folder / "job.json"),
                  "--data", str(data.relative_to(root)), "--output", "results", "--seconds", str(seconds)],
         code_refs=source_refs(root), input_refs=inputs, output_paths=["results/receipt.json"],
-        protocol_ref=bindings["protocol_ref"], verification_ref=None,
+        protocol_ref=bindings["protocol_ref"], verification_ref=bindings.get("verification_ref") if child else None,
         seed=job.get("trajectory", job.get("unit", {})).get("seed", 17), group=bindings["group"],
         arm_role=bindings["arm_role"], seconds=seconds,
-        provenance={"git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
-            "model_revision": read_json(data / "model-manifest.json")["revision"], "data_revision": manifest["sha256"],
-            "config_digest": object_hash(job.get("config", {})),
-            "environment_digest": object_hash(env), "environment_refs": [ref(root, folder / "environment.json")]})
-    resource = _resources(bindings, gpu=False)
-    resource.update(gpu_count=1, ram_mib=bindings.get("resources", {}).get("ram_mib", 14000))
-    # Initial exclusive host measurement is intentionally allowed before a memory profile exists.
+        provenance=provenance, replay_context=replay_context,
+        evidence_mode="developmental" if child else None)
+    profile = bindings.get("resources", {})
+    measured = child and (profile.get("gpu_peak_mib") is not None or profile.get("memory_profile_ref") is not None)
+    resource = _resources(bindings, gpu=True) if measured else _resources(bindings, gpu=False)
+    if not measured:
+        resource.update(gpu_count=1, ram_mib=bindings.get("resources", {}).get("ram_mib", 14000))
+    # A finite reviewed measurement child may discover its peak on one exclusive
+    # GPU. Main full-suite admission still requires the real measured profile.
     plan = _harness_plan(root, folder, native, resources=resource, gpu_uuid=bindings["gpu_uuid"],
                          hard_seconds=_time_left(budget_path))
     task = _execute_plan(root, folder, plan)
     if task.get("receipt_ref"):
-        admission.charge_budget(root, budget_path, reservation_id=run_id, receipt_ref=task["receipt_ref"])
+        admission.charge_budget(root, budget_path, reservation_id=reservation_id, receipt_ref=task["receipt_ref"],
+                                cell_id=job["node_id"] if child else None, final=not child)
+    if (comparator or child) and task.get("receipt_ref"):
+        native_receipt = read_json(verify_ref(root, task["receipt_ref"]))
+        outputs = []
+        entry = {"status": "completed" if task["status"] == "completed" else "failed",
+            "receipt_ref": task["receipt_ref"], "attempts": [{"receipt_ref": task["receipt_ref"],
+            "native_plan_ref": ref(root, folder / "native-plan.json")}]}
+        for attempt in native_receipt["attempts"]:
+            result_folder = _path(root, attempt["attempt_path"]) / "workspace/results"
+            if result_folder.is_dir():
+                outputs += [ref(root, path) for path in result_folder.rglob("*")
+                            if path.is_file() and not path.is_symlink()]
+            for output in attempt["output_refs"]:
+                if output["path"].endswith("/results/receipt.json"):
+                    entry["workload_receipt_ref"] = output
+        entry["output_refs"] = _unique_refs(outputs)
+        atomic_json(folder / "dependency-record.json", {"nodes": {job["node_id"]: entry}})
+        task = {**task, "dependency_state_ref": ref(root, folder / "dependency-record.json")}
     return task
 
 

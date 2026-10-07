@@ -1,0 +1,32 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE. JSONC comments and nulls deliberately block direct execution.
+// FRAGMENT ONLY: insert as bindings.qualification in a complete protocol-input. Example three-role ordinary qualifier; does not cover every M03 comparator. Its treatment means fixed_data, never M03. Fresh current code evidence required.
+{
+  "purpose": "comparator-qualification",
+  "allowed_arm_roles": [
+    "treatment",
+    "baseline",
+    "full_soft"
+  ],
+  "suite_ref": {
+    "path": "research/suite-v3/catalogs/development.json",
+    "sha256": null
+  },
+  "bundle_id": "M03",
+  "arm_bindings": {
+    "treatment": "fixed_data",
+    "baseline": "hard",
+    "full_soft": "full_soft"
+  },
+  "method_verification_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "config": {},
+  "calibration": {},
+  "tuning_budget": null,
+  "execution_provenance": {
+    "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+    "data_revision": null,
+    "environment_digest": null
+  }
+}

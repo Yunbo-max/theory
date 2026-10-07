@@ -1,0 +1,30 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE. JSONC comments and nulls deliberately block direct execution.
+// Candidate calibration child only: protocol must be canonically frozen and verification_ref the real own-method complete design batch. Match exact child scope, original authorization and finite node_seconds. See docs/LOCAL_INPUT_CONTRACTS.md.
+{
+  "protocol_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "verification_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "group": null,
+  "arm_role": null,
+  "gpu_uuid": null,
+  "config": {},
+  "calibration": {},
+  "tuning_budget": null,
+  "resources": {
+    "cpu_cores": null,
+    "ram_mib": null,
+    "gpu_peak_mib": null,
+    "memory_profile_ref": null
+  },
+  "dependency_state_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "replay_timeout_seconds": null,
+  "replay_calls_per_node": null
+}

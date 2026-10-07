@@ -10,14 +10,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 
-def engineering(command, *, label, seconds, queue=None):
+def engineering(command, *, label, seconds, queue=None, code=None):
     from recursive_ssd.harness import execute_engineering
     if queue is None:
+        if code is not None:
+            raise ValueError("Explicit engineering source capture requires an original queue budget")
         return execute_engineering(command, label=label, seconds=seconds)
     from recursive_ssd import suite_queue as Q
     folder = ROOT / "runs/controller" / (label + "-" + uuid.uuid4().hex[:12])
     result = Q._engineering(ROOT, folder, command, seconds=seconds,
-                            budget_path=Q.authorization_path(ROOT, queue))
+                            budget_path=Q.authorization_path(ROOT, queue), code=code)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] == "completed" else 1
 
@@ -43,8 +45,8 @@ def main(argv=None):
             command.add_argument("--model", default="Qwen/Qwen2.5-Coder-1.5B-Instruct")
         if name == "qualify":
             command.add_argument("--benchmark", choices=("humaneval", "mbpp", "livecodebench"), default="humaneval")
-            command.add_argument("--job", help="explicit baseline-only native qualification job")
-            command.add_argument("--bindings", help="reviewed baseline-only protocol/group/arm binding")
+            command.add_argument("--job", help="baseline job or source-bound comparator/calibration-child node request")
+            command.add_argument("--bindings", help="reviewed native protocol/group/arm and exact dependency bindings")
     preflight = commands.add_parser("preflight")
     preflight.add_argument("--data", default="artifacts/multibench-v3")
     preflight.add_argument("--queue", required=True)
@@ -110,9 +112,13 @@ def main(argv=None):
     from recursive_ssd.suite_design import make_suite
     try:
         if args.command == "check":
+            from recursive_ssd.harness import project_refs
             selected = args.tests[1:] if args.tests[:1] == ["--"] else args.tests
+            # Software semantics depend on retained research fixtures as well as
+            # package code. project_refs excludes runtime caches and attempts.
             return engineering([sys.executable, "-m", "pytest", "-q", *selected],
-                               label=args.label, seconds=args.seconds, queue=args.queue)
+                               label=args.label, seconds=args.seconds, queue=args.queue,
+                               code=project_refs(ROOT))
         if args.command in {"setup", "pipcheck"}:
             Q._conda()
             if args.command == "setup":

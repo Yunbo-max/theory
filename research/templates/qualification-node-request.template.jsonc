@@ -1,0 +1,6 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE. JSONC comments and nulls deliberately block direct execution.
+// Exact node request for comparator or candidate child: this single key only. Select real compiled catalog node; never supply custom jobs or guessed checkpoints.
+{
+  "node_id": null
+}
+

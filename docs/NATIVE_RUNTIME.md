@@ -1,5 +1,13 @@
 # Native Conda/Python execution
 
+> Historical `native-v1` record. Its old CLI and setup examples below are **not
+> current executable instructions**. The legacy CLI rejects execution and
+> `run_8h.sh --start-at` is superseded. Start at
+> [LOCAL_AGENT_RUNBOOK.md](../LOCAL_AGENT_RUNBOOK.md) and
+> [RUN_MULTIBENCH.md](RUN_MULTIBENCH.md) for the current suite-v3 controller,
+> shared budget, downloads, checks and native scoring. Historical evidence below
+> retains only its original scope.
+
 The current user explicitly requires native evaluation. No runtime/setup/cleanup path invokes a container runtime.
 The previous container implementation is superseded. The numerical default training configuration remains a small development run; the broader G01 design is separately conditional.
 

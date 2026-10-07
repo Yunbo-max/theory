@@ -1,5 +1,14 @@
 # Native multi-benchmark controller
 
+Local entry: read [AGENTS](../AGENTS.md), the
+[SSH runbook](../LOCAL_AGENT_RUNBOOK.md) and the
+[current handoff](../rounds/2026-10-07-local-handoff/WEB_HANDOFF.md) at the delivered
+commit first. Web supplies generated source/design; Local runs acceptance and
+experiments. [Asset cards](LOCAL_ASSETS.md) list all pinned downloads, and
+[input contracts](LOCAL_INPUT_CONTRACTS.md) explain the conditional files below.
+`research/templates/*.jsonc` are non-dispatchable documentation, not approved
+protocols. The historical example start has elapsed and grants no new window.
+
 `python scripts/research.py --help` is the project entry point. Executable work is
 submitted to the pinned research-autopilot `run_harness.py`; the controller only
 compiles immutable inputs, reconciles receipts, and advances dependency nodes.
@@ -71,6 +80,12 @@ definitions to the actual skill's sample/definition contracts.
 `protocol` compiles supplied reviewed G01 fields and a current method batch.
 `freeze` invokes the skill's canonical freeze transaction. See
 `SCIENTIFIC_ADMISSION.md` for the native evidence contracts.
+
+The four paths below are **Local-produced evidence inputs/outputs**. See the
+[field guide](LOCAL_INPUT_CONTRACTS.md) and templates before creating them;
+the Web draft does not invent hashes, thresholds, host measurements or frozen
+gate evidence. A file named `frozen-m03.json` is still a draft until the actual
+freeze transaction succeeds.
 
 ```bash
 python scripts/research.py native-assets --spec research/native-assets-input.json
@@ -198,3 +213,9 @@ Collection preserves catalog/budget/attempt records, native plans and logs,
 raw generations, exact native outputs, source/model/data identities, and
 checkpoint hash lineage. Weights can be added explicitly with
 `--include-checkpoints`; they are never silently committed to GitHub.
+
+The new [metadata budget repair](METADATA_BUDGET_HANDOFF.md) reserves report,
+selection and collection on the same original ledger before snapshotting inputs,
+then charges the actual harness receipt. It is generated and awaits Local tests.
+The finalization margin does not authorize analysis after expiry. If already
+expired, transfer retained outputs over SSH without launching fresh computation.

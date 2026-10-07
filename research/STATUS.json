@@ -1,17 +1,22 @@
 {
   "project": "recursive-ssd",
-  "as_of": "2026-10-06",
+  "as_of": "2026-10-07",
+  "execution_role": "web_supervisor",
+  "user_delivery_scope": "Complete code and full experiment design; Local runs software acceptance and experiments (2026-10-07 clarification)",
+  "current_handoff": "rounds/2026-10-07-local-handoff/WEB_HANDOFF.md",
+  "current_authoring_status": "Code/design and Local handoff authored and source-reviewed; generated_unexecuted; Local software acceptance pending",
   "runtime_version": "suite-v3",
   "mathematical_candidates": 20,
   "selected_implementations": 15,
   "implemented_comparison_bundles": 15,
   "engineering_tests_passed": 332,
   "engineering_checks_passed": 7,
+  "engineering_evidence_scope": "Historical suite-v3 source f12e6b3a976d00d99fedff9c23b63c39e6f352d2 only; new Web repairs have not been executed or tested",
   "engineering_verification_ref": {
     "path": "research/suite-v3/verification/engineering-checks.json",
     "sha256": "76524dd1f41db08320d504ce949d888552fee0f1c0a62b41fcaebf00aeab6f8f"
   },
-  "review_scope": "Bounded component and integration agent source reviews plus actual CPU engineering; no independent scientific review, novelty certification or target-GPU evidence",
+  "review_scope": "Current bounded component and integration source review only; actual CPU engineering belongs to historical evidence; no independent scientific review, novelty certification or target-GPU evidence",
   "primary_candidate": "M03 floor_projection",
   "benchmarks": {
     "humaneval": {
@@ -73,6 +78,11 @@
     "completion_guarantee": "none for full scientific inventory; complete bundles need measured capacity, unfinished cells remain pending"
   },
   "remaining_selected_code_backlog": [],
+  "local_acceptance_pending": [
+    "Execute affected and full software checks at the delivered source revision through the pinned harness",
+    "Qualify native target-host scorers/baselines and bind actual canonical/design/resource evidence before experiments",
+    "Retain failures and repair any demonstrated runtime defects; source review is not execution evidence"
+  ],
   "reserves_without_implementation": [
     "M16",
     "M17",
@@ -89,16 +99,21 @@
   "gpu_memory_and_throughput": "PENDING real target-host measurements",
   "scientific_verdict": "INCONCLUSIVE; no GPU observations",
   "gate_a_g01_e04": "PENDING canonical scientific prerequisites, native host qualification, current freeze and result review",
-  "next_evidence": "Target-host native reference replay, baseline/natural failure qualification, actual per-node cost/VRAM, canonical Parent/Gate0/IPCG, reviewed frozen complete design; then finite whole-bundle dispatch",
+  "next_evidence": "Local current-source software acceptance first; then target-host native reference replay, baseline/natural failure qualification, bounded candidate calibration children, actual per-node cost/VRAM, canonical Parent/Gate0/IPCG and reviewed frozen complete main design before finite whole-bundle dispatch",
   "historical_source_commit": "bfe8a4058590853ecf1c7108703fcf1021e85c05",
-  "source_commit": "f12e6b3a976d00d99fedff9c23b63c39e6f352d2",
-  "current_source_identity": "research/suite-v3/verification/source-identity.json",
-  "current_method_verification_ref": {
+  "historical_tested_source_commit": "f12e6b3a976d00d99fedff9c23b63c39e6f352d2",
+  "source_commit": null,
+  "source_commit_resolution": "Resolve the generated source revision from the exact Web delivery receipt; Local must bind actual tested source separately",
+  "historical_source_identity": "research/suite-v3/verification/source-identity.json",
+  "current_source_identity": null,
+  "historical_method_verification_ref": {
     "path": "research/suite-v3/implementation-check.json",
     "sha256": "62f329dfa9c4f78c84c67e983ce5f313a759b5ee01156208db1aec035c6636c3"
   },
-  "code_verified": 15,
-  "code_binding_status": "Actual skill validator accepted current published source bindings for15 selected implementations; design/scientific evidence remains pending",
+  "current_method_verification_ref": null,
+  "historical_code_verified": 15,
+  "code_verified": null,
+  "code_binding_status": "Current generated source repairs await Local software checks and rebinding; historical 15-code verification remains scoped to its retained revision",
   "design_drafts": 15,
   "design_verified": 0,
   "design_ref": "research/suite-v3/G01_COVERAGE.md",

@@ -1,0 +1,53 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE; the CLI accepts strict JSON, not JSONC.
+// M03 DEVELOPMENT only. Null refs, UUID, measurements and settings are deliberately unresolved. Use the actual design batch, not implementation-check.json. See docs/LOCAL_INPUT_CONTRACTS.md.
+{
+  "protocol_ref": {
+    "path": "research/frozen-m03.json",
+    "sha256": null
+  },
+  "verification_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "calibration_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "gpu_uuid": null,
+  "resources": {
+    "cpu_cores": null,
+    "ram_mib": null,
+    "gpu_peak_mib": null,
+    "memory_profile_ref": {
+      "path": null,
+      "sha256": null
+    }
+  },
+  "groups": {
+    "humaneval/dev": "he-dev"
+  },
+  "arm_roles": {
+    "base": "initial",
+    "hard": "baseline",
+    "full_soft": "full_soft",
+    "fixed_data": "fixed_data",
+    "M03": "treatment",
+    "arithmetic_anchor": "arithmetic_anchor",
+    "lower_lr": "lower_lr",
+    "floor_zero": "floor_zero",
+    "arithmetic_anchor_tuned": "arithmetic_anchor_tuned",
+    "full_soft_lr_half": "full_soft_lr_half",
+    "gkd_fkl_cached": "gkd_fkl_cached",
+    "gkd_fkl_update": "gkd_fkl_update",
+    "gkd_rkl_cached": "gkd_rkl_cached",
+    "gkd_rkl_update": "gkd_rkl_update",
+    "gkd_jsd_cached": "gkd_jsd_cached",
+    "gkd_jsd_update": "gkd_jsd_update"
+  },
+  "config": null,
+  "calibration": null,
+  "replay_timeout_seconds": null,
+  "replay_calls_per_node": null,
+  "finalization_reserve_seconds": 900
+}
+

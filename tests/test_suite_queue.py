@@ -235,6 +235,87 @@ def test_candidate_settings_cannot_hide_under_a_qualification_baseline_name():
         api().validate_qualification_job({"kind": "preflight", "methods": ["M03"]})
 
 
+@pytest.mark.parametrize("operation", ["report", "select", "collect"])
+def test_metadata_reserves_same_original_budget_before_hashing_inputs(tmp_path, monkeypatch, operation):
+    """Controller wiring fixture only; it does not launch an actual workload."""
+    q = api()
+    start = datetime.now(timezone.utc).isoformat()
+    q.initialize_authorization(tmp_path, "runs/original", original_start=start, already_used_seconds=37)
+    q.initialize_authorization(tmp_path, "runs/confirmation", original_start=start,
+                               budget_from="runs/original")
+    budget_path = q.authorization_path(tmp_path, "runs/original")
+    original = json.loads(budget_path.read_text())
+    observed = {}
+
+    def snapshot(root, directory, *, exclude):
+        ledger = json.loads(budget_path.read_text())
+        assert len(ledger["reservations"]) == 1
+        reservation = next(iter(ledger["reservations"].values()))
+        assert reservation["purpose"] == "engineering-preparation"
+        assert reservation["seconds"] == 60
+        observed["reservation_id"] = reservation["reservation_id"]
+        # _engineering must not reserve again after this hash is captured.
+        observed["snapshot_ref"] = q.ref(root, budget_path)
+        return [observed["snapshot_ref"]]
+
+    def engineering(root, folder, command, **kwargs):
+        assert kwargs["budget_path"] == budget_path
+        assert kwargs["reservation_id"] == observed["reservation_id"]
+        assert observed["snapshot_ref"] in kwargs["inputs"]
+        q.verify_ref(root, observed["snapshot_ref"])
+        assert kwargs["seconds"] == 60
+        assert command[3] == "_" + operation
+        observed["dispatched"] = True
+        # Preserve a failed fixture; the real _engineering owns receipt charging.
+        return {"status": "failed", "fixture": "no workload executed"}
+
+    monkeypatch.setattr(q, "_snapshot_inputs", snapshot)
+    monkeypatch.setattr(q, "_engineering", engineering)
+    result = q.metadata_operation(tmp_path, operation=operation, directory="runs/confirmation",
+                                 seconds=60, output=None if operation == "report" else "returns/output.json")
+    assert observed["dispatched"] is True
+    assert result["status"] == "failed"
+    assert result["budget_ref"] == q.ref(tmp_path, budget_path)
+    ledger = json.loads(budget_path.read_text())
+    assert ledger["original_start"] == original["original_start"]
+    assert ledger["absolute_end"] == original["absolute_end"]
+    assert ledger["cumulative_used_seconds"] == 37
+
+
+@pytest.mark.parametrize("operation", ["report", "select", "collect"])
+def test_metadata_cannot_execute_after_original_deadline(tmp_path, monkeypatch, operation):
+    q = api()
+    start = (datetime.now(timezone.utc) - timedelta(hours=9)).isoformat()
+    q.initialize_authorization(tmp_path, "runs/q", original_start=start)
+    budget_path = q.authorization_path(tmp_path, "runs/q")
+    before = budget_path.read_bytes()
+    called = []
+    monkeypatch.setattr(q, "_snapshot_inputs", lambda *a, **k: called.append("snapshot"))
+    monkeypatch.setattr(q, "_engineering", lambda *a, **k: called.append("engineering"))
+    with pytest.raises(ValueError, match="ORIGINAL_BUDGET_EXPIRED"):
+        q.metadata_operation(tmp_path, operation=operation, directory="runs/q", seconds=60)
+    assert called == []
+    assert budget_path.read_bytes() == before
+
+
+@pytest.mark.parametrize("operation", ["report", "select", "collect"])
+def test_metadata_cannot_spend_capacity_reserved_for_unfinished_nodes(tmp_path, monkeypatch, operation):
+    q = api()
+    start = datetime.now(timezone.utc).isoformat()
+    q.initialize_authorization(tmp_path, "runs/q", original_start=start, cap_seconds=600)
+    budget_path = q.authorization_path(tmp_path, "runs/q")
+    q.admission.reserve_calibration(budget_path, calibration_id="unfinished-real-probe",
+                                    bound_seconds=550, arm_ids=["hard"])
+    before = budget_path.read_bytes()
+    called = []
+    monkeypatch.setattr(q, "_snapshot_inputs", lambda *a, **k: called.append("snapshot"))
+    monkeypatch.setattr(q, "_engineering", lambda *a, **k: called.append("engineering"))
+    with pytest.raises(ValueError, match="COMPLETE_BUNDLE_EXCEEDS_REMAINING_BUDGET"):
+        q.metadata_operation(tmp_path, operation=operation, directory="runs/q", seconds=60)
+    assert called == []
+    assert budget_path.read_bytes() == before
+
+
 def test_selected_stages_inherit_exact_development_hyperparameters_and_calibration(tmp_path):
     from recursive_ssd.suite_design import make_suite
     evidence = put(tmp_path, "inputs/tuning-evidence.json", {"scope": "engineering fixture"})

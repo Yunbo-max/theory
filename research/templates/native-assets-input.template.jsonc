@@ -1,0 +1,297 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE; the CLI accepts strict JSON, not JSONC.
+// All four prepared groups; nulls need actual source/host evidence. Sampling values are project settings, not proof of upstream official defaults. See docs/LOCAL_INPUT_CONTRACTS.md.
+{
+  "asset_manifest_ref": {
+    "path": "artifacts/multibench-v3/benchmarks-manifest.json",
+    "sha256": null
+  },
+  "groups": {
+    "he-dev": {
+      "benchmark": "humaneval",
+      "split": "dev"
+    },
+    "he-confirm": {
+      "benchmark": "humaneval",
+      "split": "confirm"
+    },
+    "mbpp-full": {
+      "benchmark": "mbpp",
+      "split": "full"
+    },
+    "lcb-full": {
+      "benchmark": "livecodebench",
+      "split": "full"
+    }
+  },
+  "definitions": {
+    "he-dev": {
+      "benchmark_id": null,
+      "benchmark_revision": "v0.1.10",
+      "published_at": null,
+      "source_url": null,
+      "publication_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ],
+      "upstream_split": null,
+      "primary_metric": "pass@1",
+      "metrics": [
+        {
+          "name": "pass@1",
+          "output_path": null
+        },
+        {
+          "name": "pass@10",
+          "output_path": null
+        }
+      ],
+      "prediction_format": {
+        "format": null,
+        "records_path": null,
+        "id_path": null
+      },
+      "sampling": {
+        "policy": null,
+        "parameters": {
+          "n": 10,
+          "temperature": 0.8,
+          "top_p": 0.95,
+          "max_new_tokens": 384,
+          "max_prompt_tokens": 1024,
+          "top_k": 0
+        }
+      },
+      "budget": null,
+      "scorer": {
+        "kind": "official",
+        "identity": null,
+        "revision": "0.3.1",
+        "source_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "code_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "command": null,
+        "cwd": null,
+        "output": {
+          "format": "json",
+          "source": null
+        },
+        "denominator_path": null
+      }
+    },
+    "he-confirm": {
+      "benchmark_id": null,
+      "benchmark_revision": "v0.1.10",
+      "published_at": null,
+      "source_url": null,
+      "publication_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ],
+      "upstream_split": null,
+      "primary_metric": "pass@1",
+      "metrics": [
+        {
+          "name": "pass@1",
+          "output_path": null
+        },
+        {
+          "name": "pass@10",
+          "output_path": null
+        }
+      ],
+      "prediction_format": {
+        "format": null,
+        "records_path": null,
+        "id_path": null
+      },
+      "sampling": {
+        "policy": null,
+        "parameters": {
+          "n": 10,
+          "temperature": 0.8,
+          "top_p": 0.95,
+          "max_new_tokens": 384,
+          "max_prompt_tokens": 1024,
+          "top_k": 0
+        }
+      },
+      "budget": null,
+      "scorer": {
+        "kind": "official",
+        "identity": null,
+        "revision": "0.3.1",
+        "source_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "code_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "command": null,
+        "cwd": null,
+        "output": {
+          "format": "json",
+          "source": null
+        },
+        "denominator_path": null
+      }
+    },
+    "mbpp-full": {
+      "benchmark_id": null,
+      "benchmark_revision": "v0.2.0",
+      "published_at": null,
+      "source_url": null,
+      "publication_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ],
+      "upstream_split": null,
+      "primary_metric": "pass@1",
+      "metrics": [
+        {
+          "name": "pass@1",
+          "output_path": null
+        },
+        {
+          "name": "pass@10",
+          "output_path": null
+        }
+      ],
+      "prediction_format": {
+        "format": null,
+        "records_path": null,
+        "id_path": null
+      },
+      "sampling": {
+        "policy": null,
+        "parameters": {
+          "n": 10,
+          "temperature": 0.8,
+          "top_p": 0.95,
+          "max_new_tokens": 384,
+          "max_prompt_tokens": 1024,
+          "top_k": 0
+        }
+      },
+      "budget": null,
+      "scorer": {
+        "kind": "official",
+        "identity": null,
+        "revision": "0.3.1",
+        "source_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "code_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "command": null,
+        "cwd": null,
+        "output": {
+          "format": "json",
+          "source": null
+        },
+        "denominator_path": null
+      }
+    },
+    "lcb-full": {
+      "benchmark_id": null,
+      "benchmark_revision": "release_v5",
+      "published_at": null,
+      "source_url": null,
+      "publication_refs": [
+        {
+          "path": null,
+          "sha256": null
+        }
+      ],
+      "upstream_split": null,
+      "primary_metric": "pass@1",
+      "metrics": [
+        {
+          "name": "pass@1",
+          "output_path": null
+        },
+        {
+          "name": "pass@5",
+          "output_path": null
+        }
+      ],
+      "prediction_format": {
+        "format": null,
+        "records_path": null,
+        "id_path": null
+      },
+      "sampling": {
+        "policy": null,
+        "parameters": {
+          "n": 10,
+          "temperature": 0.2,
+          "top_p": 0.95,
+          "max_new_tokens": 2000,
+          "max_prompt_tokens": 4096,
+          "top_k": 0
+        }
+      },
+      "budget": null,
+      "scorer": {
+        "kind": "official",
+        "identity": null,
+        "revision": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+        "source_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "code_refs": [
+          {
+            "path": null,
+            "sha256": null
+          }
+        ],
+        "command": null,
+        "cwd": null,
+        "output": {
+          "format": "json",
+          "source": null
+        },
+        "denominator_path": null
+      }
+    }
+  },
+  "output_dir": "research/native-protocol-assets-v3",
+  "human_eval_split_ref": {
+    "path": "research/design-v2/data/humaneval-manifest.json",
+    "sha256": null
+  },
+  "subset_support_ref": {
+    "path": null,
+    "sha256": null
+  }
+}

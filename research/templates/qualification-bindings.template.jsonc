@@ -1,0 +1,22 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE. JSONC comments and nulls deliberately block direct execution.
+// Ordinary comparator qualifier binding; source-generated but unexecuted. For a candidate child ALSO supply verification_ref, exclusive GPU resources and replay fields as documented; both profile fields may be null for finite initial measurement. Omit dependency_state_ref only when the actual ancestor set is empty. For tuning, replace tuning_budget with the same actual source-bound trial allowance as its protocol.
+{
+  "protocol_ref": {
+    "path": null,
+    "sha256": null
+  },
+  "group": "he-dev",
+  "arm_role": null,
+  "gpu_uuid": null,
+  "config": {},
+  "calibration": {},
+  "tuning_budget": null,
+  "resources": {
+    "cpu_cores": null,
+    "ram_mib": null
+  },
+  "dependency_state_ref": {
+    "path": null,
+    "sha256": null
+  }
+}

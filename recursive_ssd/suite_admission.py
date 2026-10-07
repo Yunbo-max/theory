@@ -22,6 +22,10 @@ from .harness import runtime
 
 MAX_TOTAL_SECONDS = 8 * 60 * 60
 QUALIFICATION_ARMS = frozenset({"initial", "hard", "full_soft", "native_reference"})
+QUALIFICATION_CALIBRATION_SOURCES = {
+    "head_temperature": "M06", "m13_step_scale": "M13",
+    "clock_m13": "M13", "clock_m15": "M15",
+}
 _CONTAINERS = frozenset({"docker", "podman", "singularity", "apptainer"})
 
 
@@ -32,6 +36,90 @@ class AdmissionError(ValueError):
         self.code = code
         self.detail = detail
         super().__init__(code + (": " + detail if detail else ""))
+
+
+def qualification_dependency_report(suite):
+    """Describe the real bootstrap gap without authorizing new execution.
+
+    This is an authoring diagnostic, not a qualification packet. In particular,
+    renaming a selected method as an ablation/control cannot remove the method
+    evidence required to execute it. The current four-arm bootstrap is retained.
+    No qualification result, gate flag, resource measurement or approval is
+    created here. Local may use the report to author a reviewed child protocol.
+    """
+    from .suite_design import ORDER, arm_registry, comparison_bundles, verify_suite
+    from .io import object_hash
+
+    verify_suite(suite)
+    registry = arm_registry()
+    actual_arms = {row["arm_id"]: row["arm"] for row in suite["trajectories"]}
+    catalogue = comparison_bundles()
+    candidates = suite.get("candidate_ids", [])
+    if not candidates or any(candidate not in catalogue for candidate in candidates):
+        raise AdmissionError("QUALIFICATION_CATALOGUE_BINDING_REQUIRED")
+    for candidate in candidates:
+        if suite.get("method_bundles", {}).get(candidate) != catalogue[candidate]:
+            raise AdmissionError("QUALIFICATION_CATALOGUE_BINDING_MISMATCH", candidate)
+    bundles = {}
+    for candidate in candidates:
+        comparisons = catalogue[candidate]
+        controls = [arm for arm in comparisons["arms"] if arm != candidate]
+        scoped = []
+        for arm_id in controls:
+            if arm_id not in registry:
+                raise AdmissionError("QUALIFICATION_CATALOGUE_ARM_UNKNOWN", arm_id)
+            arm = actual_arms.get(arm_id, registry[arm_id])
+            native_name = "initial" if arm_id == "base" else arm_id
+            prerequisites = []
+            for key in arm["required_calibration"]:
+                source = QUALIFICATION_CALIBRATION_SOURCES.get(key)
+                prerequisites.append({
+                    "key": key,
+                    "source_candidate_id": source,
+                    "source_kind": "candidate_training_receipt" if source else "development_selection",
+                    "requires_real_source_refs": True,
+                })
+            selected_method = arm["method"] if arm["method"] in ORDER else None
+            allowed = native_name in QUALIFICATION_ARMS and not selected_method and not prerequisites
+            comparator_scope = (not selected_method and suite["stage"] == "development"
+                                and not any(item["source_kind"] == "development_selection" for item in prerequisites))
+            blockers = []
+            if selected_method:
+                blockers.append("CANDIDATE_METHOD_REQUIRES_OWN_VERIFIED_DESIGN")
+            if any(item["source_candidate_id"] == candidate for item in prerequisites):
+                blockers.append("VERIFIED_CALIBRATION_CHILD_REQUIRED")
+            if any(item["source_kind"] == "development_selection" for item in prerequisites):
+                blockers.append("ACTUAL_COMPLETE_DEVELOPMENT_SELECTION_REQUIRED")
+            scoped.append({
+                "arm_id": arm_id, "native_arm_name": native_name,
+                "definition_digest": object_hash(arm),
+                "existing_bootstrap_eligible": allowed,
+                "ordinary_comparator_scope_eligible": comparator_scope,
+                "selected_candidate_as_control": arm_id if arm_id in ORDER else None,
+                "selected_method_implementation": selected_method,
+                "calibration_dependencies": prerequisites,
+                "requires_verified_child_dependencies": any(item["source_candidate_id"] for item in prerequisites),
+                "blockers": blockers,
+            })
+        bundles[candidate] = {
+            "treatment_arm": candidate,
+            "required_comparators": scoped,
+            "comparator_count": len(scoped),
+            "unsupported_bootstrap_arms": [row["arm_id"] for row in scoped
+                                            if not row["existing_bootstrap_eligible"]],
+            "full_comparator_bootstrap_implemented": all(row["existing_bootstrap_eligible"] for row in scoped),
+            "requires_reviewed_child_design": [row["arm_id"] for row in scoped
+                                                if not row["ordinary_comparator_scope_eligible"]],
+        }
+    return {
+        "schema": "recursive-ssd-qualification-dependency-report-v1",
+        "scope": "source-derived authoring diagnostic; no execution or qualification authority",
+        "suite_digest": suite["suite_digest"], "stage": suite["stage"],
+        "catalogue_digest": object_hash(catalogue),
+        "bootstrap_arm_allowlist": sorted(QUALIFICATION_ARMS),
+        "scientific_dispatch_ready": False, "gate_advanced": False,
+        "bundles": bundles,
+    }
 
 
 def _checked(function):
@@ -380,10 +468,81 @@ def build_native_contract(root, sample_manifest_ref, arms, scorer_spec):
     return contract
 
 
-def _qualification(protocol):
+def _comparator_qualification(root, protocol):
+    """Verify a finite exact-catalogue scope; never admit a selected method."""
+    from .suite_design import ORDER, make_suite
+    C, _, _, M = _modules()
+    scope = protocol["suite_qualification"]
+    suite = C.load_file(C.verify_ref(root, scope["suite_ref"]))
+    if suite.get("stage") not in {"development", "tuning"}:
+        raise AdmissionError("QUALIFICATION_DEVELOPMENT_SUITE_REQUIRED")
+    expected = make_suite(suite["stage"], model=suite.get("model"),
+                          calibration=suite.get("calibration"),
+                          tuning_selection=suite.get("tuning_selection"))
+    if suite != expected:
+        raise AdmissionError("QUALIFICATION_EXACT_CATALOGUE_REQUIRED")
+    bundle = scope.get("bundle_id")
+    if bundle not in suite["method_bundles"]:
+        raise AdmissionError("QUALIFICATION_CATALOGUE_BINDING_REQUIRED")
+    if not isinstance(scope.get("config"), dict) or scope.get("calibration") != {}:
+        raise AdmissionError("QUALIFICATION_EXACT_SETTINGS_REQUIRED")
+    tuning = scope.get("tuning_budget")
+    if suite["stage"] == "tuning":
+        if not isinstance(tuning, dict) or set(tuning) != {"trial_wall_seconds", "source_refs"}:
+            raise AdmissionError("QUALIFICATION_FROZEN_TUNING_ALLOWANCE_REQUIRED")
+        if _number(tuning["trial_wall_seconds"], "QUALIFICATION_FINITE_TUNING_ALLOWANCE_REQUIRED", positive=True) > MAX_TOTAL_SECONDS:
+            raise AdmissionError("AUTHORIZED_CAP_EXCEEDED")
+        _refs(C, root, tuning["source_refs"])
+    elif tuning is not None:
+        raise AdmissionError("QUALIFICATION_TUNING_SCOPE_MISMATCH")
+    provenance = scope.get("execution_provenance")
+    if (not isinstance(provenance, dict)
+            or set(provenance) != {"model_revision", "data_revision", "environment_digest"}
+            or any(not isinstance(value, str) or not value for value in provenance.values())
+            or provenance["model_revision"] != suite["model_revision"]):
+        raise AdmissionError("QUALIFICATION_PROVENANCE_BINDINGS_REQUIRED")
+    batch = M.read(root, scope["method_verification_ref"], "method-verification-batch")
+    boundary = M.before_action(root, batch, "experiment-design", bundle)["workflow_boundary"]
+    if not boundary["ready"]:
+        raise AdmissionError("QUALIFICATION_CURRENT_CODE_EVIDENCE_REQUIRED",
+                             ", ".join(boundary["reason_codes"]))
+    entry = next(row for row in batch["candidates"] if row["candidate_id"] == bundle)
+    implementation = C.load_file(C.verify_ref(root, entry["implementation_ref"]))
+    arms = {row["arm_id"]: row["arm"] for row in suite["trajectories"]}
+    bindings = scope.get("arm_bindings")
+    roles = scope["allowed_arm_roles"]
+    if not isinstance(bindings, dict) or set(bindings) != set(roles):
+        raise AdmissionError("QUALIFICATION_EXACT_ARM_BINDINGS_REQUIRED")
+    if len(set(bindings.values())) != len(bindings):
+        raise AdmissionError("QUALIFICATION_DUPLICATE_ARM_BINDING")
+    allowed = set(suite["method_bundles"][bundle]["arms"]) - {bundle}
+    if suite["stage"] == "tuning":
+        family = "arithmetic_anchor" if bundle == "M03" else "arithmetic_same_smoothing"
+        allowed = {"base", *suite["tuning_groups"][family]}
+    contracts = protocol.get("native_eval_contracts", {"main": protocol["native_eval_contract"]})
+    for role, arm_id in bindings.items():
+        if arm_id not in allowed or arm_id not in arms:
+            raise AdmissionError("QUALIFICATION_NOT_A_REQUIRED_COMPARATOR", str(arm_id))
+        arm = arms[arm_id]
+        if arm_id in ORDER or arm["method"] in ORDER:
+            raise AdmissionError("QUALIFICATION_SELECTED_METHOD_REQUIRES_OWN_DESIGN", arm_id)
+        if set(arm["required_calibration"]) - set(QUALIFICATION_CALIBRATION_SOURCES):
+            raise AdmissionError("QUALIFICATION_PRECURSOR_DESIGN_REQUIRED", arm_id)
+        expected_name = "initial" if arm_id == "base" else arm_id
+        for contract in contracts.values():
+            if contract["arm_requirements"][role]["name"] != expected_name:
+                raise AdmissionError("QUALIFICATION_CATALOGUE_ARM_NAME_MISMATCH", role)
+            if contract["arm_requirements"][role]["implementation_refs"] != implementation["code_refs"]:
+                raise AdmissionError("QUALIFICATION_CURRENT_CODE_BINDING_MISMATCH", role)
+    if protocol["seed_policy"]["seeds"] != suite["seeds"]:
+        raise AdmissionError("QUALIFICATION_CATALOGUE_SEED_MISMATCH")
+    return suite
+
+
+def _qualification(protocol, root=None):
     scope = protocol.get("suite_qualification")
     if not isinstance(scope, dict) or scope.get("purpose") not in {
-            "baseline-calibration", "native-evaluator-qualification"}:
+            "baseline-calibration", "native-evaluator-qualification", "comparator-qualification"}:
         raise AdmissionError("METHOD_DISCOVERY_REQUIRED",
                              "candidate plans require the actual current discovery batch")
     roles = scope.get("allowed_arm_roles")
@@ -393,11 +552,16 @@ def _qualification(protocol):
     for contract in contracts.values():
         if set(roles) != set(contract["arm_requirements"]):
             raise AdmissionError("QUALIFICATION_ARM_SCOPE_MISMATCH")
-        for arm in contract["arm_requirements"].values():
-            if arm["name"] not in QUALIFICATION_ARMS:
-                raise AdmissionError("QUALIFICATION_ARM_FORBIDDEN", arm["name"])
+        if scope["purpose"] != "comparator-qualification":
+            for arm in contract["arm_requirements"].values():
+                if arm["name"] not in QUALIFICATION_ARMS:
+                    raise AdmissionError("QUALIFICATION_ARM_FORBIDDEN", arm["name"])
     if protocol.get("method_discovery"):
         raise AdmissionError("QUALIFICATION_CANDIDATE_SCOPE_CONFLICT")
+    if scope["purpose"] == "comparator-qualification":
+        if root is None:
+            raise AdmissionError("QUALIFICATION_SOURCE_ROOT_REQUIRED")
+        _comparator_qualification(root, protocol)
     return scope
 
 
@@ -469,7 +633,10 @@ def prepare_native_protocol(root, benchmark_manifest, arms, seeds, groups, score
                     seed_policy={"seeds": list(seeds), "allow_extra": False},
                     required_groups=list(groups), contrasts=_contrasts(arms))
     if "suite_qualification" in protocol:
-        _qualification(protocol)
+        _qualification(protocol, root)
+    if "suite_calibration_child" in protocol:
+        from .suite_precursor import child_scope
+        child_scope(root, protocol)
     C.validate(protocol)
     C.verify_ref(root, protocol["evidence_snapshot_ref"])
     N.verify_protocol(root, protocol)
@@ -506,11 +673,34 @@ def freeze_native_protocol(root, protocol_path, *, gate="gate-a", replay_context
         return C.freeze_gate(SimpleNamespace(gate=gate, protocol=str(path)), root)
 
 
+def qualification_sources(protocol, group):
+    """Normalize whole-manifest or exact per-comparator source bindings."""
+    evidence = protocol.get("suite_qualification_evidence", {})
+    if set(evidence) != set(protocol["required_groups"]):
+        raise AdmissionError("NATIVE_QUALIFICATION_EVIDENCE_REQUIRED")
+    record = evidence[group]
+    contract = (protocol["native_eval_contracts"][group] if protocol.get("native_eval_contracts")
+                else protocol["native_eval_contract"])
+    roles = set(contract["arm_requirements"]) - {"treatment"}
+    if "comparators" not in record:
+        if set(record) != {"protocol_ref", "manifest_ref"}:
+            raise AdmissionError("QUALIFICATION_SOURCE_BINDING_INVALID", group)
+        return [{"record": record, "roles": {role: None for role in sorted(roles)}}]
+    if set(record) != {"comparators"} or set(record["comparators"]) != roles:
+        raise AdmissionError("QUALIFICATION_COMPARATOR_INVENTORY_MISMATCH", group)
+    retained = {}
+    for role, source in record["comparators"].items():
+        if (set(source) != {"protocol_ref", "manifest_ref", "source_arm_role"}
+                or not isinstance(source["source_arm_role"], str) or not source["source_arm_role"]):
+            raise AdmissionError("QUALIFICATION_SOURCE_BINDING_INVALID", role)
+        pair = {key: source[key] for key in ("protocol_ref", "manifest_ref")}
+        key = json.dumps(pair, sort_keys=True)
+        retained.setdefault(key, {"record": pair, "roles": {}})["roles"][role] = source["source_arm_role"]
+    return [retained[key] for key in sorted(retained)]
+
+
 def _live_qualification(C, N, root, protocol, replay_context):
     """Recheck real qualification runs with the native live replay contract."""
-    evidence = protocol.get("suite_qualification_evidence")
-    if not isinstance(evidence, dict) or set(evidence) != set(protocol["required_groups"]):
-        raise AdmissionError("NATIVE_QUALIFICATION_EVIDENCE_REQUIRED")
     if not callable(replay_context):
         raise AdmissionError("NATIVE_SCORER_REPLAY_REQUIRED")
     retained = []
@@ -518,44 +708,55 @@ def _live_qualification(C, N, root, protocol, replay_context):
                 "metrics", "primary_metric", "prediction_format", "sampling", "budget", "scorer",
                 "native_definition_ref", "published_source_refs")
     for group in protocol["required_groups"]:
-        record = evidence[group]
-        qualifier = C.load_file(C.verify_ref(root, record["protocol_ref"]))
-        manifest = C.load_file(C.verify_ref(root, record["manifest_ref"]))
-        C.validate(manifest, "run-manifest")
         expected_provenance = protocol.get("suite_qualification_provenance", {}).get(group)
         if not isinstance(expected_provenance, dict) or not {
                 "model_revision", "environment_digest", "data_revision"}.issubset(expected_provenance):
             raise AdmissionError("QUALIFICATION_PROVENANCE_BINDINGS_REQUIRED", group)
-        if any(manifest["provenance"].get(key) != expected for key, expected in expected_provenance.items()):
-            raise AdmissionError("QUALIFICATION_PROVENANCE_MISMATCH", group)
-        N.verify_protocol(root, qualifier)
         current = N.contract_for_group(protocol, group)
-        previous = N.contract_for_group(qualifier, manifest["group"])
         definition = C.load_file(C.verify_ref(root, current["native_definition_ref"]))
         _definition_inputs(C, root, definition)
-        if any(current[key] != previous[key] for key in identity):
-            raise AdmissionError("QUALIFICATION_NATIVE_IDENTITY_MISMATCH", group)
-        if current.get("selection") != previous.get("selection"):
-            raise AdmissionError("QUALIFICATION_NATIVE_SELECTION_MISMATCH", group)
-        previous_arms = {arm["name"]: arm for arm in previous["arm_requirements"].values()}
-        for role, arm in current["arm_requirements"].items():
-            if role != "treatment" and previous_arms.get(arm["name"]) != arm:
-                raise AdmissionError("QUALIFICATION_COMPARATOR_IDENTITY_MISMATCH", role)
-        result = N.verify_run(root, qualifier, manifest, replay_context=replay_context)
-        _definition_inputs(C, root, definition)
-        if not result["baseline_qualified"] or not all(result["control_results"].values()):
-            raise AdmissionError("NATIVE_COMPARATOR_NOT_QUALIFIED", group)
-        role_for_name = {arm["name"]: role for role, arm in previous["arm_requirements"].items()}
         rules = {"baseline": current["baseline_qualification"],
                  **{rule["role"]: rule for rule in current["control_qualifications"]}}
         operations = {"ge": operator.ge, "gt": operator.gt, "le": operator.le,
                       "lt": operator.lt, "eq": operator.eq}
-        for role, rule in rules.items():
-            old_role = role_for_name[current["arm_requirements"][role]["name"]]
-            value = result["arm_metrics"][old_role][rule["metric"]]
-            if not operations[rule["operator"]](value, rule["threshold"]):
-                raise AdmissionError("CURRENT_NATIVE_COMPARATOR_NOT_QUALIFIED", group + "/" + role)
-        retained.append({"group": group, **deepcopy(record), "replay_audit": result["replay_audit"]})
+        for source in qualification_sources(protocol, group):
+            record = source["record"]
+            qualifier = C.load_file(C.verify_ref(root, record["protocol_ref"]))
+            manifest = C.load_file(C.verify_ref(root, record["manifest_ref"]))
+            C.validate(manifest, "run-manifest")
+            if any(manifest["provenance"].get(key) != expected for key, expected in expected_provenance.items()):
+                raise AdmissionError("QUALIFICATION_PROVENANCE_MISMATCH", group)
+            N.verify_protocol(root, qualifier)
+            if qualifier.get("method_discovery"):
+                _, _, _, M = _modules()
+                M.verify_run_design(root, {"protocol_ref": record["protocol_ref"],
+                                          "provenance": manifest["provenance"]}, qualifier)
+            else:
+                _qualification(qualifier, root)
+            previous = N.contract_for_group(qualifier, manifest["group"])
+            if any(current[key] != previous[key] for key in identity):
+                raise AdmissionError("QUALIFICATION_NATIVE_IDENTITY_MISMATCH", group)
+            if current.get("selection") != previous.get("selection"):
+                raise AdmissionError("QUALIFICATION_NATIVE_SELECTION_MISMATCH", group)
+            by_name = {arm["name"]: role for role, arm in previous["arm_requirements"].items()}
+            resolved = {}
+            for role, old_role in source["roles"].items():
+                arm = current["arm_requirements"][role]
+                old_role = old_role or by_name.get(arm["name"])
+                if previous["arm_requirements"].get(old_role) != arm:
+                    raise AdmissionError("QUALIFICATION_COMPARATOR_IDENTITY_MISMATCH", role)
+                resolved[role] = old_role
+            result = N.verify_run(root, qualifier, manifest, replay_context=replay_context)
+            _definition_inputs(C, root, definition)
+            if not result["baseline_qualified"] or not all(result["control_results"].values()):
+                raise AdmissionError("NATIVE_COMPARATOR_NOT_QUALIFIED", group)
+            for role, old_role in resolved.items():
+                rule = rules[role]
+                value = result["arm_metrics"][old_role][rule["metric"]]
+                if not operations[rule["operator"]](value, rule["threshold"]):
+                    raise AdmissionError("CURRENT_NATIVE_COMPARATOR_NOT_QUALIFIED", group + "/" + role)
+            retained.append({"group": group, **deepcopy(record), "arm_roles": resolved,
+                             "replay_audit": result["replay_audit"]})
     return retained
 
 
@@ -599,12 +800,18 @@ def validate_scientific_plan(root, plan, *, replay_context=None):
         binding = validate_candidate_binding(root, plan["protocol_ref"],
                                              plan["provenance"].get("method_verification_ref"))
         qualification = _live_qualification(C, N, root, protocol, replay_context)
+        if protocol.get("suite_calibration_child"):
+            from .suite_precursor import validate_child_plan
+            validate_child_plan(root, plan, protocol)
         result = {"scope": "candidate", "ledger_head_digest": binding["ledger_head_digest"],
                   "method_batch_digest": binding["method_batch_digest"], "qualification_replays": qualification}
     else:
-        scope = _qualification(protocol)
+        scope = _qualification(protocol, root)
         if plan["evidence_mode"] != "developmental":
             raise AdmissionError("QUALIFICATION_IS_DEVELOPMENTAL_ONLY")
+        if scope["purpose"] == "comparator-qualification":
+            from .suite_queue import validate_bound_comparator_plan
+            validate_bound_comparator_plan(root, plan, protocol)
         for job in plan["jobs"]:
             if job["arm_role"] not in scope["allowed_arm_roles"]:
                 raise AdmissionError("QUALIFICATION_ARM_FORBIDDEN", job["arm_role"])
@@ -660,10 +867,11 @@ def build_scientific_plan(root, *, run_id, command, code_refs, input_refs, outpu
         if supplied.get("method_verification_ref", verification_ref) != verification_ref:
             raise AdmissionError("RUN_METHOD_DISCOVERY_BINDING_MISMATCH")
         supplied["method_verification_ref"] = deepcopy(verification_ref)
-        supplied["admission_scope"] = "candidate"
+        supplied["admission_scope"] = ("candidate-calibration-child" if protocol.get("suite_calibration_child")
+                                       else "candidate")
         mode = evidence_mode or protocol["evidence_mode"]
     else:
-        scope = _qualification(protocol)
+        scope = _qualification(protocol, root)
         supplied["admission_scope"] = scope["purpose"]
         if verification_ref is not None:
             raise AdmissionError("QUALIFICATION_CANDIDATE_SCOPE_CONFLICT")
@@ -771,7 +979,7 @@ def _reserve(path, reservation, now):
         if identifier in budget["reservations"]:
             stored = budget["reservations"][identifier]
             expected = deepcopy(reservation)
-            if stored.get("purpose") == "candidate":
+            if stored.get("purpose") in {"candidate", "candidate-calibration-child"}:
                 expected["charged_cell_ids"] = list(stored["charged_cell_ids"])
                 expected["seconds"] = sum(bound for cell, bound in expected["cell_seconds"].items()
                                           if cell not in stored["charged_cell_ids"])
@@ -800,6 +1008,45 @@ def reserve_calibration(path, *, calibration_id, bound_seconds, arm_ids, now=Non
         raise AdmissionError("RESERVATION_ID_REQUIRED")
     return _reserve(path, {"reservation_id": calibration_id, "purpose": "baseline-calibration",
                           "seconds": seconds, "arm_ids": list(arm_ids)}, now)
+
+
+@_checked
+def reserve_comparator_qualification(root, path, *, calibration_id, bound_seconds,
+                                     protocol_ref, arm_role, now=None):
+    """Reserve only the exact independently checked comparator scope."""
+    C, _, _, _ = _modules()
+    root = C.root_path(root)
+    protocol = C.load_file(C.verify_ref(root, protocol_ref))
+    scope = _qualification(protocol, root)
+    if scope["purpose"] != "comparator-qualification" or arm_role not in scope["arm_bindings"]:
+        raise AdmissionError("QUALIFICATION_EXACT_ARM_BINDINGS_REQUIRED")
+    if not isinstance(calibration_id, str) or not calibration_id:
+        raise AdmissionError("RESERVATION_ID_REQUIRED")
+    return _reserve(path, {"reservation_id": calibration_id, "purpose": "comparator-qualification",
+                          "seconds": _number(bound_seconds, "FINITE_CALIBRATION_BOUND_REQUIRED", positive=True),
+                          "protocol_ref": deepcopy(protocol_ref), "arm_role": arm_role}, now)
+
+
+@_checked
+def reserve_calibration_child(root, path, *, protocol_ref, verification_ref, node_id,
+                              reservation_id, now=None):
+    """Reserve a finite reviewed scientific child's node, preserving all gates."""
+    C, _, _, _ = _modules()
+    root = C.root_path(root)
+    validate_candidate_binding(root, protocol_ref, verification_ref)
+    protocol = C.load_file(C.verify_ref(root, protocol_ref))
+    from .suite_precursor import child_scope
+    scope, _, _ = child_scope(root, protocol)
+    if node_id not in scope["node_ids"]:
+        raise AdmissionError("CALIBRATION_CHILD_NODE_OUTSIDE_SCOPE")
+    costs = {key: _number(value, "FINITE_CALIBRATION_BOUND_REQUIRED", positive=True)
+             for key, value in scope["node_seconds"].items()}
+    reservation = _reserve(path, {"reservation_id": reservation_id, "purpose": "candidate-calibration-child",
+        "seconds": sum(costs.values()), "cell_ids": list(scope["node_ids"]), "cell_seconds": costs,
+        "charged_cell_ids": [], "protocol_ref": deepcopy(protocol_ref)}, now)
+    if node_id in reservation["charged_cell_ids"]:
+        raise AdmissionError("CALIBRATION_CHILD_NODE_ALREADY_CHARGED")
+    return reservation
 
 
 @_checked
@@ -863,8 +1110,29 @@ def reserve_bundle(root, path, *, bundle_id, cell_ids, calibration_ref, expected
         receipt = C.verify_ref(root, measured["receipt_ref"], "experiment-run-receipt")
         if receipt["status"] != "completed" or receipt["purpose"] != "scientific" or not receipt["attempts"]:
             raise AdmissionError("COMPLETED_NATIVE_CALIBRATION_REQUIRED", cell)
-        if receipt["provenance"].get("admission_scope") != "baseline-calibration":
-            raise AdmissionError("NATIVE_BASELINE_CALIBRATION_REQUIRED", cell)
+        calibration_scope = receipt["provenance"].get("admission_scope")
+        if calibration_scope != "baseline-calibration":
+            if calibration_scope not in {"comparator-qualification", "candidate-calibration-child"}:
+                raise AdmissionError("NATIVE_BASELINE_CALIBRATION_REQUIRED", cell)
+            plan = C.verify_ref(root, measured["plan_ref"], "experiment-run-plan")
+            _, R, _, M = _modules()
+            R.validate_plan(root, plan)
+            if (plan["plan_digest"] != receipt["plan_digest"] or plan["run_id"] != receipt["run_id"]
+                    or receipt["provenance"] != plan["provenance"] or plan["provenance"].get("node_id") != cell):
+                raise AdmissionError("CALIBRATION_EXACT_NODE_PLAN_REQUIRED", cell)
+            ledger = _read_budget(path)
+            if (C.safe_path(root, receipt["provenance"].get("qualification_budget_path", "")) != Path(path).resolve()
+                    or not any(row["receipt_ref"] == measured["receipt_ref"] for row in ledger["charges"])):
+                raise AdmissionError("CALIBRATION_ORIGINAL_BUDGET_CHARGE_REQUIRED", cell)
+            source_protocol = C.load_file(C.verify_ref(root, plan["protocol_ref"]))
+            if calibration_scope == "candidate-calibration-child":
+                from .suite_precursor import validate_child_plan
+                M.verify_run_design(root, plan, source_protocol)
+                validate_child_plan(root, plan, source_protocol)
+            else:
+                from .suite_queue import validate_bound_comparator_plan
+                _qualification(source_protocol, root)
+                validate_bound_comparator_plan(root, plan, source_protocol)
         for key in ("environment_digest", "model_revision"):
             if receipt["provenance"].get(key) != expected_bindings[key]:
                 raise AdmissionError("CALIBRATION_IDENTITY_MISMATCH", key)
@@ -921,7 +1189,15 @@ def charge_budget(root, path, *, reservation_id, receipt_ref, cell_id=None, fina
                 or receipt["provenance"].get("admission_scope") != expected_scope
                 or (preparation and receipt["provenance"].get("model_revision") != "no-model-workload")):
             raise AdmissionError("BUDGET_RECEIPT_SCOPE_MISMATCH")
-        if expected_scope == "candidate":
+        if expected_scope == "comparator-qualification":
+            if (receipt.get("provenance", {}).get("qualification_protocol_ref") != reservation["protocol_ref"]
+                    or receipt.get("provenance", {}).get("qualification_arm_role") != reservation["arm_role"]):
+                raise AdmissionError("QUALIFICATION_BUDGET_BINDING_MISMATCH")
+        if expected_scope == "candidate-calibration-child":
+            if (receipt["provenance"].get("qualification_protocol_ref") != reservation["protocol_ref"]
+                    or receipt["provenance"].get("node_id") != cell_id):
+                raise AdmissionError("CALIBRATION_CHILD_BUDGET_BINDING_MISMATCH")
+        if expected_scope in {"candidate", "candidate-calibration-child"}:
             if cell_id not in reservation["cell_ids"]:
                 raise AdmissionError("RESERVED_CELL_ID_REQUIRED")
             if cell_id in reservation["charged_cell_ids"]:

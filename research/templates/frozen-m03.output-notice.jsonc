@@ -1,0 +1,17 @@
+// DOCUMENTATION TEMPLATE — NOT RUNNABLE; the CLI accepts strict JSON, not JSONC.
+// Output notice only, NOT a frozen protocol or executable input. Never copy this over research/frozen-m03.json.
+{
+  "artifact": "research/frozen-m03.json",
+  "status": "PENDING_GENERATED_OUTPUT",
+  "not_a_protocol": true,
+  "producer": "python scripts/research.py protocol --spec research/protocol-input.json",
+  "freeze_command": "python scripts/research.py freeze --protocol research/frozen-m03.json --queue runs/multibench-v3 --replay-calls <actual-inventory-count>",
+  "unresolved": [
+    "Authenticated source-backed native definitions and official/faithful scorer interfaces",
+    "Actual canonical Parent / Natural Gate 0 / IPCG state and reviewed G01 fields",
+    "Real complete comparator qualification via current source-bound ordinary and separately reviewed candidate-child paths; new code is generated_unexecuted",
+    "Target-host model / data / environment / memory / timing evidence",
+    "Valid original resource authorization",
+    "Current complete design-verification batch"
+  ]
+}
