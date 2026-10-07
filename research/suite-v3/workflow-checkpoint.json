@@ -24,6 +24,8 @@
     "remaining_web_code_backlog": [],
     "next_legal_action": "Local follows the exact delivered runbook, restores actual host/authorization facts and produces current software acceptance; only then construct real scientific inputs and run admitted work",
     "background_progress_ref": "research/background/current.md",
+    "source_commit": "5b7f69194cfd01fe0143fd3642314a83c8255c4f",
+    "delivery_receipt_ref": "rounds/2026-10-07-local-handoff/DELIVERY_RECEIPT.json",
     "source_review_ref": "rounds/2026-10-07-local-handoff/SOURCE_REVIEW.md",
     "current_goal_ref": "research/suite-v3/G01_COVERAGE.md",
     "handoff_ref": "rounds/2026-10-07-local-handoff/WEB_HANDOFF.md",

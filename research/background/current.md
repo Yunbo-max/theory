@@ -22,7 +22,8 @@ Read the [round handoff](../../rounds/2026-10-07-local-handoff/WEB_HANDOFF.md),
 [source review](../../rounds/2026-10-07-local-handoff/SOURCE_REVIEW.md),
 [current checkpoint](../suite-v3/workflow-checkpoint.json) and
 [Local runbook](../../LOCAL_AGENT_RUNBOOK.md). The GitHub delivery receipt binds
-the exact published revision; Local must separately bind its tested revision.
+the exact published revision; see [DELIVERY_RECEIPT.json](../../rounds/2026-10-07-local-handoff/DELIVERY_RECEIPT.json).
+Local must separately bind its tested revision.
 
 Next action belongs to Local: restore actual SSH, paths, native Conda/GPU and
 remaining original authorization; run source acceptance, retain failures,
